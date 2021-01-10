@@ -1,0 +1,10 @@
+
+j	java:S100+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â“Œä8æ²ò±ê.
+h
+java:S2142D"FEither re-interrupt this method or rethrow the "InterruptedException".(²ı…¦ûÿÿÿÿ8Óæ®”ì.
+I
+java:S1172Y",Remove this unused method parameter "queue".(„ÆäÈ8©îÎÊì.
+j
+java:S20953"HUse try-with-resources or close this "Connection" in a "finally" clause.(¹»­èúÿÿÿÿ8 ÚÊì.
+U
+java:S1874."3Remove this use of "newInstance"; it is deprecated.(À´Îßüÿÿÿÿ8æ²ò±ê.

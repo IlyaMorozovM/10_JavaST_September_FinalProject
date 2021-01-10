@@ -1,0 +1,13 @@
+
+l
+java:S2095H"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(±¯¢Ú8§ø°”ì.
+t
+java:S2293."YReplace the type specification in this constructor call with the diamond operator ("<>").(…Ñù†ÿÿÿÿÿ
+q
+java:S2095b"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‡¡§Ëøÿÿÿÿ8§ø°”ì.
+A
+java:S1168,"+Return an empty collection instead of null.(¥¹ï
+d
+java:S2095'"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¢‡´
+q
+java:S2095|"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Î¥ı‡ûÿÿÿÿ8§ø°”ì.
