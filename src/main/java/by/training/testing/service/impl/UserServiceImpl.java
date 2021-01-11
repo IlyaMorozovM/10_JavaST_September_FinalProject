@@ -28,22 +28,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean signUp(String login, byte[] password, String name, String lastname, String email, int roleId) throws ServiceException {
+    public boolean signUp(String login, byte[] password, String name, String lastname, String email, String role) throws ServiceException {
 
-        if(login.equals("") || password.equals("") || name.equals("") || lastname.equals("") || email.equals(""))
+        if(login.equals("") || password.equals("") || name.equals("") || lastname.equals("") || email.equals("") || role.equals(""))
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
         UserDAO userDAO = daoFactory.getUserDao();
 
         try {
-            userDAO.signUp(login, password, name, lastname, email, roleId);
+            userDAO.signUp(login, password, name, lastname, email, Integer.parseInt(role));
         }
         catch (DAOUserAlreadyExistsException e) {
             throw new ServiceUserAlreadyExistsException("User with such login already exists", e);
         }
         catch (DAOException e) {
             throw new ServiceException("Error while singing up", e);
+        }
+        catch (NumberFormatException e) {
+            throw new ServiceException("Role should be a number", e);
         }
         return true;
     }

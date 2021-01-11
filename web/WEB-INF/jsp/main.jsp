@@ -11,6 +11,13 @@
     <br/>
 
     <div>
+        <c:if test="${user.roleName == 'admin'}">
+            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users!</a>
+            <br/><br/>
+        </c:if>
+    </div>
+
+    <div>
         <c:forEach items="${subjects}" var="subject">
             <a href="Controller?command=go_to_tests&subjectId=<c:out value="${subject.subjectId}"/>"><c:out value="${subject.name}"/></a>
             <c:if test="${user.roleName == 'tutor'}">

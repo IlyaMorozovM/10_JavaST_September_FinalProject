@@ -18,7 +18,8 @@ public class SignUpCommand implements Command {
     private static final String REQUEST_PARAM_NAME = "name";
     private static final String REQUEST_PARAM_LASTNAME = "lastname";
     private static final String REQUEST_PARAM_PASSWORD = "password";
-    private static final String REDIRECT_COMMAND_SUCCESS = "Controller?command=go_to_main&register=success";
+    private static final String REQUEST_PARAM_ROLE = "role";
+    private static final String REDIRECT_COMMAND_SUCCESS = "Controller?command=go_to_signup&register=success";
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_signup&error=error";
     private static final String REDIRECT_COMMAND_ERROR_DUPLICATE = "Controller?command=go_to_signup&error=unique";
     private static final int DEFAULT_ROLE_ID = 2;
@@ -31,15 +32,17 @@ public class SignUpCommand implements Command {
         String name = req.getParameter(REQUEST_PARAM_NAME);
         String lastname = req.getParameter(REQUEST_PARAM_LASTNAME);
         String password = req.getParameter(REQUEST_PARAM_PASSWORD);
-        int roleId = DEFAULT_ROLE_ID;
+        String role = req.getParameter(REQUEST_PARAM_ROLE);
+        //int roleId = DEFAULT_ROLE_ID;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
 
-        Boolean registrationResult;
+        boolean registrationResult;
 
         try {
-            registrationResult = userService.signUp(login, password.getBytes(), name, lastname, email, roleId);
+//            registrationResult = userService.signUp(login, password.getBytes(), name, lastname, email, roleId);
+            registrationResult = userService.signUp(login, password.getBytes(), name, lastname, email, role);
 
             if(registrationResult)
                 resp.sendRedirect(REDIRECT_COMMAND_SUCCESS);

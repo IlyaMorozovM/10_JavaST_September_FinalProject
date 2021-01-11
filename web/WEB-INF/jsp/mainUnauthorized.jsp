@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <title>Testing system</title>
-<%--    <link href="../styles/mainAuthorized.css" type="text/css"/>--%>
     <style> <%@include file="../styles/mainAuthorized.css" %> </style>
     <link rel="shortcut icon" href="#">
 </head>
@@ -34,7 +33,7 @@
     <div align="center">    <!-- buttons holder -->
 <%--        <button onclick="location.href='Controller?command=go_to_signup'" class="floating-button">Sign Up!</button>--%>
 <%--        <a href="Controller?command=go_to_signup" class="floating-button">Sign up!</a>--%>
-        <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up!</a>
+<%--        <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up!</a>--%>
     </div>
 </body>
 </html>

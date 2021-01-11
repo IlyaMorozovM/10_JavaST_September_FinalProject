@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/tld/conditionalMsg.tld"%>
 <html>
 <head>
     <title>Sign Up to Garbage Testing System</title>
@@ -19,9 +20,9 @@
             <h2>Oops. Something went wrong while signing up. Try again.</h2>
         </c:if>
         <c:if test="${param.error == 'unique'}">
-            <h2>Oops. User with this login already exists. Try again.</h2>
+            <h2>Oops. User with this login or email already exists. Try again.</h2>
         </c:if>
-
+        <custom:condMsg condition="${param.register == 'success'}" message="Successful user registration!"/>
 
 
         <div> <!-- registration container -->
@@ -33,20 +34,24 @@
                 <input type="text" id="login" name="login"/>
 
                 <br/>
-                <label for="email">Email</label>
+                <label for="email">Email:</label>
                 <input type="text" id="email" name="email"/>
 
                 <br/>
-                <label for="name">Name</label>
+                <label for="name">Name:</label>
                 <input type="text" id="name" name="name"/>
 
                 <br/>
-                <label for="lastname">Lastname</label>
+                <label for="lastname">Lastname:</label>
                 <input type="text" id="lastname" name="lastname"/>
 
                 <br/>
-                <label for="password">Password</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password"/>
+
+                <br/>
+                <label for="role">Role (1=tutor, 2=student):</label>
+                <input type="number" id="role" name="role"/>
 
                 <br/>
                 <input type="submit" value="Sign Up"/>

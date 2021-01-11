@@ -5,5 +5,5 @@ import by.training.testing.bean.User;
 
 public interface UserService {
         User signIn(String login, byte[] password) throws ServiceException;
-        boolean signUp(String login, byte[] password, String name, String lastname, String email, int roleId) throws ServiceException;
+        boolean signUp(String login, byte[] password, String name, String lastname, String email, String role) throws ServiceException;
 }
