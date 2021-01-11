@@ -13,7 +13,7 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         try {
-            ConnectionPool.getInstance().InitPoolData();
+            ConnectionPool.getInstance().initPoolData();
         }
         catch (ConnectionPoolException e) {
             throw new ControllerRuntimeException(e);

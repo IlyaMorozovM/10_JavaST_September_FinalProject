@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Garbage Testing System : Available tests</title>
+    <title>Testing System : Available tests</title>
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
 <body>
@@ -16,7 +16,7 @@
     <div>
         <c:forEach items="${tests}" var="test">
             <a href="Controller?command=go_to_questions&testId=<c:out value="${test.testId}"/>"><c:out value="${test.title}"/></a>
-            <c:if test="${user.roleName != 'student'}">
+            <c:if test="${user.roleName == 'tutor'}">
                 <button onclick="location.href='Controller?command=go_to_edit&entity=test&' +
                         'id=<c:out value="${test.testId}"/>&text=<c:out value="${test.title}"/>'">Edit</button>
                 <button onclick="location.href='Controller?command=delete&entity=test&id=<c:out value="${test.testId}"/>'">Delete</button>
@@ -24,7 +24,7 @@
             <br/><br/>
         </c:forEach>
     </div>
-    <c:if test="${user.roleName != 'student'}">
+    <c:if test="${user.roleName == 'tutor'}">
         <div>
             <br/>
             <button onclick="location.href='Controller?command=go_to_add&entity=test&id=<c:out value="${subjectId}"/>'">Add test</button>

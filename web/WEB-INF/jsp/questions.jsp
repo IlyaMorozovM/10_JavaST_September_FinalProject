@@ -38,7 +38,7 @@
                 <br/>
             </c:forEach>
 
-            <c:if test="${user.roleName != 'student'}">
+            <c:if test="${user.roleName == 'tutor'}">
                 <div>
                     <br/>
                     <button onclick="location.href='Controller?command=go_to_add&entity=answer&id=<c:out value="${question.questionId}"/>'">Add answer</button>
@@ -49,7 +49,7 @@
         </c:forEach>
     </div>
 
-    <c:if test="${user.roleName != 'student'}">
+    <c:if test="${user.roleName == 'tutor'}">
         <div>
             <br/>
             <button onclick="location.href='Controller?command=go_to_add&entity=question&id=<c:out value="${testId}"/>'">Add question</button>

@@ -40,10 +40,9 @@ public final class ConnectionPool {
         return instance;
     }
 
-    public void InitPoolData() throws ConnectionPoolException {
-
+    public void initPoolData() throws ConnectionPoolException {
         try {
-            Class.forName(driverName).newInstance();
+            Class.forName(driverName);
             givenAwayConQueue = new ArrayBlockingQueue<>(poolSize);
             connectionQueue = new ArrayBlockingQueue<>(poolSize);
 
@@ -54,7 +53,7 @@ public final class ConnectionPool {
             }
         } catch (SQLException e) {
             throw new ConnectionPoolException("SQL Exception in connection pool", e);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+        } catch (ClassNotFoundException e) {
             throw new ConnectionPoolException("Can't find database driver class", e);
         }
     }
