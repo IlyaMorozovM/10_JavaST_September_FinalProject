@@ -57,6 +57,10 @@
                 <input type="submit" value="Sign Up"/>
             </form>
         </div>
+
+        <div>    <!-- buttons holder -->
+            <button onclick="location.href='Controller?command=go_to_main&signin=success'">Back</button>
+        </div>
     </main>
 
     <!-- footer -->

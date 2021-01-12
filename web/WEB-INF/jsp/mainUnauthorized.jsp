@@ -30,10 +30,5 @@
         </form>
     </div>
 
-    <div align="center">    <!-- buttons holder -->
-<%--        <button onclick="location.href='Controller?command=go_to_signup'" class="floating-button">Sign Up!</button>--%>
-<%--        <a href="Controller?command=go_to_signup" class="floating-button">Sign up!</a>--%>
-<%--        <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up!</a>--%>
-    </div>
 </body>
 </html>

@@ -26,6 +26,22 @@
             </c:if>
             <input type="submit" value="Add...">
         </form>
+
+        <div>    <!-- buttons holder -->
+            <c:choose>
+                <c:when test="${param.entity == 'test'}">
+                    <button onclick="location.href='Controller?command=go_to_tests'">Back</button>
+                </c:when>
+                <c:when test="${param.entity == 'subject'}">
+                    <button onclick="location.href='Controller?command=go_to_main'">Back</button>
+                </c:when>
+                <c:otherwise>
+                    <button onclick="location.href='Controller?command=go_to_questions'">Back</button>
+                </c:otherwise>
+            </c:choose>
+<%--            <button onclick="location.href='Controller?command=go_to_tests'">Back</button>--%>
+        </div>
+
     </main>
 
     <!-- footer -->
