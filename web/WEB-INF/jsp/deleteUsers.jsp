@@ -9,10 +9,29 @@
 <!-- content -->
 <main>
     <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Login</th>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Role</th>
+            </tr>
+            </thead>
         <c:forEach items="${users}" var="user">
-                <button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'">Delete</button>
-            <br/><br/>
+            <tbody>
+            <tr>
+                <td><c:out value="${user.login}"/></td>
+                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${user.lastname}"/></td>
+                <td><c:out value="${user.roleName}"/></td>
+                <td><button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'">Delete</button></td>
+            </tr>
+            </tbody>
+<%--                <button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'">Delete</button>--%>
+<%--            <br/><br/>--%>
         </c:forEach>
+        </table>
     </div>
     <br/>
     <div>    <!-- buttons holder -->
