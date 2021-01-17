@@ -23,6 +23,7 @@ final class CommandProvider {
         repository.put(CommandName.GO_TO_TESTS, new GoToTestsCommand());
         repository.put(CommandName.GO_TO_QUESTIONS, new GoToQuestionsCommand());
         repository.put(CommandName.NEXT_QUESTION, new NextQuestion());
+        repository.put(CommandName.GO_TO_DELETE_USERS, new GoToDeleteUsersCommand());
     }
 
     Command getCommand(String name) {

@@ -1,15 +1,17 @@
 package by.training.testing.dao.impl;
 
-import by.training.testing.dao.impl.connection.ConnectionPoolException;
 import by.training.testing.bean.User;
 import by.training.testing.dao.UserDAO;
 import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.exception.DAOUserAlreadyExistsException;
 import by.training.testing.dao.impl.connection.ConnectionPool;
+import by.training.testing.dao.impl.connection.ConnectionPoolException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -20,10 +22,17 @@ public class UserDAOImpl implements UserDAO {
     private static final String DB_COLUMN_ROLE = "roleName";
     private static final String DB_COLUMN_ID = "id";
 
+    private static final String USER_ROLE_TUTOR = "tutor";
+    private static final String USER_ROLE_STUDENT = "student";
+    private static final String USER_ROLE_ADMIN = "admin";
+
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
+    private static final String DELETE_USER_SQL = "DELETE FROM testsdb.users WHERE testsdb.users.id = ?";
     private static final String INSERT_USER_SQL = "INSERT testsdb.users(login, pass_hash, `name`, lastname, email, `role`) VALUES (?,?,?,?,?,?)";
     private static final String SIGN_IN_SQL = "SELECT u.*, r.name as roleName FROM testsdb.users u INNER JOIN testsdb.roles r ON u.role = r.id where u.login = ? and u.pass_hash = ?";
+//    private static final String SELECT_USER_SQL = "SELECT * FROM testsdb.users";
+    private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM testsdb.users u INNER JOIN testsdb.roles r ON u.role = r.id";
 
     public UserDAOImpl() {}
 
@@ -39,6 +48,75 @@ public class UserDAOImpl implements UserDAO {
         }
         generatedPassword = sb.toString();
         return generatedPassword;
+    }
+
+    @Override
+    public List<User> getUsers() throws DAOException {
+        PreparedStatement ps;
+        Connection connection = null;
+        ResultSet rs;
+
+        try {
+            connection = connectionPool.takeConnection();
+            ps = connection.prepareStatement(SELECT_USER_SQL);
+            rs = ps.executeQuery();
+            if(rs == null)
+                return null;
+
+            List<User> users = new ArrayList<>();
+//            while(rs.next()) {
+//                if (rs.getInt(DB_COLUMN_ROLE) == 1) {
+//                    users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
+//                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), USER_ROLE_TUTOR));
+//                } else if (rs.getInt(DB_COLUMN_ROLE) == 2){
+//                    users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
+//                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), USER_ROLE_STUDENT));
+//                } else if (rs.getInt(DB_COLUMN_ROLE) == 3){
+//                    users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
+//                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), USER_ROLE_ADMIN));
+//                }
+//            }
+            while(rs.next()) {
+                users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
+                           rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), rs.getString(DB_COLUMN_ROLE)));
+            }
+            ps.close();
+            rs.close();
+            return users;
+        }
+        catch (ConnectionPoolException e) {
+            throw new DAOException("Error in connection pool while getting users", e);
+        }
+        catch (SQLException e) {
+            throw new DAOException("Error while getting users", e);
+        }
+        finally {
+            connectionPool.returnConnection(connection);
+        }
+    }
+
+    @Override
+    public void deleteUser(int userId) throws DAOException {
+        PreparedStatement ps = null;
+        Connection connection = null;
+
+        try {
+            connection = connectionPool.takeConnection();
+            ps = connection.prepareStatement(DELETE_USER_SQL);
+            ps.setInt(1, userId);
+
+            ps.executeUpdate();
+            ps.close();
+        }
+        catch (ConnectionPoolException e) {
+            throw new DAOException("Error in connection pool while deleting user", e);
+        }
+        catch (SQLException e) {
+            throw new DAOException("Error while deleting user", e);
+        }
+        finally {
+            connectionPool.returnConnection(connection);
+        }
     }
 
     @Override
@@ -59,7 +137,8 @@ public class UserDAOImpl implements UserDAO {
 
             rs.last();
             if(rs.getRow() == 1) {
-                User user = new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME), rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), rs.getString(DB_COLUMN_ROLE));
+                User user = new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
+                        rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), rs.getString(DB_COLUMN_ROLE));
                 ps.close();
                 rs.close();
                 return user;

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
-<%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
-    <link href="../styles/mainAuthorized.css" type="text/css"/>
+    <title>Testing system</title>
+    <style> <%@include file="../styles/mainAuthorized.css" %> </style>
 </head>
 <body>
     <h2>Welcome, <c:out value="${user.name}"/></h2>
@@ -12,7 +13,12 @@
 
     <div>
         <c:if test="${user.roleName == 'admin'}">
-            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users!</a>
+            <button onclick="location.href='Controller?command=go_to_signup'" class="floating-button">Sign up users</button>
+<%--            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users!</a>--%>
+            <br/><br/>
+
+            <button onclick="location.href='Controller?command=go_to_delete_users'" class="floating-button">Delete users</button>
+<%--            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users</a>--%>
             <br/><br/>
         </c:if>
     </div>
@@ -37,7 +43,7 @@
     </c:if>
     <br/>
     <div>    <!-- buttons holder -->
-        <button onclick="location.href='Controller?command=signout'">Sign Out</button>
+        <button onclick="location.href='Controller?command=signout'" class="floating-button">Sign Out</button>
     </div>
 </body>
 </html>

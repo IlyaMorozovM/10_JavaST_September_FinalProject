@@ -1,11 +1,8 @@
 package by.training.testing.controller.command.impl;
 
-import by.training.testing.service.AnswerService;
-import by.training.testing.service.QuestionService;
-import by.training.testing.service.SubjectService;
+import by.training.testing.service.*;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.controller.command.Command;
-import by.training.testing.service.TestService;
 import by.training.testing.service.factory.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -22,12 +19,15 @@ public class DeleteCommand implements Command {
     private static final String ENTITY_TEST = "test";
     private static final String ENTITY_QUESTION = "question";
     private static final String ENTITY_ANSWER = "answer";
+    private static final String ENTITY_USER = "user";
     private static final String REDIRECT_COMMAND_SUCCESS_SUBJECT = "Controller?command=go_to_main";
     private static final String REDIRECT_COMMAND_ERROR_SUBJECT = "Controller?command=go_to_main&error=subject";
     private static final String REDIRECT_COMMAND_SUCCESS_TEST = "Controller?command=go_to_tests";
     private static final String REDIRECT_COMMAND_ERROR_TEST = "Controller?command=go_to_tests&error=test";
     private static final String REDIRECT_COMMAND_SUCCESS_QUESTION = "Controller?command=go_to_questions";
+    private static final String REDIRECT_COMMAND_SUCCESS_USER = "Controller?command=go_to_delete_users";
     private static final String REDIRECT_COMMAND_ERROR_QUESTION = "Controller?command=go_to_questions&error=question";
+    private static final String REDIRECT_COMMAND_ERROR_USER = "Controller?command=go_to_delete_users&error=user";
 
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
@@ -36,16 +36,16 @@ public class DeleteCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        String entity = ((String) req.getParameter(REQUEST_PARAM_ENTITY));
+        String entity = req.getParameter(REQUEST_PARAM_ENTITY);
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        Boolean result;
+        boolean result;
 
         switch (entity) {
             case ENTITY_SUBJECT:
-                int id = Integer.parseInt(req.getParameter(REQUEST_PARAM_ID));
+                int subjectId = Integer.parseInt(req.getParameter(REQUEST_PARAM_ID));
                 SubjectService subjectService = serviceFactory.getSubjectService();
                 try {
-                    result = subjectService.deleteSubject(id);
+                    result = subjectService.deleteSubject(subjectId);
                     if(result)
                         resp.sendRedirect(REDIRECT_COMMAND_SUCCESS_SUBJECT);
                     else
@@ -95,6 +95,22 @@ public class DeleteCommand implements Command {
                         resp.sendRedirect(REDIRECT_COMMAND_SUCCESS_QUESTION);
                     else
                         resp.sendRedirect(REDIRECT_COMMAND_ERROR_QUESTION);
+                }
+                catch (ServiceException e) {
+                    resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+                }
+                break;
+
+            case ENTITY_USER:
+                int userId = Integer.parseInt(req.getParameter(REQUEST_PARAM_ID));
+                UserService userService = serviceFactory.getUserService();
+                try {
+                    result = userService.deleteUser(userId);
+                    if(result)
+                        resp.sendRedirect(REDIRECT_COMMAND_SUCCESS_USER);
+                    else
+                        //TODO: obrabotka error on JSP
+                        resp.sendRedirect(REDIRECT_COMMAND_ERROR_USER);
                 }
                 catch (ServiceException e) {
                     resp.sendRedirect(REDIRECT_COMMAND_ERROR);
