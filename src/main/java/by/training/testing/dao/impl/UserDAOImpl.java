@@ -22,16 +22,11 @@ public class UserDAOImpl implements UserDAO {
     private static final String DB_COLUMN_ROLE = "roleName";
     private static final String DB_COLUMN_ID = "id";
 
-    private static final String USER_ROLE_TUTOR = "tutor";
-    private static final String USER_ROLE_STUDENT = "student";
-    private static final String USER_ROLE_ADMIN = "admin";
-
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     private static final String DELETE_USER_SQL = "DELETE FROM testsdb.users WHERE testsdb.users.id = ?";
     private static final String INSERT_USER_SQL = "INSERT testsdb.users(login, pass_hash, `name`, lastname, email, `role`) VALUES (?,?,?,?,?,?)";
     private static final String SIGN_IN_SQL = "SELECT u.*, r.name as roleName FROM testsdb.users u INNER JOIN testsdb.roles r ON u.role = r.id where u.login = ? and u.pass_hash = ?";
-//    private static final String SELECT_USER_SQL = "SELECT * FROM testsdb.users";
     private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM testsdb.users u INNER JOIN testsdb.roles r ON u.role = r.id";
 
     public UserDAOImpl() {}
@@ -64,18 +59,6 @@ public class UserDAOImpl implements UserDAO {
                 return null;
 
             List<User> users = new ArrayList<>();
-//            while(rs.next()) {
-//                if (rs.getInt(DB_COLUMN_ROLE) == 1) {
-//                    users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
-//                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), USER_ROLE_TUTOR));
-//                } else if (rs.getInt(DB_COLUMN_ROLE) == 2){
-//                    users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
-//                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), USER_ROLE_STUDENT));
-//                } else if (rs.getInt(DB_COLUMN_ROLE) == 3){
-//                    users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
-//                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), USER_ROLE_ADMIN));
-//                }
-//            }
             while(rs.next()) {
                 users.add(new User(rs.getInt(DB_COLUMN_ID), rs.getString(DB_COLUMN_LOGIN), rs.getString(DB_COLUMN_NAME),
                            rs.getString(DB_COLUMN_LASTNAME), rs.getString(DB_COLUMN_EMAIL), rs.getString(DB_COLUMN_ROLE)));

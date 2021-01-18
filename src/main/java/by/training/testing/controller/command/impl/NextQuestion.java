@@ -49,9 +49,9 @@ public class NextQuestion implements Command {
 
             for (Answer answer : currQuestion.getAnswers()) {
                 if(req.getParameter(String.valueOf(answer.getAnswerId())) != null)
-                    if(answer.getRight())
+                    if(answer.getRight()) {
                         rightAnswers++;
-                    else {
+                    } else {
                         rightAnswers = 0;
                         break;
                     }
