@@ -2,7 +2,6 @@ package by.training.testing.service.impl;
 
 import by.training.testing.bean.Result;
 import by.training.testing.dao.ResultDAO;
-import by.training.testing.dao.TestDAO;
 import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.factory.DAOFactory;
 import by.training.testing.service.ResultService;
@@ -28,15 +27,15 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public boolean addResult(int testId, int userId, int points) throws ServiceException {
-        if(userId == 0 || testId == 0)
+    public boolean addResult(int testId, String studentLogin, int points) throws ServiceException {
+        if(studentLogin.equals("") || testId == 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
         ResultDAO resultDAO = daoFactory.getResultDao();
 
         try {
-            resultDAO.addResult(testId, userId, points);
+            resultDAO.addResult(testId, studentLogin, points);
         }
         catch (DAOException e) {
             throw new ServiceException("Error while adding test", e);

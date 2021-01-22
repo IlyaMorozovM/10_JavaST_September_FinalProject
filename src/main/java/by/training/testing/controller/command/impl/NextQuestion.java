@@ -78,7 +78,7 @@ public class NextQuestion implements Command {
             try {
                 User currentUser = (User)session.getAttribute(USER_SESSION_ATTR);
                 boolean result = resultService.addResult((Integer)session.getAttribute(TEST_SESSION_ATTR),
-                        currentUser.getUserId(),(Integer)session.getAttribute(RIGHT_ANSWERS_SESSION_ATTR));
+                        currentUser.getLogin(),(Integer)session.getAttribute(RIGHT_ANSWERS_SESSION_ATTR));
                 if (result) {
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher(FINISH_TEST_PAGE_URI);
                     requestDispatcher.forward(req, resp);

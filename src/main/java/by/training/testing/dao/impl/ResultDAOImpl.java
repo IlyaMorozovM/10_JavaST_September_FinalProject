@@ -17,11 +17,11 @@ public class ResultDAOImpl implements ResultDAO {
 
     private static final String DB_COLUMN_POINTS = "points";
     private static final String DB_COLUMN_TEST = "test";
-    private static final String DB_COLUMN_STUDENT = "student";
+    private static final String DB_COLUMN_STUDENT_LOGIN = "student_login";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_RESULT_SQL = "INSERT testsdb.results(`test`, `student`, `points`) VALUES (?,?,?)";
+    private static final String INSERT_RESULT_SQL = "INSERT testsdb.results(`test`, `student_login`, `points`) VALUES (?,?,?)";
     private static final String SELECT_RESULT_SQL = "SELECT * FROM testsdb.results WHERE testsdb.results.test = ?";
 
     @Override
@@ -41,7 +41,7 @@ public class ResultDAOImpl implements ResultDAO {
 
             List<Result> results = new ArrayList<>();
             while(rs.next()) {
-                results.add(new Result(rs.getInt(DB_COLUMN_TEST), rs.getInt(DB_COLUMN_STUDENT), rs.getInt(DB_COLUMN_POINTS)));
+                results.add(new Result(rs.getInt(DB_COLUMN_TEST), rs.getString(DB_COLUMN_STUDENT_LOGIN), rs.getInt(DB_COLUMN_POINTS)));
             }
             ps.close();
             rs.close();
@@ -59,7 +59,7 @@ public class ResultDAOImpl implements ResultDAO {
     }
 
     @Override
-    public void addResult(int testId, int userId, int points) throws DAOException {
+    public void addResult(int testId, String studentLogin, int points) throws DAOException {
         PreparedStatement ps;
         Connection connection = null;
 
@@ -67,7 +67,7 @@ public class ResultDAOImpl implements ResultDAO {
             connection = connectionPool.takeConnection();
             ps = connection.prepareStatement(INSERT_RESULT_SQL);
             ps.setInt(1, testId);
-            ps.setInt(2, userId);
+            ps.setString(2, studentLogin);
             ps.setInt(3, points);
 
             ps.executeUpdate();

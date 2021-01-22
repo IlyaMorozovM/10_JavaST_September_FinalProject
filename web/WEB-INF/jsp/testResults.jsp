@@ -22,13 +22,13 @@
             <thead>
             <tr>
                 <th>Student login</th>
-                <th>Points</th>
+                <th>Points (of ${numOfQuestions})</th>
             </tr>
             </thead>
             <c:forEach items="${results}" var="result">
                 <tbody>
                 <tr>
-                    <td> <c:out value="${result.userId}"/></td>
+                    <td> <c:out value="${result.studentLogin}"/></td>
                     <td> <c:out value="${result.points}"/></td>
                 </tr>
                 </tbody>

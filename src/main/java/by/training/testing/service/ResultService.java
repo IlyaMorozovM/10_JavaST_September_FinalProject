@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ResultService {
     List<Result> getResults(int testId) throws ServiceException;
-    boolean addResult(int testId, int userId, int points) throws ServiceException;
+    boolean addResult(int testId, String studentLogin, int points) throws ServiceException;
 }

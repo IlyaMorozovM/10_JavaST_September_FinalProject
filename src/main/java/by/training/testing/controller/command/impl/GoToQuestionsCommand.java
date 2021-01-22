@@ -52,6 +52,7 @@ public class GoToQuestionsCommand implements Command {
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
         session.setAttribute(QUESTIONS_SESSION_ATTR, questions);
+        session.setAttribute(NUMBER_OF_QUESTIONS_SESSION_ATTR, questions.size());
 
         if(((User)session.getAttribute(USER_SESSION_ATTR)).getRoleName().equals("student")) {
             session.setAttribute(NUMBER_OF_QUESTIONS_SESSION_ATTR, questions.size());

@@ -6,12 +6,12 @@ import java.util.Objects;
 public class Result implements Serializable {
 
     private final int testId;
-    private final int userId;
+    private final String studentLogin;
     private final int points;
 
-    public Result(int testId, int userId, int points) {
+    public Result(int testId, String studentLogin, int points) {
         this.testId = testId;
-        this.userId = userId;
+        this.studentLogin = studentLogin;
         this.points = points;
     }
 
@@ -19,8 +19,8 @@ public class Result implements Serializable {
         return testId;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getStudentLogin() {
+        return studentLogin;
     }
 
     public int getPoints() {
@@ -33,20 +33,20 @@ public class Result implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Result result = (Result) o;
         return testId == result.testId &&
-                userId == result.userId &&
-                points == result.points;
+                points == result.points &&
+                studentLogin.equals(result.studentLogin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, userId, points);
+        return Objects.hash(testId, studentLogin, points);
     }
 
     @Override
     public String toString() {
         return "Result{" +
                 "testId=" + testId +
-                ", userId=" + userId +
+                ", studentLogin='" + studentLogin + '\'' +
                 ", points=" + points +
                 '}';
     }

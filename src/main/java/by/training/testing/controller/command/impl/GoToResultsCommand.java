@@ -1,7 +1,9 @@
 package by.training.testing.controller.command.impl;
 
+import by.training.testing.bean.Question;
 import by.training.testing.bean.Result;
 import by.training.testing.controller.command.Command;
+import by.training.testing.service.QuestionService;
 import by.training.testing.service.ResultService;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.service.factory.ServiceFactory;
@@ -21,6 +23,7 @@ public class GoToResultsCommand implements Command {
     private static final String RESULTS_SESSION_ATTR = "results";
     private static final String REQUEST_PARAMETER_TESTID = "testId";
     private static final String TESTID_SESSION_ATTR = "testId";
+    private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
@@ -46,6 +49,15 @@ public class GoToResultsCommand implements Command {
             //TODO: redirect on another page, may be
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
+
+        QuestionService questionService = serviceFactory.getQuestionService();
+        List<Question> questions = null;
+        try {
+            questions = questionService.getQuestions(testId);
+        } catch (ServiceException e) {
+            resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+        }
+        session.setAttribute(NUMBER_OF_QUESTIONS_SESSION_ATTR, questions.size());
         session.setAttribute(RESULTS_SESSION_ATTR, results);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(RESULTS_PAGE_URI);

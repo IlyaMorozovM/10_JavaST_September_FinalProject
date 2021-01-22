@@ -12,7 +12,6 @@ public class GoToAddCommand implements Command {
 
     private static final String ADD_PAGE_URI = "WEB-INF/jsp/addEntity.jsp";
 
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         RequestDispatcher dispatcher = req.getRequestDispatcher(ADD_PAGE_URI);
