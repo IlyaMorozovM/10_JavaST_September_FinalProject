@@ -16,6 +16,7 @@
         <c:forEach items="${tests}" var="test">
             <a href="Controller?command=go_to_questions&testId=<c:out value="${test.testId}"/>"><c:out value="${test.title}"/></a>
             <c:if test="${user.roleName == 'tutor'}">
+                <button onclick="location.href='Controller?command=go_to_results&testId=<c:out value="${test.testId}"/>'">Results</button>
                 <button onclick="location.href='Controller?command=go_to_edit&entity=test&' +
                         'id=<c:out value="${test.testId}"/>&text=<c:out value="${test.title}"/>'">Edit</button>
                 <button onclick="location.href='Controller?command=delete&entity=test&id=<c:out value="${test.testId}"/>'">Delete</button>

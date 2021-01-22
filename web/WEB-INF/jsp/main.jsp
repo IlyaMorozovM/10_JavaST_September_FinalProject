@@ -16,11 +16,11 @@
 
     <div>
         <c:if test="${user.roleName == 'admin'}">
-            <button onclick="location.href='Controller?command=go_to_signup'" class="floating-button">Sign up users</button>
+            <button onclick="location.href='Controller?command=go_to_signup'" class="btn btn-info">Sign up users</button>
 <%--            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users!</a>--%>
             <br/><br/>
 
-            <button onclick="location.href='Controller?command=go_to_delete_users'" class="floating-button">Delete users</button>
+            <button onclick="location.href='Controller?command=go_to_delete_users'" class="btn btn-info">Delete users</button>
 <%--            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users</a>--%>
             <br/><br/>
         </c:if>
@@ -41,12 +41,12 @@
     <c:if test="${user.roleName == 'tutor'}">
         <div>
             <br/>
-            <button onclick="location.href='Controller?command=go_to_add&entity=subject'">Add subject</button>
+            <button onclick="location.href='Controller?command=go_to_add&entity=subject'" class="btn btn-info">Add subject</button>
         </div>
     </c:if>
     <br/>
     <div>    <!-- buttons holder -->
-        <button onclick="location.href='Controller?command=signout'" class="floating-button">Sign Out</button>
+        <button onclick="location.href='Controller?command=signout'"  class="btn btn-danger">Sign Out</button>
     </div>
 </body>
 </html>

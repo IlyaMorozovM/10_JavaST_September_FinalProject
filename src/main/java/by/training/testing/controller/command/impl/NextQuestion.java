@@ -2,7 +2,11 @@ package by.training.testing.controller.command.impl;
 
 import by.training.testing.bean.Answer;
 import by.training.testing.bean.Question;
+import by.training.testing.bean.User;
 import by.training.testing.controller.command.Command;
+import by.training.testing.service.ResultService;
+import by.training.testing.service.exception.ServiceException;
+import by.training.testing.service.factory.ServiceFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,8 +24,13 @@ public class NextQuestion implements Command {
     private static final String REQUEST_PARAM_RADIO = "answer";
     private static final String REQUEST_PARAM_FINISH = "finishTest";
     private static final String QUESTIONS_SESSION_ATTR = "questions";
+    private static final String USER_SESSION_ATTR = "user";
+    private static final String TEST_SESSION_ATTR = "testId";
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
     private static final String CURRENT_QUESTION_SESSION_ATTR = "currQuestion";
+
+    //TODO: norm error
+    private static final String REDIRECT_COMMAND_ERROR_RESULT = "Controller?command=go_to_main&error=test";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -63,8 +72,23 @@ public class NextQuestion implements Command {
 
 
         if(req.getParameter(REQUEST_PARAM_FINISH) != null) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher(FINISH_TEST_PAGE_URI);
-            requestDispatcher.forward(req, resp);
+            ServiceFactory serviceFactory = ServiceFactory.getInstance();
+            ResultService resultService = serviceFactory.getResultService();
+
+            try {
+                User currentUser = (User)session.getAttribute(USER_SESSION_ATTR);
+                boolean result = resultService.addResult((Integer)session.getAttribute(TEST_SESSION_ATTR),
+                        currentUser.getUserId(),(Integer)session.getAttribute(RIGHT_ANSWERS_SESSION_ATTR));
+                if (result) {
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher(FINISH_TEST_PAGE_URI);
+                    requestDispatcher.forward(req, resp);
+                } else {
+                    resp.sendRedirect(REDIRECT_COMMAND_ERROR_RESULT);
+                }
+            }
+            catch (ServiceException e) {
+                resp.sendRedirect(REDIRECT_COMMAND_ERROR_RESULT);
+            }
         }
         else {
             session.setAttribute(CURRENT_QUESTION_SESSION_ATTR, (Integer)session.getAttribute(CURRENT_QUESTION_SESSION_ATTR) + 1);

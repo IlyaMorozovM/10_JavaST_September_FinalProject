@@ -1,4 +1,11 @@
 package by.training.testing.service;
 
+import by.training.testing.bean.Result;
+import by.training.testing.service.exception.ServiceException;
+
+import java.util.List;
+
 public interface ResultService {
+    List<Result> getResults(int testId) throws ServiceException;
+    boolean addResult(int testId, int userId, int points) throws ServiceException;
 }

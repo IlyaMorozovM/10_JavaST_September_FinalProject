@@ -29,13 +29,11 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processGetRequest(req, resp);
-        return;
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processPostRequest(req, resp);
-        return;
     }
 
     private void processGetRequest(HttpServletRequest req, HttpServletResponse resp) throws  ServletException, IOException {

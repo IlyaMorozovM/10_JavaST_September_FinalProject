@@ -38,7 +38,6 @@ public class GoToMainCommand implements Command {
                 subjects = subjectService.getSubjects();
             } catch (ServiceException e) {
                 requestDispatcher.forward(req, resp);
-
             }
             session.setAttribute(SUBJECTS_SESSION_ATTR, subjects);
         }

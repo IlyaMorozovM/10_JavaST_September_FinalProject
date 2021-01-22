@@ -15,5 +15,6 @@ public enum CommandName {
     GO_TO_TESTS,
     GO_TO_QUESTIONS,
     NEXT_QUESTION,
-    GO_TO_DELETE_USERS
+    GO_TO_DELETE_USERS,
+    GO_TO_RESULTS
 }
