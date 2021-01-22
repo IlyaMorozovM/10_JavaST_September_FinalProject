@@ -10,6 +10,7 @@
     <style> <%@include file="../styles/templatemo-style.css" %> </style>
 </head>
 <body>
+    <jsp:include page="nav-language.jsp"/>
     <h2>Welcome, <c:out value="${user.name}"/></h2>
     <h3>Your role is <i><c:out value="${user.roleName}"/></i>.</h3>
     <br/>

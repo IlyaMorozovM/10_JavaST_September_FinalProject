@@ -10,7 +10,7 @@
 <!-- content -->
 <main>
     <h2>Now browsing questions</h2>
-    <h3>Your role is <i><c:out value="${user.roleName}"/></i>.</h3>
+    <h3>Your role is <i>`<c:out value="${user.roleName}"/>`</i>.</h3>
     <br/>
 
     <div>

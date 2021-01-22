@@ -8,6 +8,7 @@
 
 <!-- content -->
 <main>
+    <jsp:include page="nav-language.jsp"/>
     <h2>Now browsing tests</h2>
     <h3>Your role is <i><c:out value="${user.roleName}"/></i>.</h3>
     <br/>
