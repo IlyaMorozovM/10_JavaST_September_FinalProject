@@ -3,14 +3,12 @@ package by.training.testing.controller.command.impl;
 import by.training.testing.controller.command.Command;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public class ChangeLanguageCommand implements Command {
 
@@ -19,14 +17,13 @@ public class ChangeLanguageCommand implements Command {
     private static final String EN_LANG = "en_EN";
     private static final String RU_LANG = "ru_RU";
 
-    private static final String PAGE_URI = "WEB-INF/jsp/";
+    private static final String WEB_INF_JSP = "WEB-INF/jsp/";
+    private static final String INDEX_JSP = "index.jsp";
+    private static final String EMPTY_PAGE = "";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String lang = req.getParameter("lang");
-        String page = req.getParameter("page");
-
-        HttpSession session = req.getSession();
 
         Cookie langCookie = null;
 
@@ -50,7 +47,12 @@ public class ChangeLanguageCommand implements Command {
         String uri = req.getParameter("page");
         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(PAGE_URI + pageName);
+        RequestDispatcher requestDispatcher;
+        if (pageName.equals(INDEX_JSP) || pageName.equals(EMPTY_PAGE)){
+            requestDispatcher = req.getRequestDispatcher(pageName);
+        } else {
+            requestDispatcher = req.getRequestDispatcher(WEB_INF_JSP + pageName);
+        }
         requestDispatcher.forward(req, resp);
 
     }

@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="en_US" scope="session" />
-<fmt:setBundle basename="resource.pagecontent"/>
 <%@ taglib prefix = "custom" uri = "/WEB-INF/tld/conditionalMsg.tld"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="#">
 </head>
 <body>
+    <jsp:include page="nav-language.jsp"/>
     <custom:condMsg condition="${param.register == 'success'}" message="You have signed up successfully!"/>
     <custom:condMsg condition="${param.signin == 'error'}" message="Invalid login or password."/>
 
@@ -30,7 +31,7 @@
             <input type="password" id="password" name="password"/>
 
             <br/>
-            <input type="submit" value="Sign In!" class="floating-button"/>
+            <input type="submit" value=<fmt:message key="button.signin"/> class="floating-button"/>
         </form>
     </div>
 

@@ -14,9 +14,6 @@
 
     <a>
         <fmt:message key="title.language"/>
-        <c:out value="${page}"/> = page)))
-        <c:out value="${pageContext.request.requestURL}"/> = requestURL
-
     </a>
 
     <ul>
