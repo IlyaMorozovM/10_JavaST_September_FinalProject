@@ -11,6 +11,7 @@ public final class ServiceFactory {
     private static final TestService testService = new TestServiceImpl();
     private static final AnswerService answerService = new AnswerServiceImpl();
     private static final QuestionService questionService = new QuestionServiceImpl();
+    private static final ResultService resultService = new ResultServiceImpl();
 
     private ServiceFactory() {}
 
@@ -36,5 +37,9 @@ public final class ServiceFactory {
 
     public QuestionService getQuestionService() {
         return questionService;
+    }
+
+    public ResultService getResultService() {
+        return resultService;
     }
 }

@@ -8,7 +8,8 @@
 <html lang="en">
 <head>
     <title>Testing system</title>
-    <style> <%@include file="../styles/mainAuthorized.css" %> </style>
+<%--    <style> <%@include file="../styles/mainAuthorized.css" %> </style>--%>
+    <style> <%@include file="../styles/bootstrap.css" %> </style>
     <link rel="shortcut icon" href="#">
 </head>
 <body>

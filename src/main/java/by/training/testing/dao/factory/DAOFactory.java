@@ -11,6 +11,7 @@ public final class DAOFactory {
     private static final TestDAO sqlTestImpl = new TestDAOImpl();
     private static final AnswerDAO sqlAnswerImpl = new AnswerDAOImpl();
     private static final QuestionDAO sqlQuestionImpl = new QuestionDAOImpl();
+    private static final ResultDAO sqlResultImpl = new ResultDAOImpl();
 
     private DAOFactory() {}
     public static DAOFactory getInstance() {
@@ -35,5 +36,9 @@ public final class DAOFactory {
 
     public QuestionDAO getQuestionDao() {
         return sqlQuestionImpl;
+    }
+
+    public ResultDAO getResultDao() {
+        return sqlResultImpl;
     }
 }

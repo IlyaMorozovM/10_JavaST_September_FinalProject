@@ -4,7 +4,10 @@
 <html>
 <head>
     <title>Testing system</title>
-    <style> <%@include file="../styles/mainAuthorized.css" %> </style>
+<%--    <style> <%@include file="../styles/mainAuthorized.css" %> </style>--%>
+    <style> <%@include file="../styles/bootstrap.css" %> </style>
+    <style> <%@include file="../styles/bootstrap-theme.css" %> </style>
+    <style> <%@include file="../styles/templatemo-style.css" %> </style>
 </head>
 <body>
     <h2>Welcome, <c:out value="${user.name}"/></h2>
@@ -28,8 +31,8 @@
             <a href="Controller?command=go_to_tests&subjectId=<c:out value="${subject.subjectId}"/>"><c:out value="${subject.name}"/></a>
             <c:if test="${user.roleName == 'tutor'}">
                 <button onclick="location.href='Controller?command=go_to_edit&entity=subject&' +
-                                               'id=<c:out value="${subject.subjectId}"/>&text=<c:out value="${subject.name}"/>'">Edit</button>
-                <button onclick="location.href='Controller?command=delete&entity=subject&id=<c:out value="${subject.subjectId}"/>'">Delete</button>
+                                               'id=<c:out value="${subject.subjectId}"/>&text=<c:out value="${subject.name}"/>'" class="btn btn-primary">Edit</button>
+                <button onclick="location.href='Controller?command=delete&entity=subject&id=<c:out value="${subject.subjectId}"/>'" class="btn btn-primary">Delete</button>
             </c:if>
             <br/><br/>
         </c:forEach>

@@ -17,10 +17,13 @@
         <c:forEach items="${questions}" var="question">
 
             <b><c:out value="${question.question}"/></b>
-            <button onclick="location.href='Controller?command=go_to_edit&entity=question&' +
+            <c:if test="${user.roleName == 'tutor'}">
+                <button onclick="location.href='Controller?command=go_to_edit&entity=question&' +
                     'id=<c:out value="${question.questionId}"/>&text=<c:out value="${question.question}"/>'">Edit</button>
-            <button onclick="location.href='Controller?command=delete&entity=question&id=<c:out value="${question.questionId}"/>'">Delete</button>
+                <button onclick="location.href='Controller?command=delete&entity=question&id=<c:out value="${question.questionId}"/>'">Delete</button>
+            </c:if>
             <br/>
+
 
             <!-- Answers -->
             <c:forEach items="${question.answers}" var="answer">
@@ -32,9 +35,11 @@
                         <p><c:out value="${answer.answer}"/></p>
                     </c:otherwise>
                 </c:choose>
-                <button onclick="location.href='Controller?command=go_to_edit&entity=answer&' +
+                <c:if test="${user.roleName == 'tutor'}">
+                    <button onclick="location.href='Controller?command=go_to_edit&entity=answer&' +
                         'id=<c:out value="${answer.answerId}"/>&text=<c:out value="${answer.answer}"/>&isRight=<c:out value="${answer.right}"/>'">Edit</button>
-                <button onclick="location.href='Controller?command=delete&entity=answer&id=<c:out value="${answer.answerId}"/>'">Delete</button>
+                    <button onclick="location.href='Controller?command=delete&entity=answer&id=<c:out value="${answer.answerId}"/>'">Delete</button>
+                </c:if>
                 <br/>
             </c:forEach>
 

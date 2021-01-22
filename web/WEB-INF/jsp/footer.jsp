@@ -4,6 +4,7 @@
 <fmt:setBundle basename="pagecontent" />
 <html>
 <head>
+    <style> <%@include file="../styles/bootstrap.css" %> </style>
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
 <body>
