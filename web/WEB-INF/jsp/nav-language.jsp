@@ -6,31 +6,22 @@
 
 <html>
 <head>
-
+    <style> <%@include file="../styles/bootstrap.css" %> </style>
 </head>
 <body>
 
-<li>
-
-    <a>
-        <fmt:message key="title.language"/>
-    </a>
-
-    <ul>
-        <li>
-            <a href="Controller?command=change_language&lang=en_EN&page=${pageContext.request.requestURL}">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="Controller?command=change_language&lang=en_EN&page=${pageContext.request.requestURL}">
                 <fmt:message key="label.languageEn"/>
             </a>
         </li>
-        <li>
-            <a href="Controller?command=change_language&lang=ru_RU&page=${pageContext.request.requestURL}">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="Controller?command=change_language&lang=ru_RU&page=${pageContext.request.requestURL}">
                 <fmt:message key="label.languageRu"/>
             </a>
         </li>
     </ul>
-
-</li>
-
 
 </body>
 </html>

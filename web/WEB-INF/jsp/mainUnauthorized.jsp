@@ -8,18 +8,18 @@
 <html lang="en">
 <head>
     <title>Testing system</title>
-<%--    <style> <%@include file="../styles/mainAuthorized.css" %> </style>--%>
     <style> <%@include file="../styles/bootstrap.css" %> </style>
     <link rel="shortcut icon" href="#">
 </head>
-<body>
-    <jsp:include page="nav-language.jsp"/>
+<body class="p-3 mb-2 bg-info text-white">
     <c:set var="successSignup"><fmt:message key="label.successSignup"/></c:set>
     <c:set var="failLogin"><fmt:message key="label.failLogin"/></c:set>
     <custom:condMsg condition="${param.register == 'success'}" message="${successSignup}"/>
     <custom:condMsg condition="${param.signin == 'error'}" message="${failLogin}"/>
 
-    <div align="center"> <!-- login form -->
+<%--    <div align="center"> <!-- login form -->--%>
+    <figure class="text-center">
+        <blockquote class="blockquote">
         <h3><fmt:message key="label.signin"/></h3>
         <form action="Controller" method="post">
             <input type="hidden" name="command" value="signin"/>
@@ -33,9 +33,11 @@
             <input type="password" id="password" name="password"/>
 
             <br/>
-            <input type="submit" value=<fmt:message key="button.signin"/> class="floating-button"/>
+            <input type="submit" value=<fmt:message key="button.signin"/> class="btn-dark" class="btn" />
         </form>
-    </div>
+        </blockquote>
+    </figure>
+<%--    </div>--%>
 
 </body>
 </html>

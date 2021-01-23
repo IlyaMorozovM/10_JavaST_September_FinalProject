@@ -7,13 +7,13 @@
 <head>
     <title>Delete users</title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
 
 <!-- content -->
 <main>
     <div>
-        <table class="table table-hover">
+        <table class="table table-striped p-3 mb-2 bg-secondary text-white">
             <thead>
             <tr>
                 <th><fmt:message key="table.login"/></th>
@@ -29,7 +29,7 @@
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.lastname}"/></td>
                 <td><c:out value="${user.roleName}"/></td>
-                <td><button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'"><fmt:message key="button.delete"/></button></td>
+                <td><button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button></td>
             </tr>
             </tbody>
 <%--                <button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'">Delete</button>--%>
@@ -39,7 +39,7 @@
     </div>
     <br/>
     <div>    <!-- buttons holder -->
-        <button onclick="location.href='Controller?command=go_to_main'"><fmt:message key="button.back"/></button>
+        <button onclick="location.href='Controller?command=go_to_main'" class="btn btn-dark"><fmt:message key="button.back"/></button>
     </div>
 </main>
 

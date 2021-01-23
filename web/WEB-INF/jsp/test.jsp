@@ -8,7 +8,7 @@
     <title>Test (in progress)</title>
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
 <!-- header -->
 <header>
@@ -37,7 +37,7 @@
         <c:choose>
             <c:when test="${currQuestion + 1 == numOfQuestions}">
                 <input type="hidden" name="finishTest" value="true">
-                <input type="submit" value=<fmt:message key="button.finishTest"/> >
+                <input type="submit" value=<fmt:message key="button.finishTest"/> class="btn-success" class="btn" >
             </c:when>
             <c:otherwise>
                 <input type="submit" value=<fmt:message key="button.nextQuesstion"/> >

@@ -9,7 +9,7 @@
     <style> <%@include file="../styles/bootstrap.css" %> </style>
     <link rel="shortcut icon" href="#">
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
     <h2>Now browsing results</h2>
 
@@ -35,7 +35,7 @@
     </div>
 
     <div>
-        <button onclick="location.href='Controller?command=go_to_tests'"><fmt:message key="button.back"/></button>
+        <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>
     </div>
 
     <!-- footer -->

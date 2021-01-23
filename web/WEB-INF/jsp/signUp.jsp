@@ -8,7 +8,7 @@
 <head>
     <title>Sign Up to Testing system</title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
 
     <!-- header -->
@@ -58,12 +58,12 @@
                 <input type="number" id="role" name="role"/>
 
                 <br/>
-                <input type="submit" value=<fmt:message key="button.signup"/> />
+                <input type="submit" value=<fmt:message key="button.signup"/> class="btn-success" class="btn" />
             </form>
         </div>
 
         <div>    <!-- buttons holder -->
-            <button onclick="location.href='Controller?command=go_to_main&signin=success'"><fmt:message key="button.back"/></button>
+            <button onclick="location.href='Controller?command=go_to_main&signin=success'" class="btn" class="btn-dark" class="btn-lg"><fmt:message key="button.back"/></button>
         </div>
     </main>
 

@@ -6,7 +6,7 @@
 <head>
     <title>Oops! Something went wrong :(</title>
 </head>
-<body>
+<body class="badge bg-danger">
 <jsp:include page="nav-language.jsp"/>
     <h1><b><fmt:message key="error.unexpected"/></b></h1>
     <h2><i><fmt:message key="error.wrontRequest"/></i></h2>

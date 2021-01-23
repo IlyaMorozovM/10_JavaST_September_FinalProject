@@ -7,7 +7,7 @@
 <head>
     <title>Add new <c:out value="${param.entity}"/></title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
 
     <!-- content -->
@@ -27,19 +27,19 @@
             <c:if test="${param.entity == 'answer'}">
                 <input type="checkbox" name="isRight" value="true"/>
             </c:if>
-            <input type="submit" value=<fmt:message key="button.add"/>>
+            <input type="submit" value=<fmt:message key="button.add"/> class="btn" class="btn-info">
         </form>
 
         <div>    <!-- buttons holder -->
             <c:choose>
                 <c:when test="${param.entity == 'test'}">
-                    <button onclick="location.href='Controller?command=go_to_tests'"><fmt:message key="button.back"/></button>
+                    <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>
                 </c:when>
                 <c:when test="${param.entity == 'subject'}">
-                    <button onclick="location.href='Controller?command=go_to_main'"><fmt:message key="button.back"/></button>
+                    <button onclick="location.href='Controller?command=go_to_main'" class="btn btn-dark"><fmt:message key="button.back"/></button>
                 </c:when>
                 <c:otherwise>
-                    <button onclick="location.href='Controller?command=go_to_questions'"><fmt:message key="button.back"/></button>
+                    <button onclick="location.href='Controller?command=go_to_questions'" class="btn btn-dark"><fmt:message key="button.back"/></button>
                 </c:otherwise>
             </c:choose>
 <%--            <button onclick="location.href='Controller?command=go_to_tests'">Back</button>--%>

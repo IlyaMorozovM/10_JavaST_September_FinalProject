@@ -8,7 +8,7 @@
     <title>Test (results)</title>
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
-<body>
+<body lass="badge bg-success">
 <jsp:include page="nav-language.jsp"/>
 <header>
     <h3><fmt:message key="label.testCompleted"/></h3>
@@ -20,7 +20,7 @@
     <br/>
     <br/>
 
-    <button onclick="location.href='Controller?command=go_to_tests'"><fmt:message key="button.backToTests"/></button>
+    <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.backToTests"/></button>
 </main>
 
 <!-- footer -->

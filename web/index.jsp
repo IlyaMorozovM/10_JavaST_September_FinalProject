@@ -9,6 +9,9 @@
   </head>
   <body>
 
+  <!-- change language -->
+  <jsp:include page="WEB-INF/jsp/nav-language.jsp"/>
+
   <!-- header -->
   <header>
     <jsp:include page="WEB-INF/jsp/header.jsp"/>

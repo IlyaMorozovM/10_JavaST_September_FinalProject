@@ -41,7 +41,12 @@ public class NextQuestion implements Command {
                 get(((Integer)session.getAttribute(CURRENT_QUESTION_SESSION_ATTR)));
 
         if(currQuestion.getRightAnswers() == 1) {
-            int answerId = Integer.parseInt(req.getParameter(REQUEST_PARAM_RADIO));
+            int answerId;
+            if (req.getParameter(REQUEST_PARAM_RADIO) == null){
+                answerId = -1;
+            } else {
+                answerId = Integer.parseInt(req.getParameter(REQUEST_PARAM_RADIO));
+            }
             int rightAnswerId = 0;
 
             for(Answer answer : currQuestion.getAnswers())

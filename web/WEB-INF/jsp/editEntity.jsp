@@ -8,7 +8,7 @@
     <title>Edit <c:out value="${param.entity}"/></title>
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
 
 <!-- content -->
@@ -28,7 +28,7 @@
         <c:if test="${param.entity == 'answer'}">
             <input type="checkbox" name="isRight" value="true" <c:if test="${param.isRight == 'true'}"><c:out value="checked"/></c:if>/>
         </c:if>
-        <input type="submit" value=<fmt:message key="button.save"/>>
+        <input type="submit" value=<fmt:message key="button.save"/> class="btn" class="btn-success">
     </form>
 </main>
 

@@ -7,8 +7,11 @@
     <style> <%@include file="../styles/bootstrap.css" %> </style>
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
-<body>
-<%--    <h3>Copyright Ilya Morozov 2020.</h3>--%>
-    <fmt:message key="footer.copyright"/>
+<body class="p-3 mb-2 bg-info text-white">
+<figure class="text-center">
+    <figcaption class="blockquote-footer">
+        <p class="h5"><fmt:message key="footer.copyright"/></p>
+    </figcaption>
+</figure>
 </body>
 </html>
