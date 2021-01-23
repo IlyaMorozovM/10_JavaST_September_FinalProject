@@ -13,20 +13,12 @@
 <jsp:include page="nav-language.jsp"/>
     <h2>Now browsing results</h2>
 
-<%--    <div>--%>
-<%--        <c:forEach items="${results}" var="result">--%>
-<%--            <c:out value="${result.userId}"/>--%>
-<%--            <c:out value="${result.points}"/>--%>
-<%--            <br/><br/>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-
     <div>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Student login</th>
-                <th>Points (of ${numOfQuestions})</th>
+                <th><fmt:message key="table.studentLogin"/></th>
+                <th><fmt:message key="table.pointsOf"/>${numOfQuestions})</th>
             </tr>
             </thead>
             <c:forEach items="${results}" var="result">
@@ -43,7 +35,7 @@
     </div>
 
     <div>
-        <button onclick="location.href='Controller?command=go_to_tests'">Back</button>
+        <button onclick="location.href='Controller?command=go_to_tests'"><fmt:message key="button.back"/></button>
     </div>
 
     <!-- footer -->

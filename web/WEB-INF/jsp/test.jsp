@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
     <title>Test (in progress)</title>
@@ -9,7 +12,7 @@
 <jsp:include page="nav-language.jsp"/>
 <!-- header -->
 <header>
-    <h3>Question <c:out value="${currQuestion + 1}"/> out of <c:out value="${numOfQuestions}"/></h3>
+    <h3><fmt:message key="label.question"/><c:out value="${currQuestion + 1}"/><fmt:message key="label.outOf"/><c:out value="${numOfQuestions}"/></h3>
 </header>
 
 <main>
@@ -34,10 +37,10 @@
         <c:choose>
             <c:when test="${currQuestion + 1 == numOfQuestions}">
                 <input type="hidden" name="finishTest" value="true">
-                <input type="submit" value="Finish test">
+                <input type="submit" value=<fmt:message key="button.finishTest"/> >
             </c:when>
             <c:otherwise>
-                <input type="submit" value="Next question ->">
+                <input type="submit" value=<fmt:message key="button.nextQuesstion"/> >
             </c:otherwise>
         </c:choose>
     </form>
