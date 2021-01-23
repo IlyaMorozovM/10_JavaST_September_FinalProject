@@ -29,8 +29,7 @@ public class NextQuestion implements Command {
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
     private static final String CURRENT_QUESTION_SESSION_ATTR = "currQuestion";
 
-    //TODO: norm error
-    private static final String REDIRECT_COMMAND_ERROR_RESULT = "Controller?command=go_to_main&error=test";
+    private static final String REDIRECT_COMMAND_ERROR_RESULT = "Controller?command=go_to_main&error=question";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

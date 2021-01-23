@@ -25,7 +25,7 @@ public class DeleteCommand implements Command {
     private static final String REDIRECT_COMMAND_SUCCESS_TEST = "Controller?command=go_to_tests";
     private static final String REDIRECT_COMMAND_ERROR_TEST = "Controller?command=go_to_tests&error=test";
     private static final String REDIRECT_COMMAND_SUCCESS_QUESTION = "Controller?command=go_to_questions";
-    private static final String REDIRECT_COMMAND_SUCCESS_USER = "Controller?command=go_to_delete_users";
+    private static final String REDIRECT_COMMAND_SUCCESS_USER = "Controller?command=go_to_delete_users&delete=success";
     private static final String REDIRECT_COMMAND_ERROR_QUESTION = "Controller?command=go_to_questions&error=question";
     private static final String REDIRECT_COMMAND_ERROR_USER = "Controller?command=go_to_delete_users&error=user";
 
@@ -109,7 +109,6 @@ public class DeleteCommand implements Command {
                     if(result)
                         resp.sendRedirect(REDIRECT_COMMAND_SUCCESS_USER);
                     else
-                        //TODO: obrabotka error on JSP
                         resp.sendRedirect(REDIRECT_COMMAND_ERROR_USER);
                 }
                 catch (ServiceException e) {

@@ -5,7 +5,7 @@
 
     <tag>
         <name>condMsg</name>
-        <tag-class>by.training.testing.tagHandlers.ConditionMessageTag</tag-class>
+        <tag-class>by.training.testing.tags.ConditionMessageTag</tag-class>
         <body-content>empty</body-content>
         
         <attribute>

@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Testing system : Questions</title>
+    <style> <%@include file="../styles/questions.css" %> </style>
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
@@ -23,7 +24,16 @@
             <c:if test="${user.roleName == 'tutor'}">
                 <button onclick="location.href='Controller?command=go_to_edit&entity=question&' +
                     'id=<c:out value="${question.questionId}"/>&text=<c:out value="${question.question}"/>'" class="btn btn-primary"><fmt:message key="button.edit"/></button>
-                <button onclick="location.href='Controller?command=delete&entity=question&id=<c:out value="${question.questionId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>
+                <br/><br/>
+                <c:set var="message"><fmt:message key="notification.delete"/></c:set>
+                <form onSubmit='return confirm("${message}");' action="Controller" method="post">
+                    <input type="hidden" name="command" value="delete"/>
+                    <input type="hidden" name="entity" value="question"/>
+                    <input type="hidden" name="id" value=<c:out value="${question.questionId}"/> />
+
+                    <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">
+                </form>
+<%--                <button onclick="location.href='Controller?command=delete&entity=question&id=<c:out value="${question.questionId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
             </c:if>
             <br/>
 
@@ -32,16 +42,27 @@
             <c:forEach items="${question.answers}" var="answer">
                 <c:choose>
                     <c:when test="${answer.right}">
-                        <p><font color="green"><c:out value="${answer.answer}"/></font></p>
+                         <p class="green_text">
+                            <c:out value="${answer.answer}"/>
+                        </p>
                     </c:when>
                     <c:otherwise>
-                        <p><c:out value="${answer.answer}"/></p>
+                        <c:out value="${answer.answer}"/>
                     </c:otherwise>
                 </c:choose>
                 <c:if test="${user.roleName == 'tutor'}">
                     <button onclick="location.href='Controller?command=go_to_edit&entity=answer&' +
                         'id=<c:out value="${answer.answerId}"/>&text=<c:out value="${answer.answer}"/>&isRight=<c:out value="${answer.right}"/>'" class="btn btn-primary"><fmt:message key="button.edit"/></button>
-                    <button onclick="location.href='Controller?command=delete&entity=answer&id=<c:out value="${answer.answerId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>
+                    <br/><br/>
+                    <c:set var="message"><fmt:message key="notification.delete"/></c:set>
+                    <form onSubmit='return confirm("${message}");' action="Controller" method="post">
+                        <input type="hidden" name="command" value="delete"/>
+                        <input type="hidden" name="entity" value="answer"/>
+                        <input type="hidden" name="id" value=<c:out value="${answer.answerId}"/> />
+
+                        <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">
+                    </form>
+<%--                    <button onclick="location.href='Controller?command=delete&entity=answer&id=<c:out value="${answer.answerId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
                 </c:if>
                 <br/>
             </c:forEach>

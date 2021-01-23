@@ -24,7 +24,16 @@
                 <button onclick="location.href='Controller?command=go_to_results&testId=<c:out value="${test.testId}"/>'" class="btn btn-success"><fmt:message key="button.results"/></button>
                 <button onclick="location.href='Controller?command=go_to_edit&entity=test&' +
                         'id=<c:out value="${test.testId}"/>&text=<c:out value="${test.title}"/>'" class="btn btn-primary"><fmt:message key="button.edit"/></button>
-                <button onclick="location.href='Controller?command=delete&entity=test&id=<c:out value="${test.testId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>
+                <br/><br/>
+                <c:set var="message"><fmt:message key="notification.delete"/></c:set>
+                <form onSubmit='return confirm("${message}");' action="Controller" method="post">
+                    <input type="hidden" name="command" value="delete"/>
+                    <input type="hidden" name="entity" value="test"/>
+                    <input type="hidden" name="id" value=<c:out value="${test.testId}"/> />
+
+                    <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">
+                </form>
+<%--                <button onclick="location.href='Controller?command=delete&entity=test&id=<c:out value="${test.testId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
             </c:if>
             <br/><br/>
         </c:forEach>

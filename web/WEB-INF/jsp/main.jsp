@@ -34,7 +34,16 @@
             <c:if test="${user.roleName == 'tutor'}">
                 <button onclick="location.href='Controller?command=go_to_edit&entity=subject&' +
                                                'id=<c:out value="${subject.subjectId}"/>&text=<c:out value="${subject.name}"/>'" class="btn btn-primary"><fmt:message key="button.edit"/></button>
-                <button onclick="location.href='Controller?command=delete&entity=subject&id=<c:out value="${subject.subjectId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>
+                <br/><br/>
+                <c:set var="message"><fmt:message key="notification.delete"/></c:set>
+                <form onSubmit='return confirm("${message}");' action="Controller" method="post">
+                    <input type="hidden" name="command" value="delete"/>
+                    <input type="hidden" name="entity" value="subject"/>
+                    <input type="hidden" name="id" value=<c:out value="${subject.subjectId}"/> />
+
+                    <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">
+                </form>
+<%--                <button onclick="location.href='Controller?command=delete&entity=subject&id=<c:out value="${subject.subjectId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
             </c:if>
             <br/><br/>
         </c:forEach>

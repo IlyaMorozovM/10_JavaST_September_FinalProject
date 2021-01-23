@@ -46,7 +46,6 @@ public class GoToResultsCommand implements Command {
         try {
             results = resultService.getResults(testId);
         } catch (ServiceException e) {
-            //TODO: redirect on another page, may be
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
 
