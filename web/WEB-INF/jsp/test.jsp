@@ -6,7 +6,7 @@
 <%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
 <body>
-
+<jsp:include page="nav-language.jsp"/>
 <!-- header -->
 <header>
     <h3>Question <c:out value="${currQuestion + 1}"/> out of <c:out value="${numOfQuestions}"/></h3>

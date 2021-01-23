@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
     <title>Add new <c:out value="${param.entity}"/></title>
-<%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
 </head>
 <body>
+<jsp:include page="nav-language.jsp"/>
 
     <!-- content -->
     <main>
@@ -15,28 +18,28 @@
             <input type="hidden" name="id" value="<c:out value="${param.id}"/>"/>
             <c:choose>
                 <c:when test="${param.entity == 'subject' || param.entity == 'test'}">
-                    <input type="text" value="Add new <c:out value="${param.entity}"/>" name="name"/>
+                    <input type="text" value=<fmt:message key="label.addNew"/>"<c:out value="${param.entity}"/>" name="name"/>
                 </c:when>
                 <c:otherwise>
-                    <textarea name="name">Add new <c:out value="${param.entity}"/></textarea>
+                    <textarea name="name"><fmt:message key="label.addNew"/><c:out value="${param.entity}"/></textarea>
                 </c:otherwise>
             </c:choose>
             <c:if test="${param.entity == 'answer'}">
                 <input type="checkbox" name="isRight" value="true"/>
             </c:if>
-            <input type="submit" value="Add...">
+            <input type="submit" value=<fmt:message key="button.add"/>>
         </form>
 
         <div>    <!-- buttons holder -->
             <c:choose>
                 <c:when test="${param.entity == 'test'}">
-                    <button onclick="location.href='Controller?command=go_to_tests'">Back</button>
+                    <button onclick="location.href='Controller?command=go_to_tests'"><fmt:message key="button.back"/></button>
                 </c:when>
                 <c:when test="${param.entity == 'subject'}">
-                    <button onclick="location.href='Controller?command=go_to_main'">Back</button>
+                    <button onclick="location.href='Controller?command=go_to_main'"><fmt:message key="button.back"/></button>
                 </c:when>
                 <c:otherwise>
-                    <button onclick="location.href='Controller?command=go_to_questions'">Back</button>
+                    <button onclick="location.href='Controller?command=go_to_questions'"><fmt:message key="button.back"/></button>
                 </c:otherwise>
             </c:choose>
 <%--            <button onclick="location.href='Controller?command=go_to_tests'">Back</button>--%>

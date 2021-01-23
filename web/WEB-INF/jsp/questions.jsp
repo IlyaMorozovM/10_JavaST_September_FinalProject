@@ -1,16 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Garbage Testing System : Questions</title>
-<%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
+    <title>Testing system : Questions</title>
 </head>
 <body>
+<jsp:include page="nav-language.jsp"/>
 
 <!-- content -->
 <main>
-    <h2>Now browsing questions</h2>
-    <h3>Your role is <i>`<c:out value="${user.roleName}"/>`</i>.</h3>
+    <h2><fmt:message key="label.browsingQuestions"/></h2>
+    <h3><fmt:message key="label.role"/><i>`<c:out value="${user.roleName}"/>`</i>.</h3>
     <br/>
 
     <div>
@@ -63,7 +66,7 @@
     <br/>
 
     <div>    <!-- buttons holder -->
-        <button onclick="location.href='Controller?command=go_to_tests'">Back</button>
+        <button onclick="location.href='Controller?command=go_to_tests'"><fmt:message key="button.back"/></button>
     </div>
 </main>
 

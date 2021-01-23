@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +14,17 @@
 </head>
 <body>
     <jsp:include page="nav-language.jsp"/>
-    <h2>Welcome, <c:out value="${user.name}"/></h2>
-    <h3>Your role is <i><c:out value="${user.roleName}"/></i>.</h3>
+    <h2><fmt:message key="label.welcome"/> <c:out value="${user.name}"/></h2>
+    <h3><fmt:message key="label.role"/> <i><c:out value="${user.roleName}"/></i>.</h3>
     <br/>
 
     <div>
         <c:if test="${user.roleName == 'admin'}">
-            <button onclick="location.href='Controller?command=go_to_signup'" class="btn btn-info">Sign up users</button>
+            <button onclick="location.href='Controller?command=go_to_signup'" class="btn btn-info"><fmt:message key="label.signUpUsers"/></button>
 <%--            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users!</a>--%>
             <br/><br/>
 
-            <button onclick="location.href='Controller?command=go_to_delete_users'" class="btn btn-info">Delete users</button>
+            <button onclick="location.href='Controller?command=go_to_delete_users'" class="btn btn-info"><fmt:message key="label.deleteUsers"/></button>
 <%--            <a href='<c:url value="Controller?command=go_to_signup" />' class="floating-button">Sign up users</a>--%>
             <br/><br/>
         </c:if>
@@ -47,7 +50,7 @@
     </c:if>
     <br/>
     <div>    <!-- buttons holder -->
-        <button onclick="location.href='Controller?command=signout'"  class="btn btn-danger">Sign Out</button>
+        <button onclick="location.href='Controller?command=signout'"  class="btn btn-danger"><fmt:message key="button.signOut"/></button>
     </div>
 </body>
 </html>

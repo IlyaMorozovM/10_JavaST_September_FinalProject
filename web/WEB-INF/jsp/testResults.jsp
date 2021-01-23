@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
     <title>Test results</title>
@@ -7,6 +10,7 @@
     <link rel="shortcut icon" href="#">
 </head>
 <body>
+<jsp:include page="nav-language.jsp"/>
     <h2>Now browsing results</h2>
 
 <%--    <div>--%>
