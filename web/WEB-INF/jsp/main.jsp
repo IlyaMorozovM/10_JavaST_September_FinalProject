@@ -52,7 +52,7 @@
     <c:if test="${user.roleName == 'tutor'}">
         <div>
             <br/>
-            <button onclick="location.href='Controller?command=go_to_add&entity=subject'" class="btn btn-info">Add subject</button>
+            <button onclick="location.href='Controller?command=go_to_add&entity=subject'" class="btn btn-info"><fmt:message key="label.addSubject"/></button>
         </div>
     </c:if>
     <br/>

@@ -4,11 +4,11 @@
 <fmt:setLocale value="${cookie.language.value}"/>
 <fmt:setBundle basename="pagecontent"/>
 
-<html>
-<head>
-    <style> <%@include file="../styles/bootstrap.css" %> </style>
-</head>
-<body>
+<%--<html>--%>
+<%--<head>--%>
+<%--    <style> <%@include file="../styles/bootstrap.css" %> </style>--%>
+<%--</head>--%>
+<%--<body>--%>
 
     <ul class="nav justify-content-end">
         <li class="nav-item">
@@ -23,5 +23,5 @@
         </li>
     </ul>
 
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>

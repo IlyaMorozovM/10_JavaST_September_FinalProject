@@ -11,7 +11,14 @@
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
-    <h2>Now browsing results</h2>
+    <h2><fmt:message key="label.browsingResults"/></h2>
+
+    <div> <!-- find user form -->
+        <form action="Controller" method="post">
+            <input type="hidden" name="command" value="go_to_results"/>
+            <input type="hidden" name="userResult" value="true">
+        </form>
+    </div>
 
     <div>
         <table class="table table-hover">
@@ -28,8 +35,6 @@
                     <td> <c:out value="${result.points}"/></td>
                 </tr>
                 </tbody>
-                <%--                <button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'">Delete</button>--%>
-                <%--            <br/><br/>--%>
             </c:forEach>
         </table>
     </div>
