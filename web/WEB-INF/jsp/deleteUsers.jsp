@@ -18,6 +18,37 @@
     <custom:condMsg condition="${param.error == 'user'}" message="${failDelete}"/>
     <custom:condMsg condition="${param.delete == 'success'}" message="${success}"/>
 
+    <div> <!-- find user form -->
+        <form action="Controller" method="post">
+            <input type="hidden" name="command" value="go_to_delete_users"/>
+            <input type="hidden" name="showOneUser" value="true">
+
+            <label for="login"><fmt:message key="label.findByLogin"/></label>
+            <input type="text" id="login" name="login"/>
+
+            <input type="submit" value=<fmt:message key="button.find"/> class="btn-success" />
+        </form>
+    </div>
+
+    <div> <!-- find user form -->
+        <form action="Controller" method="post">
+            <input type="hidden" name="command" value="go_to_delete_users"/>
+            <input type="hidden" name="showOneUser" value="false">
+
+            <input type="submit" value=<fmt:message key="button.showAllUsers" /> class="btn-success" />
+        </form>
+    </div>
+
+    <c:choose>
+        <c:when test="${oneUser != null}">
+            <c:set var="users" scope="session" value="${oneUser}" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="users" scope="session" value="${allUsers}" />
+        </c:otherwise>
+    </c:choose>
+
+
     <div>
         <table class="table table-striped p-3 mb-2 bg-secondary text-white">
             <thead>

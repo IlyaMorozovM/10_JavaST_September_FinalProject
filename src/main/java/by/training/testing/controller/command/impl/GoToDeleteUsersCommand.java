@@ -17,7 +17,10 @@ import java.util.List;
 public class GoToDeleteUsersCommand implements Command {
 
     private static final String DELETE_USERS_PAGE_URI = "WEB-INF/jsp/deleteUsers.jsp";
-    private static final String USERS_SESSION_ATTR = "users";
+    private static final String USERS_SESSION_ATTR = "allUsers";
+    private static final String ONE_USER_SESSION_ATTR = "oneUser";
+    private static final String REQUEST_PARAM_LOGIN = "login";
+    private static final String REQUEST_PARAM_ONE_USER = "showOneUser";
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
     @Override
@@ -25,18 +28,33 @@ public class GoToDeleteUsersCommand implements Command {
 
 
         HttpSession session = req.getSession(true);
+        session.removeAttribute(ONE_USER_SESSION_ATTR);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
 
         List<User> users = null;
-        try {
-            users = userService.getUsers();
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+        List<User> oneUser = null;
+
+        if ( req.getParameter(REQUEST_PARAM_ONE_USER) == null ||
+                req.getParameter(REQUEST_PARAM_ONE_USER).equals("false")) {
+            try {
+                users = userService.getUsers();
+                session.setAttribute(USERS_SESSION_ATTR, users);
+            } catch (ServiceException e) {
+                resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+            }
+        } else {
+            users = (List<User>)session.getAttribute(USERS_SESSION_ATTR);
+            String login = req.getParameter(REQUEST_PARAM_LOGIN);
+            try {
+                oneUser = userService.getUser(users, login);
+                session.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
+            } catch (ServiceException e) {
+                resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+            }
         }
-        session.setAttribute(USERS_SESSION_ATTR, users);
+//        session.setAttribute(USERS_SESSION_ATTR, users);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(DELETE_USERS_PAGE_URI);
         requestDispatcher.forward(req, resp);

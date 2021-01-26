@@ -10,6 +10,7 @@ import by.training.testing.service.UserService;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.service.exception.ServiceUserAlreadyExistsException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -24,6 +25,18 @@ public class UserServiceImpl implements UserService {
         catch (DAOException e) {
             throw new ServiceException("Error while getting users", e);
         }
+    }
+
+    @Override
+    public List<User> getUser(List<User> users, String login) throws ServiceException {
+        List<User> oneUser = new ArrayList<>();
+        for (User user: users){
+            if (user.getLogin().equals(login)){
+                oneUser.add(user);
+                break;
+            }
+        }
+        return oneUser;
     }
 
     @Override

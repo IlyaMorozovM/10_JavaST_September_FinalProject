@@ -30,7 +30,7 @@
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="false">
 
-            <input type="submit" value=<fmt:message key="button.showAll" /> class="btn-success" />
+            <input type="submit" value=<fmt:message key="button.showAllResults" /> class="btn-success" />
         </form>
     </div>
 
