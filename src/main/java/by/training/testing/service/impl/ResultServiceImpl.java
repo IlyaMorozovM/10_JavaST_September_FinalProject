@@ -7,6 +7,7 @@ import by.training.testing.dao.factory.DAOFactory;
 import by.training.testing.service.ResultService;
 import by.training.testing.service.exception.ServiceException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultServiceImpl implements ResultService {
@@ -24,6 +25,17 @@ public class ResultServiceImpl implements ResultService {
         catch (DAOException e) {
             throw new ServiceException("Error while getting results", e);
         }
+    }
+
+    @Override
+    public List<Result> getUserResults(List<Result> results, String login) throws ServiceException {
+        List<Result> userResults = new ArrayList<>();
+        for(Result result: results){
+            if (result.getStudentLogin().equals(login)){
+                userResults.add(result);
+            }
+        }
+        return userResults;
     }
 
     @Override

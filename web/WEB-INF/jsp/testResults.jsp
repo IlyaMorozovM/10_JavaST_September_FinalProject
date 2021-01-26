@@ -16,9 +16,32 @@
     <div> <!-- find user form -->
         <form action="Controller" method="post">
             <input type="hidden" name="command" value="go_to_results"/>
-            <input type="hidden" name="userResult" value="true">
+            <input type="hidden" name="isUserResult" value="true">
+
+            <label for="login"><fmt:message key="label.findByLogin"/></label>
+            <input type="text" id="login" name="login"/>
+
+            <input type="submit" value=<fmt:message key="button.find"/> class="btn-success" />
         </form>
     </div>
+
+    <div> <!-- find user form -->
+        <form action="Controller" method="post">
+            <input type="hidden" name="command" value="go_to_results"/>
+            <input type="hidden" name="isUserResult" value="false">
+
+            <input type="submit" value=<fmt:message key="button.showAll" /> class="btn-success" />
+        </form>
+    </div>
+
+    <c:choose>
+        <c:when test="${userResults != null}">
+            <c:set var="results" scope="session" value="${userResults}" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="results" scope="session" value="${allResults}" />
+        </c:otherwise>
+    </c:choose>
 
     <div>
         <table class="table table-hover">
@@ -28,6 +51,7 @@
                 <th><fmt:message key="table.pointsOf"/>${numOfQuestions})</th>
             </tr>
             </thead>
+
             <c:forEach items="${results}" var="result">
                 <tbody>
                 <tr>

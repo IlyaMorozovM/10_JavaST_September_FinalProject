@@ -20,8 +20,11 @@ public class GoToResultsCommand implements Command {
 
     private static final String RESULTS_PAGE_URI = "WEB-INF/jsp/testResults.jsp";
 
-    private static final String RESULTS_SESSION_ATTR = "results";
+    private static final String RESULTS_SESSION_ATTR = "allResults";
+    private static final String USER_RESULTS_SESSION_ATTR = "userResults";
     private static final String REQUEST_PARAMETER_TESTID = "testId";
+    private static final String REQUEST_PARAM_LOGIN = "login";
+    private static final String REQUEST_PARAM_USER_RESULT = "isUserResult";
     private static final String TESTID_SESSION_ATTR = "testId";
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
 
@@ -30,6 +33,7 @@ public class GoToResultsCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession(true);
+        session.removeAttribute(USER_RESULTS_SESSION_ATTR);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ResultService resultService = serviceFactory.getResultService();
@@ -43,10 +47,25 @@ public class GoToResultsCommand implements Command {
         }
 
         List<Result> results = null;
-        try {
-            results = resultService.getResults(testId);
-        } catch (ServiceException e) {
-            resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+        List<Result> userResults = null;
+
+        if ( req.getParameter(REQUEST_PARAM_USER_RESULT) == null ||
+                req.getParameter(REQUEST_PARAM_USER_RESULT).equals("false")) {
+            try {
+                results = resultService.getResults(testId);
+                session.setAttribute(RESULTS_SESSION_ATTR, results);
+            } catch (ServiceException e) {
+                resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+            }
+        } else {
+            results = (List<Result>)session.getAttribute(RESULTS_SESSION_ATTR);
+            String login = req.getParameter(REQUEST_PARAM_LOGIN);
+            try {
+                userResults = resultService.getUserResults(results, login);
+                session.setAttribute(USER_RESULTS_SESSION_ATTR, userResults);
+            } catch (ServiceException e) {
+                resp.sendRedirect(REDIRECT_COMMAND_ERROR);
+            }
         }
 
         QuestionService questionService = serviceFactory.getQuestionService();
@@ -56,8 +75,10 @@ public class GoToResultsCommand implements Command {
         } catch (ServiceException e) {
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
+        //TODO: why only Controller в адресной строке, когда find
         session.setAttribute(NUMBER_OF_QUESTIONS_SESSION_ATTR, questions.size());
-        session.setAttribute(RESULTS_SESSION_ATTR, results);
+//        session.setAttribute(RESULTS_SESSION_ATTR, results);
+//        session.setAttribute(USER_RESULTS_SESSION_ATTR, userResults);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(RESULTS_PAGE_URI);
         requestDispatcher.forward(req, resp);
