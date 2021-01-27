@@ -7,10 +7,10 @@
 <html>
 <head>
     <title>Testing system</title>
-    <style> <%@include file="../styles/bootstrap.css" %> </style>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="p-3 mb-2 bg-info text-white">
-
     <h2><fmt:message key="label.welcome"/> <c:out value="${user.name}"/></h2>
     <h3><fmt:message key="label.role"/> <i><c:out value="${user.roleName}"/></i>.</h3>
     <br/>

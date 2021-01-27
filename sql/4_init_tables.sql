@@ -1,3 +1,7 @@
+INSERT INTO testsdb.roles (id, name) VALUES (3, 'admin');
+INSERT INTO testsdb.roles (id, name) VALUES (2, 'student');
+INSERT INTO testsdb.roles (id, name) VALUES (1, 'tutor');
+
 INSERT INTO `users` (
 	`id`,
 	`login`,

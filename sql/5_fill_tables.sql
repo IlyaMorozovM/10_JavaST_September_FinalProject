@@ -35,10 +35,6 @@ INSERT INTO testsdb.subjects (id, name) VALUES (2, 'Russian');
 INSERT INTO testsdb.subjects (id, name) VALUES (4, 'History');
 INSERT INTO testsdb.subjects (id, name) VALUES (5, 'Biology');
 
-INSERT INTO testsdb.roles (id, name) VALUES (3, 'admin');
-INSERT INTO testsdb.roles (id, name) VALUES (2, 'student');
-INSERT INTO testsdb.roles (id, name) VALUES (1, 'tutor');
-
 INSERT INTO testsdb.results (id, test, student_login, points) VALUES (3, 1, 'vasya', 1);
 INSERT INTO testsdb.results (id, test, student_login, points) VALUES (4, 6, 'vasya', 2);
 INSERT INTO testsdb.results (id, test, student_login, points) VALUES (5, 1, 'Dasha', 2);

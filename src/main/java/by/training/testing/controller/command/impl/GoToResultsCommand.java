@@ -23,9 +23,11 @@ public class GoToResultsCommand implements Command {
     private static final String RESULTS_SESSION_ATTR = "allResults";
     private static final String USER_RESULTS_SESSION_ATTR = "userResults";
     private static final String REQUEST_PARAMETER_TESTID = "testId";
+    private static final String REQUEST_PARAMETER_TEST_TITLE = "testTitle";
     private static final String REQUEST_PARAM_LOGIN = "login";
     private static final String REQUEST_PARAM_USER_RESULT = "isUserResult";
     private static final String TESTID_SESSION_ATTR = "testId";
+    private static final String TEST_TITLE_SESSION_ATTR = "testTitle";
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
@@ -45,6 +47,10 @@ public class GoToResultsCommand implements Command {
         } else {
             testId = (int) session.getAttribute(TESTID_SESSION_ATTR);
         }
+
+        String testTitle = req.getParameter(REQUEST_PARAMETER_TEST_TITLE);
+        session.setAttribute(TEST_TITLE_SESSION_ATTR, testTitle);
+
 
         List<Result> results = null;
         List<Result> userResults = null;

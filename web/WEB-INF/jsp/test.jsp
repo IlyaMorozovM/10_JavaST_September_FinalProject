@@ -6,7 +6,8 @@
 <html>
 <head>
     <title>Test (in progress)</title>
-<%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>

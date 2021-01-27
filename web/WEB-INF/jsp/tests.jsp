@@ -6,6 +6,8 @@
 <html>
 <head>
     <title>Available tests</title>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 
@@ -21,7 +23,7 @@
             <button onclick="location.href='Controller?command=go_to_questions&testId=<c:out value="${test.testId}"/>'" class="btn btn-info"><c:out value="${test.title}"/></button>
 <%--            <a href="Controller?command=go_to_questions&testId=<c:out value="${test.testId}"/>"><c:out value="${test.title}"/></a>--%>
             <c:if test="${user.roleName == 'tutor'}">
-                <button onclick="location.href='Controller?command=go_to_results&testId=<c:out value="${test.testId}"/>'" class="btn btn-success"><fmt:message key="button.results"/></button>
+                <button onclick="location.href='Controller?command=go_to_results&testId=<c:out value="${test.testId}"/>&testTitle=<c:out value="${test.title}"/>'" class="btn btn-success"><fmt:message key="button.results"/></button>
                 <button onclick="location.href='Controller?command=go_to_edit&entity=test&' +
                         'id=<c:out value="${test.testId}"/>&text=<c:out value="${test.title}"/>'" class="btn btn-primary"><fmt:message key="button.edit"/></button>
                 <br/><br/>

@@ -8,7 +8,8 @@
 <html lang="en">
 <head>
     <title>Testing system</title>
-    <style> <%@include file="../styles/bootstrap.css" %> </style>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <link rel="shortcut icon" href="#">
 </head>
 <body class="p-3 mb-2 bg-info text-white">

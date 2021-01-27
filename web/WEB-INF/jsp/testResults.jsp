@@ -6,12 +6,13 @@
 <html>
 <head>
     <title>Test results</title>
-    <style> <%@include file="../styles/bootstrap.css" %> </style>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <link rel="shortcut icon" href="#">
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>
-    <h2><fmt:message key="label.browsingResults"/></h2>
+    <h2><fmt:message key="label.browsingResults"/><c:out value="${testTitle}"/> </h2>
 
     <div> <!-- find user form -->
         <form action="Controller" method="post">

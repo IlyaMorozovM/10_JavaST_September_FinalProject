@@ -7,6 +7,8 @@
 <html>
 <head>
     <title>Delete users</title>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 <jsp:include page="nav-language.jsp"/>

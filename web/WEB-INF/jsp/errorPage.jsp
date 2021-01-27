@@ -5,6 +5,8 @@
 <html>
 <head>
     <title>Oops! Something went wrong :(</title>
+    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="badge bg-danger">
 <jsp:include page="nav-language.jsp"/>
