@@ -14,3 +14,7 @@
 результат. 
 Студент просматривает
 список доступных Тестов, отвечает на вопросы.
+
+
+Схема БД представлена на следующем изображении:
+![Image alt](https://github.com/IlyaMorozovM/10_JavaST_September_FinalProject/raw/main/db.png)
