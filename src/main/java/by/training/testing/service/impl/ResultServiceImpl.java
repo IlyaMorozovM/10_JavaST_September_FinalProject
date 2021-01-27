@@ -13,7 +13,7 @@ import java.util.List;
 public class ResultServiceImpl implements ResultService {
     @Override
     public List<Result> getResults(int testId) throws ServiceException {
-        if(testId == 0)
+        if(testId <= 0)
             return null;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -40,7 +40,7 @@ public class ResultServiceImpl implements ResultService {
 
     @Override
     public boolean addResult(int testId, String studentLogin, int points) throws ServiceException {
-        if(studentLogin.equals("") || testId == 0)
+        if(studentLogin.equals("") || testId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();

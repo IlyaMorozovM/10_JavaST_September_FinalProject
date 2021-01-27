@@ -13,31 +13,45 @@ public final class ConnectionPool {
     private BlockingQueue<Connection> connectionQueue;
     private BlockingQueue<Connection> givenAwayConQueue;
 
-    private final String driverName;
-    private final String url;
-    private final String user;
-    private final String password;
+    private String driverName;
+    private String url;
+    private String user;
+    private String password;
     private int poolSize;
 
-    private static final ConnectionPool instance = new ConnectionPool();
-
-    private ConnectionPool() {
+    private ConnectionPool(){
         DBResourceManager dbResourceManager = DBResourceManager.getInstance();
-        this.driverName = dbResourceManager.getValue(DBParameter.DB_DRIVER);
-        this.url = dbResourceManager.getValue(DBParameter.DB_URL);
-        this.user = dbResourceManager.getValue(DBParameter.DB_USER);
-        this.password = dbResourceManager.getValue(DBParameter.DB_PASSWORD);
+        driverName = dbResourceManager.getValue(DBParameter.DB_DRIVER);
+        url = dbResourceManager.getValue(DBParameter.DB_URL);
+        user = dbResourceManager.getValue(DBParameter.DB_USER);
+        password = dbResourceManager.getValue(DBParameter.DB_PASSWORD);
 
         try {
-            this.poolSize = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_POOL_SIZE));
+            poolSize = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_POOL_SIZE));
         }
         catch (NumberFormatException e) {
             poolSize = POOL_SIZE;
         }
     }
 
+    private static final ConnectionPool instance = new ConnectionPool();
+
     public static ConnectionPool getInstance() {
         return instance;
+    }
+
+    public void initParams(String driverName, String url, String user, String password, int poolSize){
+        this.driverName = driverName;
+        this.url = url;
+        this.user = user;
+        this.password = password;
+
+        try {
+            this.poolSize = poolSize;
+        }
+        catch (NumberFormatException e) {
+            this.poolSize = POOL_SIZE;
+        }
     }
 
     public void initPoolData() throws ConnectionPoolException {

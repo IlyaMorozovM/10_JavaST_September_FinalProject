@@ -21,8 +21,8 @@ public class ResultDAOImpl implements ResultDAO {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_RESULT_SQL = "INSERT testsdb.results(`test`, `student_login`, `points`) VALUES (?,?,?)";
-    private static final String SELECT_RESULT_SQL = "SELECT * FROM testsdb.results WHERE testsdb.results.test = ?";
+    private static final String INSERT_RESULT_SQL = "INSERT results(`test`, `student_login`, `points`) VALUES (?,?,?)";
+    private static final String SELECT_RESULT_SQL = "SELECT * FROM results WHERE results.test = ?";
 
     @Override
     public List<Result> getResults(int testId) throws DAOException {

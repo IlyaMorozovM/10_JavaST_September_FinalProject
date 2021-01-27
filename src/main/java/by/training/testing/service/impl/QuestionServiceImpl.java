@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> getQuestions(int testId) throws ServiceException {
-        if(testId == 0)
+        if(testId <= 0)
             return null;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -39,7 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public boolean addQuestion(int testId, String question) throws ServiceException {
-        if(question.equals("") || testId == 0)
+        if(question.equals("") || testId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -56,7 +56,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public boolean editQuestion(int questionId, String question) throws ServiceException {
-        if(question.equals("") || questionId == 0)
+        if(question.equals("") || questionId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -73,7 +73,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public boolean deleteQuestion(int questionId) throws ServiceException {
-        if(questionId == 0)
+        if(questionId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();

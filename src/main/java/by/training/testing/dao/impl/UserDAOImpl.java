@@ -24,10 +24,10 @@ public class UserDAOImpl implements UserDAO {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String DELETE_USER_SQL = "DELETE FROM testsdb.users WHERE testsdb.users.id = ?";
-    private static final String INSERT_USER_SQL = "INSERT testsdb.users(login, pass_hash, `name`, lastname, email, `role`) VALUES (?,?,?,?,?,?)";
-    private static final String SIGN_IN_SQL = "SELECT u.*, r.name as roleName FROM testsdb.users u INNER JOIN testsdb.roles r ON u.role = r.id where u.login = ? and u.pass_hash = ?";
-    private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM testsdb.users u INNER JOIN testsdb.roles r ON u.role = r.id";
+    private static final String DELETE_USER_SQL = "DELETE FROM users WHERE users.id = ?";
+    private static final String INSERT_USER_SQL = "INSERT users(login, pass_hash, `name`, lastname, email, `role`) VALUES (?,?,?,?,?,?)";
+    private static final String SIGN_IN_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id where u.login = ? and u.pass_hash = ?";
+    private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id";
 
     public UserDAOImpl() {}
 

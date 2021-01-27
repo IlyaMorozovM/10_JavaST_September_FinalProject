@@ -13,7 +13,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public List<Answer> getAnswers(int questionId) throws ServiceException {
 
-        if(questionId == 0)
+        if(questionId <= 0)
             return null;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -30,7 +30,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public boolean addAnswer(int questionId, String answer, boolean isRight) throws ServiceException {
 
-        if(answer.equals("") || questionId == 0)
+        if(answer.equals("") || questionId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -48,7 +48,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public boolean editAnswer(int answerId, String answer, boolean isRight) throws ServiceException {
 
-        if(answer.equals("") || answerId == 0)
+        if(answer.equals("") || answerId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -66,7 +66,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public boolean deleteAnswer(int answerId) throws ServiceException {
 
-        if(answerId == 0)
+        if(answerId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();

@@ -20,10 +20,10 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_SUBJECT_SQL = "INSERT testsdb.subjects(`name`) VALUES (?)";
-    private static final String DELETE_SUBJECT_SQL = "DELETE FROM testsdb.subjects WHERE testsdb.subjects.id = ?";
-    private static final String UPDATE_SUBJECT_SQL = "UPDATE testsdb.subjects SET testsdb.subjects.name = ? WHERE testsdb.subjects.id = ?";
-    private static final String SELECT_SUBJECT_SQL = "SELECT * FROM testsdb.subjects";
+    private static final String INSERT_SUBJECT_SQL = "INSERT subjects(`name`) VALUES (?)";
+    private static final String DELETE_SUBJECT_SQL = "DELETE FROM subjects WHERE subjects.id = ?";
+    private static final String UPDATE_SUBJECT_SQL = "UPDATE subjects SET subjects.name = ? WHERE subjects.id = ?";
+    private static final String SELECT_SUBJECT_SQL = "SELECT * FROM subjects";
 
     @Override
     public List<Subject> getSubjects() throws DAOException {

@@ -21,10 +21,10 @@ public class TestDAOImpl implements TestDAO {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_TEST_SQL = "INSERT testsdb.tests(`subject`, `title`) VALUES (?,?)";
-    private static final String DELETE_TEST_SQL = "DELETE FROM testsdb.tests WHERE testsdb.tests.id = ?";
-    private static final String UPDATE_TEST_SQL = "UPDATE testsdb.tests SET testsdb.tests.title = ? WHERE testsdb.tests.id = ?";
-    private static final String SELECT_TEST_SQL = "SELECT * FROM testsdb.tests WHERE testsdb.tests.subject = ?";
+    private static final String INSERT_TEST_SQL = "INSERT tests(`subject`, `title`) VALUES (?,?)";
+    private static final String DELETE_TEST_SQL = "DELETE FROM tests WHERE tests.id = ?";
+    private static final String UPDATE_TEST_SQL = "UPDATE tests SET tests.title = ? WHERE tests.id = ?";
+    private static final String SELECT_TEST_SQL = "SELECT * FROM tests WHERE tests.subject = ?";
 
     @Override
     public List<Test> getTests(int subjectId) throws DAOException {

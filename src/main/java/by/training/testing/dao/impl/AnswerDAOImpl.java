@@ -22,10 +22,10 @@ public class AnswerDAOImpl implements AnswerDAO {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_ANSWER_SQL = "INSERT testsdb.answers(`question`, `answer`, `is_right`) VALUES (?,?,?)";
-    private static final String DELETE_ANSWER_SQL = "DELETE FROM testsdb.answers WHERE testsdb.answers.id = ?";
-    private static final String UPDATE_ANSWER_SQL = "UPDATE testsdb.answers SET testsdb.answers.answer = ?, testsdb.answers.is_right = ? WHERE testsdb.answers.id = ?";
-    private static final String SELECT_ANSWER_SQL = "SELECT * FROM testsdb.answers WHERE testsdb.answers.question = ?";
+    private static final String INSERT_ANSWER_SQL = "INSERT answers(`question`, `answer`, `is_right`) VALUES (?,?,?)";
+    private static final String DELETE_ANSWER_SQL = "DELETE FROM answers WHERE answers.id = ?";
+    private static final String UPDATE_ANSWER_SQL = "UPDATE answers SET answers.answer = ?, answers.is_right = ? WHERE answers.id = ?";
+    private static final String SELECT_ANSWER_SQL = "SELECT * FROM answers WHERE answers.question = ?";
 
     @Override
     public List<Answer> getAnswers(int questionId) throws DAOException {
