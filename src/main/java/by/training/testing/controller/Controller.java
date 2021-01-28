@@ -1,5 +1,6 @@
 package by.training.testing.controller;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import by.training.testing.controller.command.Command;
@@ -15,12 +16,11 @@ public class Controller extends HttpServlet {
     private static final String REQUEST_PARAM_COMMAND = "command";
     private static final String LAST_REQUEST_PARAM = "lastRequest";
 
-    private final Logger logger;
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
 
     public Controller() {
         super();
 
-        logger = Logger.getLogger(Controller.class);
         PropertyConfigurator.configure(Controller.class.getClassLoader().getResource("log4j.properties"));
     }
 
@@ -47,7 +47,7 @@ public class Controller extends HttpServlet {
             executionCommand.execute(req, resp);
         }
         catch (Exception e) {
-            logger.debug(e);
+            LOGGER.debug(e);
         }
 
 
@@ -65,7 +65,7 @@ public class Controller extends HttpServlet {
             executionCommand.execute(req, resp);
         }
         catch (Exception e) {
-            logger.debug(e);
+            LOGGER.debug(e);
         }
 
     }

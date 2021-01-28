@@ -40,7 +40,7 @@ public class AddEntityCommand implements Command {
         String entity = req.getParameter(REQUEST_PARAM_ENTITY);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        Boolean result;
+        boolean result;
 
         switch (entity) {
             case ENTITY_SUBJECT:

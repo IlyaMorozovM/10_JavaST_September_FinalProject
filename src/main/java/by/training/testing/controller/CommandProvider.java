@@ -2,10 +2,15 @@ package by.training.testing.controller;
 
 import by.training.testing.controller.command.Command;
 import by.training.testing.controller.command.impl.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
 final class CommandProvider {
+
+    private static final Logger LOGGER = LogManager.getLogger(CommandProvider.class);
+
     private final HashMap<CommandName, Command> repository = new HashMap<>();
 
     CommandProvider() {
@@ -29,15 +34,15 @@ final class CommandProvider {
     }
 
     Command getCommand(String name) {
-        CommandName commandName = null;
-        Command command = null;
+        CommandName commandName;
+        Command command;
 
         try {
             commandName = CommandName.valueOf(name.toUpperCase());
             command = repository.get(commandName);
         }
         catch (IllegalArgumentException | NullPointerException e) {
-            //log
+            LOGGER.debug(e);
             command = repository.get(CommandName.WRONG_REQUEST);
         }
         return  command;

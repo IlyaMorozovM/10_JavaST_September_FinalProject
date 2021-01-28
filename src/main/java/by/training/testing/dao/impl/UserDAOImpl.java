@@ -6,6 +6,8 @@ import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.exception.DAOUserAlreadyExistsException;
 import by.training.testing.dao.impl.connection.ConnectionPool;
 import by.training.testing.dao.impl.connection.ConnectionPoolException;
+import by.training.testing.service.UserService;
+import by.training.testing.service.factory.ServiceFactory;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,20 +32,6 @@ public class UserDAOImpl implements UserDAO {
     private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id";
 
     public UserDAOImpl() {}
-
-    private static String getMD5Hash(byte[] password) throws NoSuchAlgorithmException {
-        String generatedPassword = null;
-
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(password);
-        byte[] bytes = md.digest();
-        StringBuilder sb = new StringBuilder();
-        for (byte aByte : bytes) {
-            sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
-        }
-        generatedPassword = sb.toString();
-        return generatedPassword;
-    }
 
     @Override
     public List<User> getUsers() throws DAOException {
@@ -108,11 +96,14 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         ResultSet rs = null;
 
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        UserService userService = serviceFactory.getUserService();
+
         try {
             connection = connectionPool.takeConnection();
             ps = connection.prepareStatement(SIGN_IN_SQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ps.setString(1, login);
-            ps.setString(2, getMD5Hash(password));
+            ps.setString(2, userService.getMD5Hash(password));
 
             rs = ps.executeQuery();
             if(rs == null)
@@ -149,11 +140,14 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement ps = null;
         Connection connection = null;
 
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        UserService userService = serviceFactory.getUserService();
+
         try {
             connection = connectionPool.takeConnection();
             ps = connection.prepareStatement(INSERT_USER_SQL);
             ps.setString(1, login);
-            ps.setString(2, getMD5Hash(password));
+            ps.setString(2, userService.getMD5Hash(password));
             ps.setString(3, name);
             ps.setString(4, lastname);
             ps.setString(5, email);

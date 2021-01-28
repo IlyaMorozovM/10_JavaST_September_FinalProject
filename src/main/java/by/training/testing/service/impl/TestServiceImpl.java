@@ -13,7 +13,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<Test> getTests(int subjectId) throws ServiceException {
 
-        if(subjectId == 0)
+        if(subjectId <= 0)
             return null;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -30,7 +30,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public boolean addTest(int subjectId, String title) throws ServiceException {
 
-        if(title.equals("") || subjectId == 0)
+        if(title.equals("") || subjectId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -48,7 +48,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public boolean editTest(int testId, String title) throws ServiceException {
 
-        if(title.equals("") || testId == 0)
+        if(title.equals("") || testId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -66,7 +66,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public boolean deleteTest(int testId) throws ServiceException {
 
-        if(testId == 0)
+        if(testId <= 0)
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();

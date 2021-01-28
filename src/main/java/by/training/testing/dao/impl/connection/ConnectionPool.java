@@ -1,5 +1,8 @@
 package by.training.testing.dao.impl.connection;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +13,8 @@ import java.util.concurrent.BlockingQueue;
 public final class ConnectionPool {
 
     private static final int POOL_SIZE = 5;
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private BlockingQueue<Connection> connectionQueue;
     private BlockingQueue<Connection> givenAwayConQueue;
 
@@ -95,7 +100,7 @@ public final class ConnectionPool {
             closeConnectionQueue(connectionQueue);
         }
         catch (SQLException e) {
-            //log
+            LOGGER.debug(e);
         }
     }
 

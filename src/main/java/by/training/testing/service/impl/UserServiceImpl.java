@@ -10,10 +10,27 @@ import by.training.testing.service.UserService;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.service.exception.ServiceUserAlreadyExistsException;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+    @Override
+    public String getMD5Hash(byte[] password) throws NoSuchAlgorithmException {
+        String generatedPassword = null;
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password);
+        byte[] bytes = md.digest();
+        StringBuilder sb = new StringBuilder();
+        for (byte aByte : bytes) {
+            sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+        }
+        generatedPassword = sb.toString();
+        return generatedPassword;
+    }
+
     @Override
     public List<User> getUsers() throws ServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
