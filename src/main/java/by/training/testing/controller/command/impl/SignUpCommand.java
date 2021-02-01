@@ -50,7 +50,6 @@ public class SignUpCommand implements Command {
             boolean registrationResult;
 
             try {
-//            registrationResult = userService.signUp(login, password.getBytes(), name, lastname, email, roleId);
                 registrationResult = userService.signUp(login, password.getBytes(), name, lastname, email, role);
 
                 if (registrationResult)
@@ -63,7 +62,6 @@ public class SignUpCommand implements Command {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
         } else {
-            //TODO: check, is correct perform on JSP when incorrect params and + unique
             if (req.getAttribute("invalidLogin") != null && req.getAttribute("invalidLogin").equals(true)){
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR_LOGIN);
             } else if (req.getAttribute("invalidEmail") != null && req.getAttribute("invalidEmail").equals(true)){

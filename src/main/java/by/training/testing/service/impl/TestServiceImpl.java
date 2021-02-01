@@ -28,6 +28,23 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
+    public List<Test> getTestsFromTo(int subjectId, int start, int end) throws ServiceException {
+        if(subjectId <= 0 || start <= 0 || end <= 0)
+            return null;
+
+        //TODO: вынести тут все создания фабрик в поле класса + с коннекшенами попробовать такое в ДАО
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        TestDAO testDAO = daoFactory.getTestDao();
+
+        try {
+            return testDAO.getTestsFromTo(subjectId, start, end);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting tests", e);
+        }
+    }
+
+    @Override
     public boolean addTest(int subjectId, String title) throws ServiceException {
 
         if(title.equals("") || subjectId <= 0)

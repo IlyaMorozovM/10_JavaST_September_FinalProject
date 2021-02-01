@@ -25,6 +25,7 @@ public class TestDAOImpl implements TestDAO {
     private static final String DELETE_TEST_SQL = "DELETE FROM tests WHERE tests.id = ?";
     private static final String UPDATE_TEST_SQL = "UPDATE tests SET tests.title = ? WHERE tests.id = ?";
     private static final String SELECT_TEST_SQL = "SELECT * FROM tests WHERE tests.subject = ?";
+    private static final String FIND_IN_RANGE = "SELECT * FROM tests LIMIT ? OFFSET ?";
 
     @Override
     public List<Test> getTests(int subjectId) throws DAOException {
@@ -41,7 +42,7 @@ public class TestDAOImpl implements TestDAO {
             if(rs == null)
                 return null;
 
-            List<Test> tests = new ArrayList<Test>();
+            List<Test> tests = new ArrayList<>();
             while(rs.next()) {
                 tests.add(new Test(rs.getInt(DB_COLUMN_ID), rs.getInt(DB_COLUMN_SUBJECT), rs.getString(DB_COLUMN_TITLE)));
             }
@@ -58,6 +59,36 @@ public class TestDAOImpl implements TestDAO {
         finally {
             connectionPool.returnConnection(connection);
         }
+    }
+
+    @Override
+    public List<Test> getTestsFromTo(int subjectId, int start, int end) throws DAOException {
+        ResultSet resultSet = null;
+        PreparedStatement ps = null;
+        Connection connection = null;
+
+        List<Test> tests = new ArrayList<>();
+        try {
+            connection = connectionPool.takeConnection();
+            ps = connection.prepareStatement(FIND_IN_RANGE);
+            ps.setInt(1, start);
+            ps.setInt(2, end);
+            resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                tests.add(new Test(resultSet.getInt(DB_COLUMN_ID), resultSet.getInt(DB_COLUMN_SUBJECT),
+                        resultSet.getString(DB_COLUMN_TITLE)));
+            }
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("Error in connection pool while getting tests", e);
+        }
+        catch (SQLException e) {
+            throw new DAOException("Error while getting tests", e);
+        }
+        finally {
+            connectionPool.returnConnection(connection);
+        }
+
+        return tests;
     }
 
     @Override

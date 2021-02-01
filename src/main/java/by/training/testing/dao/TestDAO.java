@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface TestDAO {
     List<Test> getTests(int subjectId) throws DAOException;
+    List<Test> getTestsFromTo(int subjectId, int start, int end) throws DAOException;
     void addTest(int subjectId, String title) throws DAOException;
     void editTest(int testId, String title) throws DAOException;
     void deleteTest(int testId) throws DAOException;
