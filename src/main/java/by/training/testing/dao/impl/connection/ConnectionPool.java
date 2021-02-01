@@ -106,7 +106,7 @@ public final class ConnectionPool {
 
     private void closeConnectionQueue(Queue<Connection> queue) throws SQLException {
         Connection connection;
-        while((connection = connectionQueue.poll()) != null) {
+        while((connection = queue.poll()) != null) {
             if(!connection.getAutoCommit())
                 connection.commit();
             connection.close();

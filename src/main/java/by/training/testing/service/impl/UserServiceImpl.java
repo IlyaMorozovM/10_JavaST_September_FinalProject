@@ -13,6 +13,7 @@ import by.training.testing.service.exception.ServiceUserAlreadyExistsException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -93,7 +94,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean signUp(String login, byte[] password, String name, String lastname, String email, String role) throws ServiceException {
 
-        if(login.equals("") || password.equals("") || name.equals("") || lastname.equals("") || email.equals("") || role.equals(""))
+        if(login.equals("") || Arrays.toString(password).equals("") || name.equals("") || lastname.equals("") || email.equals("") || role.equals(""))
             return false;
 
         DAOFactory daoFactory = DAOFactory.getInstance();

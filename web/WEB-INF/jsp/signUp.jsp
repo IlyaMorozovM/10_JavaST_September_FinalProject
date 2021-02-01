@@ -27,8 +27,21 @@
         <c:if test="${param.error == 'unique'}">
             <h2><fmt:message key="error.unique"/></h2>
         </c:if>
+
         <c:set var="successRegistration"><fmt:message key="label.successRegistration"/></c:set>
         <custom:condMsg condition="${param.register == 'success'}" message="${successRegistration}"/>
+        <c:set var="invalidUserLogin"><fmt:message key="label.invalidLogin"/></c:set>
+        <custom:condMsg condition="${param.error == 'login'}" message="${invalidUserLogin}"/>
+        <c:set var="invalidUserEmail"><fmt:message key="label.invalidEmail"/></c:set>
+        <custom:condMsg condition="${param.error == 'email'}" message="${invalidUserEmail}"/>
+        <c:set var="invalidUserPassword"><fmt:message key="label.invalidPassword"/></c:set>
+        <custom:condMsg condition="${param.error == 'password'}" message="${invalidUserPassword}"/>
+        <c:set var="invalidUserName"><fmt:message key="label.invalidName"/></c:set>
+        <custom:condMsg condition="${param.error == 'name'}" message="${invalidUserName}"/>
+        <c:set var="invalidUserLastname"><fmt:message key="label.invalidLastname"/></c:set>
+        <custom:condMsg condition="${param.error == 'lastname'}" message="${invalidUserLastname}"/>
+        <c:set var="invalidUserRole"><fmt:message key="label.invalidRole"/></c:set>
+        <custom:condMsg condition="${param.error == 'role'}" message="${invalidUserRole}"/>
 
 
         <div> <!-- registration container -->

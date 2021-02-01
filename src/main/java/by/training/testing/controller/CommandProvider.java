@@ -42,7 +42,7 @@ final class CommandProvider {
             command = repository.get(commandName);
         }
         catch (IllegalArgumentException | NullPointerException e) {
-            LOGGER.debug(e);
+            LOGGER.debug(name.toUpperCase() + " ", e);
             command = repository.get(CommandName.WRONG_REQUEST);
         }
         return  command;
