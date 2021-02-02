@@ -18,14 +18,16 @@ public class GoToTestsCommand implements Command {
 
     private static final String TESTS_PAGE_URI = "WEB-INF/jsp/tests.jsp";
 
-    private static final String TESTS_SESSION_ATTR = "tests";
+    private static final String REQUEST_ATTR_TESTS = "tests";
+    private static final String REQUEST_ATTR_MAX_PAGE = "maxPage";
     private static final String REQUEST_PARAMETER_SUBJECTID = "subjectId";
+    private static final String REQUEST_PARAMETER_CURRENT_PAGE = "currentPage";
     private static final String SUBJECTID_SESSION_ATTR = "subjectId";
     private static final String TESTID_SESSION_ATTR = "testId";
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
     private static final String CURRENT_QUESTION_SESSION_ATTR = "currQuestion";
-    private static final int TEST_AMOUNT_ON_PAGE = 3;
+    private static final int TEST_AMOUNT_ON_PAGE = 1;
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
@@ -62,11 +64,11 @@ public class GoToTestsCommand implements Command {
         //----------------------------------------------------------------
         int page = 1;
         try {
-            if (req.getParameter("currentPage") != null) {
-                page = Integer.parseInt(req.getParameter("currentPage"));
+            if (req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE) != null) {
+                page = Integer.parseInt(req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
             }
         } catch (NumberFormatException ex) {
-            page = 1;
+            //TODO: log
         }
         List<Test> tests1 = null;
         try {
@@ -74,10 +76,14 @@ public class GoToTestsCommand implements Command {
         } catch (ServiceException e) {
             //TODO : perform
         }
-        req.setAttribute("tests", tests1);
+        req.setAttribute(REQUEST_ATTR_TESTS, tests1);
         int countOfTests = tests.size();
-        req.setAttribute("maxPage", countOfTests / TEST_AMOUNT_ON_PAGE + 1);
-        req.setAttribute("currentPage", req.getParameter("currentPage"));
+        req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE + 1);
+        if (req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE) != null) {
+            req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
+        } else {
+            req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, 1);
+        }
         //-------------------------------------------------------------------
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(TESTS_PAGE_URI);

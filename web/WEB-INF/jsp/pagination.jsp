@@ -17,59 +17,62 @@
 
 <div class="container">
     <div class="pagination p1">
-        <ul>
+        <ul class="pagination">
             <c:if test="${currentPage>1}">
-                <a href="Controller?command=go_to_tests&currentPage=${currentPage-1}">
-                    <li>&#10094</li>
+                <li class="page-item">
+                <a href="Controller?command=go_to_tests&currentPage=${currentPage-1}" class="page-link">
+                   &#10094
                 </a>
+                </li>
             </c:if>
 
             <c:if test="${currentPage>2}">
-                <a href="Controller?command=go_to_tests&currentPage=1">
-                    <li>1</li>
-                </a>
+                <li class="page-item">
+                    <a href="Controller?command=go_to_tests&currentPage=1" class="page-link">1</a>
+                </li>
             </c:if>
 
             <c:if test="${currentPage>3}">
-                <a>
-                    <li>...</li>
-                </a>
+                <li class="page-item">
+                    <a>...</a>
+                </li>
             </c:if>
 
             <c:if test="${currentPage>1}">
-                <a href="Controller?command=go_to_tests&currentPage=${currentPage-1}">
-                    <li>${currentPage-1}</li>
-                </a>
+                <li class="page-item">
+                <a href="Controller?command=go_to_tests&currentPage=${currentPage-1}" class="page-link">${currentPage-1}</a>
+                </li>
             </c:if>
 
 
-            <a class="is-active"
-               href="Controller?command=go_to_tests&currentPage=${currentPage}">
-                <li>${currentPage}</li>
-            </a>
+            <li class="page-item active">
+                <a href="Controller?command=go_to_tests&currentPage=${currentPage}" class="page-link">${currentPage}</a>
+            </li>
 
             <c:if test="${currentPage < maxPage}">
-                <a href="Controller?command=go_to_tests&currentPage=${currentPage+1}">
-                    <li>${currentPage+1}</li>
-                </a>
+                <li class="page-item">
+                <a href="Controller?command=go_to_tests&currentPage=${currentPage+1}" class="page-link">${currentPage+1}</a>
+                <li class="page-item">
             </c:if>
 
             <c:if test="${currentPage<maxPage-2}">
-                <a>
-                    <li>...</li>
-                </a>
+                <li class="page-item">
+                    <a class="page-link">...</a>
+                </li>
             </c:if>
 
             <c:if test="${currentPage<maxPage-1}">
-                <a href="Controller?command=go_to_tests&currentPage=${maxPage}">
-                    <li>${maxPage}</li>
-                </a>
+                <li class="page-item">
+                    <a href="Controller?command=go_to_tests&currentPage=${maxPage}" class="page-link">${maxPage}</a>
+                </li>
             </c:if>
 
             <c:if test="${currentPage<maxPage}">
-                <a href="Controller?command=go_to_tests&currentPage=${currentPage+1}">
-                    <li>&#10095</li>
-                </a>
+                <li class="page-item">
+                    <a href="Controller?command=go_to_tests&currentPage=${currentPage+1}" class="page-link">
+                     &#10095
+                    </a>
+                </li>
             </c:if>
 
         </ul>
