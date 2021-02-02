@@ -25,7 +25,7 @@ public class TestDAOImpl implements TestDAO {
     private static final String DELETE_TEST_SQL = "DELETE FROM tests WHERE tests.id = ?";
     private static final String UPDATE_TEST_SQL = "UPDATE tests SET tests.title = ? WHERE tests.id = ?";
     private static final String SELECT_TEST_SQL = "SELECT * FROM tests WHERE tests.subject = ?";
-    private static final String FIND_IN_RANGE = "SELECT * FROM tests LIMIT ? OFFSET ?";
+    private static final String FIND_IN_RANGE_SQL = "SELECT * FROM tests WHERE tests.subject = ? LIMIT ? OFFSET ?";
 
     @Override
     public List<Test> getTests(int subjectId) throws DAOException {
@@ -70,9 +70,10 @@ public class TestDAOImpl implements TestDAO {
         List<Test> tests = new ArrayList<>();
         try {
             connection = connectionPool.takeConnection();
-            ps = connection.prepareStatement(FIND_IN_RANGE);
-            ps.setInt(1, start);
-            ps.setInt(2, end);
+            ps = connection.prepareStatement(FIND_IN_RANGE_SQL);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, start);
+            ps.setInt(3, end);
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 tests.add(new Test(resultSet.getInt(DB_COLUMN_ID), resultSet.getInt(DB_COLUMN_SUBJECT),

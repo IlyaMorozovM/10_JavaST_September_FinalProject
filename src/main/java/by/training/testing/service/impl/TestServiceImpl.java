@@ -29,7 +29,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<Test> getTestsFromTo(int subjectId, int start, int end) throws ServiceException {
-        if(subjectId <= 0 || start <= 0 || end <= 0)
+        if(subjectId <= 0)
             return null;
 
         //TODO: вынести тут все создания фабрик в поле класса + с коннекшенами попробовать такое в ДАО

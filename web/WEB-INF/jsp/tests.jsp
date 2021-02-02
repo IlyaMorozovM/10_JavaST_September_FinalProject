@@ -39,6 +39,7 @@
             </c:if>
             <br/><br/>
         </c:forEach>
+        <jsp:include page="pagination.jsp"/>
     </div>
     <c:if test="${user.roleName == 'tutor'}">
         <div>

@@ -25,6 +25,7 @@ public class GoToTestsCommand implements Command {
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
     private static final String CURRENT_QUESTION_SESSION_ATTR = "currQuestion";
+    private static final int TEST_AMOUNT_ON_PAGE = 3;
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
@@ -56,7 +57,28 @@ public class GoToTestsCommand implements Command {
         } catch (ServiceException e) {
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
-        session.setAttribute(TESTS_SESSION_ATTR, tests);
+        //session.setAttribute(TESTS_SESSION_ATTR, tests);
+
+        //----------------------------------------------------------------
+        int page = 1;
+        try {
+            if (req.getParameter("currentPage") != null) {
+                page = Integer.parseInt(req.getParameter("currentPage"));
+            }
+        } catch (NumberFormatException ex) {
+            page = 1;
+        }
+        List<Test> tests1 = null;
+        try {
+            tests1 = testService.getTestsFromTo(subjectId, TEST_AMOUNT_ON_PAGE, (page - 1) * TEST_AMOUNT_ON_PAGE);
+        } catch (ServiceException e) {
+            //TODO : perform
+        }
+        req.setAttribute("tests", tests1);
+        int countOfTests = tests.size();
+        req.setAttribute("maxPage", countOfTests / TEST_AMOUNT_ON_PAGE + 1);
+        req.setAttribute("currentPage", req.getParameter("currentPage"));
+        //-------------------------------------------------------------------
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(TESTS_PAGE_URI);
         requestDispatcher.forward(req, resp);
