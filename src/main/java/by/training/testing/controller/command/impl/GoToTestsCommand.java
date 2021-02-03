@@ -14,6 +14,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class contains method, that directs tutor to the "tests" page.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class GoToTestsCommand implements Command {
 
     private static final String TESTS_PAGE_URI = "WEB-INF/jsp/tests.jsp";
@@ -27,13 +34,19 @@ public class GoToTestsCommand implements Command {
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
     private static final String CURRENT_QUESTION_SESSION_ATTR = "currQuestion";
-    private static final int TEST_AMOUNT_ON_PAGE = 1;
+    private static final int TEST_AMOUNT_ON_PAGE = 5;
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
+    /**
+     * Method, that directs client to the "tests" page.
+     * "Tests" page contains tests, that refer to a specific subject.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
 
         HttpSession session = req.getSession(true);
         session.removeAttribute(TESTID_SESSION_ATTR);

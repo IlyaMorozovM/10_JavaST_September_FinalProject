@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Test implements Serializable {
-    private int testId;
-    private int subjectId;
-    private String title;
+    private final int testId;
+    private final int subjectId;
+    private final String title;
 
     public Test(int testId, int subjectId, String title) {
         this.testId = testId;

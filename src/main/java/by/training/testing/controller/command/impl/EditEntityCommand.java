@@ -13,6 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class contains method, that edits entity (subject, test, question or answer).
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class EditEntityCommand implements Command {
 
     private static final String REQUEST_PARAM_ENTITY = "entity";
@@ -32,6 +39,12 @@ public class EditEntityCommand implements Command {
     private static final String REDIRECT_COMMAND_ERROR_QUESTION = "Controller?command=go_to_questions&error=question";
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
+    /**
+     * Method, that edits entity (subject, test, question or answer).
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String entity = req.getParameter(REQUEST_PARAM_ENTITY);

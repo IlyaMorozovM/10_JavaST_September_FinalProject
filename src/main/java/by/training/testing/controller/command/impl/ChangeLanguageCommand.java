@@ -10,6 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * This class contains method, that changes language.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class ChangeLanguageCommand implements Command {
 
     private static final String LANGUAGE = "language";
@@ -21,6 +28,12 @@ public class ChangeLanguageCommand implements Command {
     private static final String INDEX_JSP = "index.jsp";
     private static final String EMPTY_PAGE = "";
 
+    /**
+     * Method, that change language.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String lang = req.getParameter("lang");

@@ -15,6 +15,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class contains method, that directs client to the "questions" page.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class GoToQuestionsCommand implements Command {
     private static final String QUESTIONS_PAGE_URI = "WEB-INF/jsp/questions.jsp";
     private static final String START_TEST_PAGE_URI = "WEB-INF/jsp/test.jsp";
@@ -29,6 +36,13 @@ public class GoToQuestionsCommand implements Command {
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_tests&error=error";
 
+    /**
+     * Method, that directs client to the "questions" page.
+     * "Questions" page contains questions, that refer to a specific test.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

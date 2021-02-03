@@ -16,7 +16,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class NextQuestion implements Command {
+/**
+ * This class contains method, that directs student to the next question.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
+public class GoToNextQuestionCommand implements Command {
 
     private static final String NEXT_PAGE_URI = "WEB-INF/jsp/test.jsp";
     private static final String FINISH_TEST_PAGE_URI = "WEB-INF/jsp/finishTest.jsp";
@@ -31,6 +38,12 @@ public class NextQuestion implements Command {
 
     private static final String REDIRECT_COMMAND_ERROR_RESULT = "Controller?command=go_to_main&error=question";
 
+    /**
+     * Method, that directs student to the next question.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession(true);

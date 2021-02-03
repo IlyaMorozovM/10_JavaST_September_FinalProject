@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Main class of application. Accepts GET and POST requests and processes them.
+ *
+ * @author	Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class Controller extends HttpServlet {
 
     private static final String REQUEST_PARAM_COMMAND = "command";

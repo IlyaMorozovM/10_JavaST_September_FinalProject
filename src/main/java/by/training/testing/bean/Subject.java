@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Subject implements Serializable {
-    private int subjectId;
-    private String name;
+    private final int subjectId;
+    private final String name;
 
     public Subject(int subjectId, String name) {
         this.subjectId = subjectId;

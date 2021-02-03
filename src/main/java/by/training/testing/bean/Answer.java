@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Answer implements Serializable {
-    private int answerId;
-    private int questionId;
-    private String answer;
-    private boolean right;
+    private final int answerId;
+    private final int questionId;
+    private final String answer;
+    private final boolean right;
 
     public Answer(int answerId, int questionId, String answer, boolean isRight) {
         this.answerId = answerId;

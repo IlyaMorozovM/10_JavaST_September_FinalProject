@@ -16,6 +16,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class contains method, that directs tutor to the "results" page.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class GoToResultsCommand implements Command {
 
     private static final String RESULTS_PAGE_URI = "WEB-INF/jsp/testResults.jsp";
@@ -32,6 +39,14 @@ public class GoToResultsCommand implements Command {
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
+    /**
+     * Method, that directs tutor to the "results" page.
+     * "Results" page contains results, that refer to a specific test.
+     * Only tutor has access to the "results" page.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession(true);

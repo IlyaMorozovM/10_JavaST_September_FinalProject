@@ -10,6 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class contains method, that deletes some entity (subject,
+ * test, question, answer or user).
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class DeleteCommand implements Command {
 
     private static final String REQUEST_PARAM_ID = "id";
@@ -32,7 +40,12 @@ public class DeleteCommand implements Command {
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
-
+    /**
+     * Method, that deletes some entity (subject, test, question, answer or user).
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

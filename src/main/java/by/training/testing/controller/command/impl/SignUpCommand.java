@@ -13,6 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class contains method, that registers users into Testing system.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class SignUpCommand implements Command {
 
     private static final String REQUEST_PARAM_LOGIN = "login";
@@ -31,6 +38,12 @@ public class SignUpCommand implements Command {
     private static final String REDIRECT_COMMAND_ERROR_ROLE = "Controller?command=go_to_signup&error=role";
     private static final String REDIRECT_COMMAND_ERROR_DUPLICATE = "Controller?command=go_to_signup&error=unique";
 
+    /**
+     * Method, that that registers users into Testing system.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

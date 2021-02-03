@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * This class contains method, that tries to authorize the guest into Testing system.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class SignInCommand implements Command {
 
     private static final String REQUEST_PARAM_LOGIN = "login";
@@ -20,6 +27,12 @@ public class SignInCommand implements Command {
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&signin=error";
     private static final String USER_SESSION_ATTR = "user";
 
+    /**
+     * Method, that tries to authorize the guest into Testing system.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String login = req.getParameter(REQUEST_PARAM_LOGIN);

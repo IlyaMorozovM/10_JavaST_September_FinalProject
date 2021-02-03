@@ -14,6 +14,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class contains method, that directs client to the "delete" page.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class GoToDeleteUsersCommand implements Command {
 
     private static final String DELETE_USERS_PAGE_URI = "WEB-INF/jsp/deleteUsers.jsp";
@@ -23,6 +30,12 @@ public class GoToDeleteUsersCommand implements Command {
     private static final String REQUEST_PARAM_ONE_USER = "showOneUser";
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
+    /**
+     * Method, that directs client to the "delete" page.
+     *
+     * @param req Request from client.
+     * @param resp Response to client.
+     */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

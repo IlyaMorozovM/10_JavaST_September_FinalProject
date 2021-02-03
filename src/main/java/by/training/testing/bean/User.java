@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class User implements Serializable {
 
-    private int userId;
-    private String login;
-    private String name;
-    private String lastname;
-    private String email;
-    private String roleName;
+    private final int userId;
+    private final String login;
+    private final String name;
+    private final String lastname;
+    private final String email;
+    private final String roleName;
 
     public User(int userId, String login, String name, String lastname, String email, String roleName) {
         this.userId = userId;
