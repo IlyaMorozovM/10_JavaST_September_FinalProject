@@ -9,8 +9,10 @@
     <title>Delete users</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/deleteUsers.css" var="cssDeleteUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssDeleteUrl}" />
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
 
 <!-- content -->
@@ -20,24 +22,30 @@
     <custom:condMsg condition="${param.error == 'user'}" message="${failDelete}"/>
     <custom:condMsg condition="${param.delete == 'success'}" message="${success}"/>
 
+    </br>
     <div> <!-- find user form -->
-        <form action="Controller" method="post">
+        <form action="Controller" method="post" class="form-inline justify-content-center ">
             <input type="hidden" name="command" value="go_to_delete_users"/>
             <input type="hidden" name="showOneUser" value="true">
 
-            <label for="login"><fmt:message key="label.findByLogin"/></label>
-            <input type="text" id="login" name="login"/>
-
-            <input type="submit" value=<fmt:message key="button.find"/> class="btn-success" />
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="login"><fmt:message key="label.findByLogin"/></label>
+                <input type="text" class="form-control" placeholder="User login" id="login" name="login"/>
+            </div>
+<%--            <input type="submit" value=<fmt:message key="button.find"/> class="btn-dark" />--%>
+            <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.find"/></button>
         </form>
     </div>
 
-    <div> <!-- find user form -->
+    <div> <!-- find all users form -->
         <form action="Controller" method="post">
             <input type="hidden" name="command" value="go_to_delete_users"/>
             <input type="hidden" name="showOneUser" value="false">
 
-            <input type="submit" value=<fmt:message key="button.showAllUsers" /> class="btn-success" />
+<%--            <input type="submit" value=<fmt:message key="button.showAllUsers" /> class="btn-dark" />--%>
+            <div class="form-group mx-sm-3 mb-2">
+            <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.showAllUsers" /></button>
+            </div>
         </form>
     </div>
 
@@ -52,14 +60,15 @@
 
 
     <div>
-        <table class="table table-striped p-3 mb-2 bg-secondary text-white">
+        <table class="table table-bordered">
             <thead>
-            <tr>
-                <th><fmt:message key="table.login"/></th>
-                <th><fmt:message key="table.name"/></th>
-                <th><fmt:message key="table.lastname"/></th>
-                <th><fmt:message key="table.role"/></th>
-            </tr>
+                <tr class="table-dark">
+                    <th scope="col"><fmt:message key="table.login"/></th>
+                    <th scope="col"><fmt:message key="table.name"/></th>
+                    <th scope="col"><fmt:message key="table.lastname"/></th>
+                    <th scope="col"><fmt:message key="table.role"/></th>
+                    <th scope="col"><fmt:message key="table.action"/></th>
+                </tr>
             </thead>
         <c:forEach items="${users}" var="user">
             <tbody>
