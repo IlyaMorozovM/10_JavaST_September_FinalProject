@@ -11,5 +11,5 @@
 <%--<body class="p-3 mb-2 bg-info text-white">--%>
 
 <%--        <p class="h5">&copy;<fmt:message key="footer.copyright"/></p>--%>
-        <p class="mt-5 mb-3 text-muted">&copy;<fmt:message key="footer.copyright"/></p>
+        <p class="mt-5 mb-3 text-muted">&copy; <fmt:message key="footer.copyright"/></p>
 <%--</html>--%>
