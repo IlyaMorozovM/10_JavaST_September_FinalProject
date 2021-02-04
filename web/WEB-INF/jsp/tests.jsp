@@ -6,14 +6,14 @@
 <html>
 <head>
     <title>Available tests</title>
-    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="p-3 mb-2 bg-info text-white">
 
 <!-- content -->
 <main>
-    <jsp:include page="nav-language.jsp"/>
+    <jsp:include page="navLanguageAndSignOut.jsp"/>
     <h2><fmt:message key="label.browsingTests"/></h2>
     <h3><fmt:message key="label.role"/><i><c:out value="${user.roleName}"/></i>.</h3>
     <br/>

@@ -13,6 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with DB relates to entity "answer".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class AnswerDAOImpl implements AnswerDAO {
 
     private static final String DB_COLUMN_ANSWER = "answer";
@@ -27,6 +34,13 @@ public class AnswerDAOImpl implements AnswerDAO {
     private static final String UPDATE_ANSWER_SQL = "UPDATE answers SET answers.answer = ?, answers.is_right = ? WHERE answers.id = ?";
     private static final String SELECT_ANSWER_SQL = "SELECT * FROM answers WHERE answers.question = ?";
 
+    /**
+     * Method, that validates params (login, email, name, lastname, password, role),
+     * when admin registers users.
+     *
+     * @param questionId Question ID, to which answers relate.
+     * @return List, that contains all answers.
+     */
     @Override
     public List<Answer> getAnswers(int questionId) throws DAOException {
 

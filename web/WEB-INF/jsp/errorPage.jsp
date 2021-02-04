@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>Oops! Something went wrong :(</title>
-    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
 </head>
 <body class="badge bg-danger">
-<jsp:include page="nav-language.jsp"/>
+<jsp:include page="navLanguageAndSignOut.jsp"/>
     <h1><b><fmt:message key="error.unexpected"/></b></h1>
     <h2><i><fmt:message key="error.wrontRequest"/></i></h2>
 </body>

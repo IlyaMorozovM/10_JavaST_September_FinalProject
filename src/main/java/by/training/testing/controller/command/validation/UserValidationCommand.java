@@ -5,6 +5,14 @@ import by.training.testing.service.validator.UserValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * This class contains method, that validates params (login, email,
+ * name, lastname, password, role), when admin registers users.
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class UserValidationCommand implements ValidationCommand{
 
     private static final String REQUEST_PARAM_LOGIN = "login";
@@ -14,6 +22,13 @@ public class UserValidationCommand implements ValidationCommand{
     private static final String REQUEST_PARAM_PASSWORD = "password";
     private static final String REQUEST_PARAM_ROLE = "role";
 
+    /**
+     * Method, that validates params (login, email, name, lastname, password, role),
+     * when admin registers users.
+     *
+     * @param request Request from client.
+     * @param response Response to client.
+     */
     @Override
     public boolean isValid(HttpServletRequest request, HttpServletResponse response) {
         UserValidator validator = new UserValidator();

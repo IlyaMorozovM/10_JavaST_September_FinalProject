@@ -7,12 +7,23 @@
 <html>
 <head>
     <title>Testing system</title>
-    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/main.css" var="cssMain"/>
+    <link href="${cssMain}" rel="stylesheet">
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="text-center">
+
+    <!-- change language -->
+    <jsp:include page="navLanguageAndSignOut.jsp"/>
+
+    <!-- header -->
+    <header>
+        <jsp:include page="header.jsp"/>
+    </header>
+
     <h2><fmt:message key="label.welcome"/> <c:out value="${user.name}"/></h2>
-    <h3><fmt:message key="label.role"/> <i><c:out value="${user.roleName}"/></i>.</h3>
+    <h4><fmt:message key="label.role"/> <strong><c:out value="${user.roleName}"/></strong>.</h4>
     <br/>
 
     <div>
@@ -56,8 +67,13 @@
         </div>
     </c:if>
     <br/>
-    <div>    <!-- buttons holder -->
-        <button onclick="location.href='Controller?command=signout'"  class="btn btn-danger"><fmt:message key="button.signOut"/></button>
-    </div>
+
+    <!-- footer -->
+    <footer>
+        <jsp:include page="footer.jsp"/>
+    </footer>
+<%--    <div>    <!-- buttons holder -->--%>
+<%--        <button onclick="location.href='Controller?command=signout'"  class="btn btn-danger"><fmt:message key="button.signOut"/></button>--%>
+<%--    </div>--%>
 </body>
 </html>

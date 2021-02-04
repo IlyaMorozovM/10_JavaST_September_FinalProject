@@ -1,21 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${cookie.language.value}"/>
+<fmt:setBundle basename="pagecontent"/>
 <html>
   <head>
     <title>Testing System</title>
-<%--    <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.1/dist/paper.css">--%>
-    <link href="WEB-INF/styles/mainAuthorized.css" type="text/css"/>
+    <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <link rel="shortcut icon" href="#">
   </head>
   <body>
-
-  <!-- change language -->
-  <jsp:include page="WEB-INF/jsp/nav-language.jsp"/>
-
-  <!-- header -->
-  <header>
-    <jsp:include page="WEB-INF/jsp/header.jsp"/>
-  </header>
 
   <!-- content -->
   <main>
@@ -28,11 +23,6 @@
       </c:otherwise>
     </c:choose>
   </main>
-
-  <!-- footer -->
-  <footer>
-    <jsp:include page="WEB-INF/jsp/footer.jsp"/>
-  </footer>
 
   </body>
 </html>

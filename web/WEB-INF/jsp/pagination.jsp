@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Pagination</title>
-    <c:url value="/styles/bootstrap.css" var="cssUrl"/>
+    <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" /></head>
 <body>
 
