@@ -9,8 +9,10 @@
     <title>Sign Up to Testing system</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/signUp.css" var="cssSignUpUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssSignUpUrl}" />
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
 
     <!-- header -->
@@ -47,36 +49,108 @@
         </div>
 
 
+<%--        <div> <!-- registration container -->--%>
+<%--            <form action="Controller" method="post">--%>
+<%--                <input type="hidden" name="command" value="signup"/>--%>
+
+<%--                <br/>--%>
+<%--                <label for="login"><fmt:message key="label.login"/></label>--%>
+<%--                <input type="text" id="login" name="login"/>--%>
+
+<%--                <br/>--%>
+<%--                <label for="email"><fmt:message key="label.email"/></label>--%>
+<%--                <input type="text" id="email" name="email"/>--%>
+
+<%--                <br/>--%>
+<%--                <label for="name"><fmt:message key="label.name"/></label>--%>
+<%--                <input type="text" id="name" name="name"/>--%>
+
+<%--                <br/>--%>
+<%--                <label for="lastname"><fmt:message key="label.lastname"/></label>--%>
+<%--                <input type="text" id="lastname" name="lastname"/>--%>
+
+<%--                <br/>--%>
+<%--                <label for="password"><fmt:message key="label.password"/></label>--%>
+<%--                <input type="password" id="password" name="password"/>--%>
+
+<%--                <br/>--%>
+<%--                <label for="role"><fmt:message key="label.signupRole"/></label>--%>
+<%--                <input type="number" id="role" name="role"/>--%>
+
+<%--                <br/>--%>
+<%--                <input type="submit" value=<fmt:message key="button.signup"/> class="btn-success" class="btn" />--%>
+<%--            </form>--%>
+<%--        </div>--%>
+
         <div> <!-- registration container -->
             <form action="Controller" method="post">
                 <input type="hidden" name="command" value="signup"/>
+                <div class="form-row my-form-signUp">
+                    <div class="col-md-3 mb-3">
+                        <label for="login"><fmt:message key="label.login"/></label>
+                        <input type="text" class="form-control" placeholder="<fmt:message key="label.login"/>" id="login" name="login" required/>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="email"><fmt:message key="label.email"/></label>
+                        <input type="text" class="form-control" id="email" placeholder="email@example.com" name="email" required/>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                            <label for="name"><fmt:message key="label.name"/></label>
+                            <input type="text" class="form-control" placeholder="<fmt:message key="label.name"/>" id="name" name="name" required/>
+                            <div class="invalid-feedback">
+                                Please input name.
+                            </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="lastname"><fmt:message key="label.lastname"/></label>
+                        <input type="text" class="form-control" placeholder="<fmt:message key="label.lastname"/>" id="lastname" name="lastname" required/>
+                    </div>
 
-                <br/>
-                <label for="login"><fmt:message key="label.login"/></label>
-                <input type="text" id="login" name="login"/>
+                    <div class="col-md-4 mb-3">
+                        <label for="password"><fmt:message key="label.password"/></label>
+                        <input type="password" class="form-control" placeholder="<fmt:message key="label.password"/>" id="password" name="password" required/>
+                        </div>
+                </div>
 
-                <br/>
-                <label for="email"><fmt:message key="label.email"/></label>
-                <input type="text" id="email" name="email"/>
+<%--                <label for="role"><fmt:message key="label.signupRole"/></label>--%>
+<%--                <input type="number" id="role" name="role"/>--%>
 
-                <br/>
-                <label for="name"><fmt:message key="label.name"/></label>
-                <input type="text" id="name" name="name"/>
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2"><fmt:message key="label.signupRole"/></legend>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="2">
+                                <label class="form-check-label" for="gridRadios1">
+                                    <fmt:message key="radio.student"/>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="role" id="gridRadios2" value="1">
+                                <label class="form-check-label" for="gridRadios2">
+                                    <fmt:message key="radio.tutor"/>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="role" id="gridRadios3" value="3">
+                                <label class="form-check-label" for="gridRadios3">
+                                    <fmt:message key="radio.admin"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
 
-                <br/>
-                <label for="lastname"><fmt:message key="label.lastname"/></label>
-                <input type="text" id="lastname" name="lastname"/>
-
-                <br/>
-                <label for="password"><fmt:message key="label.password"/></label>
-                <input type="password" id="password" name="password"/>
-
-                <br/>
-                <label for="role"><fmt:message key="label.signupRole"/></label>
-                <input type="number" id="role" name="role"/>
-
-                <br/>
-                <input type="submit" value=<fmt:message key="button.signup"/> class="btn-success" class="btn" />
+                <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.signup"/></button>
+<%--                <input type="submit" value=<fmt:message key="button.signup"/> class="btn-success" class="btn" />--%>
             </form>
         </div>
 
