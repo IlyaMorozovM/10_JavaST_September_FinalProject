@@ -23,6 +23,7 @@ public class ChangeLanguageCommand implements Command {
     private static final String DEFAULT_LANG = "";
     private static final String EN_LANG = "en_EN";
     private static final String RU_LANG = "ru_RU";
+//    private static final String SESSION_ATTR_ENTITY = "entitySess";
 
     private static final String WEB_INF_JSP = "WEB-INF/jsp/";
     private static final String INDEX_JSP = "index.jsp";
@@ -36,6 +37,8 @@ public class ChangeLanguageCommand implements Command {
      */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        //TODO: при смене языка теряется предмет, пофиксить через сессию можно
+
         String lang = req.getParameter("lang");
 
         Cookie langCookie = null;

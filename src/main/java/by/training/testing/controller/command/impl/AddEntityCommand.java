@@ -11,6 +11,7 @@ import by.training.testing.service.factory.ServiceFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -26,6 +27,7 @@ public class AddEntityCommand implements Command {
     private static final String REQUEST_PARAM_ENTITY = "entity";
     private static final String REQUEST_PARAM_ID = "id";
     private static final String REQUEST_PARAM_ISRIGHT = "isRight";
+//    private static final String SESSION_ATTR_ENTITY = "entitySess";
 
     private static final String ENTITY_SUBJECT = "subject";
     private static final String ENTITY_TEST = "test";
@@ -51,6 +53,9 @@ public class AddEntityCommand implements Command {
 
         String name = req.getParameter(REQUEST_PARAM_NAME);
         String entity = req.getParameter(REQUEST_PARAM_ENTITY);
+
+//        HttpSession session = req.getSession(true);
+//        session.setAttribute(SESSION_ATTR_ENTITY, entity);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         boolean result;

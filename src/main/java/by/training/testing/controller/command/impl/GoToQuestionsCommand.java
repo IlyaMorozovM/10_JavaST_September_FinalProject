@@ -55,9 +55,9 @@ public class GoToQuestionsCommand implements Command {
         if(session.getAttribute(TESTID_SESSION_ATTR) == null) {
             testId = Integer.parseInt(req.getParameter(REQUEST_PARAMETER_TESTID));
             session.setAttribute(TESTID_SESSION_ATTR, testId);
+        } else {
+            testId = (int) session.getAttribute(TESTID_SESSION_ATTR);
         }
-        else
-            testId = (int)session.getAttribute(TESTID_SESSION_ATTR);
 
         List<Question> questions = null;
         try {
