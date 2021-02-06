@@ -23,7 +23,7 @@
     </header>
 
     <h2><fmt:message key="label.welcome"/> <c:out value="${user.name}"/></h2>
-    <h4><fmt:message key="label.role"/> <strong><c:out value="${user.roleName}"/></strong>.</h4>
+    <h4><fmt:message key="label.role"/><strong><c:out value="${user.roleName}"/></strong>.</h4>
     <br/>
 
     <c:if test="${user.roleName == 'admin'}">

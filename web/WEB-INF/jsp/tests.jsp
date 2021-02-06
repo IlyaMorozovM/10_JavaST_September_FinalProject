@@ -8,14 +8,16 @@
     <title>Available tests</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/tests.css" var="cssTests"/>
+    <link href="${cssTests}" rel="stylesheet">
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="text-center">
 
 <!-- content -->
 <main>
     <jsp:include page="navLanguageAndSignOut.jsp"/>
     <h2><fmt:message key="label.browsingTests"/></h2>
-    <h3><fmt:message key="label.role"/><i><c:out value="${user.roleName}"/></i>.</h3>
+    <h4><fmt:message key="label.role"/><strong><c:out value="${user.roleName}"/></strong>.</h4>
     <br/>
 
     <div>
