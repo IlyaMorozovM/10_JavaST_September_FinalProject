@@ -19,9 +19,24 @@ body {
 }
 
 .my-form-question{
-    background-color: #2aabd2;
+    background-color: lavender;
+}
+
+.my-head-question{
+    background-color: gainsboro;
+}
+
+.my-question-text{
+    font-size: larger;
 }
 
 .green_text {
     color: darkgreen;
+}
+
+.wrapper {text-align: center; /*располагаем содержимое блока по центру*/}
+
+.box {
+    display: inline-block; /*располагаем блоки в ряд по горизонтали*/
+    margin-right: -0.25em; /*убираем правый отступ между блоками*/
 }
