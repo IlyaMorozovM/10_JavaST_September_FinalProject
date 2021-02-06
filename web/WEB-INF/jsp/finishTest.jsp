@@ -8,16 +8,36 @@
     <title>Test (results)</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/finishTest.css" var="cssFinishTestUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssFinishTestUrl}" />
 </head>
-<body lass="badge bg-success">
+<body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
-<header>
+<header class="my-header">
     <h3><fmt:message key="label.testCompleted"/></h3>
 </header>
 
 <main>
-    <h4><fmt:message key="label.yourReult"/></h4>
-    <p><b><c:out value="${rightAnswers}"/><fmt:message key="label.rightAnswers"/><c:out value="${numOfQuestions}"/></b></p>
+    <h4 class="my-header-result"><fmt:message key="label.yourReult"/></h4>
+
+    <table class="table table-striped my-table">
+        <thead>
+        <tr>
+            <th scope="col"><fmt:message key="table.testState"/></th>
+            <th scope="col"><fmt:message key="table.rightAnswers"/> / <c:out value="${numOfQuestions}"/></th>
+            <th scope="col">% <fmt:message key="table.completion"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row"><fmt:message key="table.done"/></th>
+            <td><c:out value="${rightAnswers}"/></td>
+<%--            <td><c:out value="${Double.parseDouble(String.valueOf(rightAnswers)) / Double.parseDouble(String.valueOf(numOfQuestions)) * 100}"/>%</td>--%>
+            <td><c:out value="${rightAnswers / numOfQuestions * 100}"/>%</td>
+        </tr>
+        </tbody>
+    </table>
+
     <br/>
     <br/>
 

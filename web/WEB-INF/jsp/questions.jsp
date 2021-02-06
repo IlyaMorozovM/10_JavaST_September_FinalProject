@@ -61,7 +61,7 @@
                     </c:when>
                     <c:otherwise>
                         <div class="mx-sm-3 mb-3">
-                             <c:out value="${answer.answer}"/>
+                                <c:out value="${answer.answer}"/>
                         </div>
                     </c:otherwise>
                 </c:choose>

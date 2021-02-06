@@ -8,11 +8,13 @@
     <title>Test (in progress)</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/test.css" var="cssTestUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssTestUrl}" />
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
 <!-- header -->
-<header>
+<header class="my-header">
     <h3><fmt:message key="label.question"/><c:out value="${currQuestion + 1}"/><fmt:message key="label.outOf"/><c:out value="${numOfQuestions}"/></h3>
 </header>
 
