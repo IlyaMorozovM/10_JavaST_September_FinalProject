@@ -15,7 +15,7 @@
 <jsp:include page="navLanguageAndSignOut.jsp"/>
 
     <!-- content -->
-    <br>
+    <main>
         <form action="Controller" method="post" class="my-form-add-entity">
             <input type="hidden" name="command" value="addEntity"/>
             <input type="hidden" name="entity" value="<c:out value="${param.entity}"/>">

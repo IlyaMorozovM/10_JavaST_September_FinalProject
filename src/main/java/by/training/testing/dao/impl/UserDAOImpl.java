@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement ps;
         Connection connection = null;
         ResultSet rs;
-
+        //TODO: во время финиш тест когда меняешь язык, остаются аттрибуты, сделать чтоб было так же при добавлении entity
         try {
             connection = connectionPool.takeConnection();
             ps = connection.prepareStatement(SELECT_USER_SQL);
