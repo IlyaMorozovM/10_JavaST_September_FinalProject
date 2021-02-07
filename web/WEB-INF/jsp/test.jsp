@@ -8,8 +8,8 @@
     <title>Test (in progress)</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
-    <c:url value="/styles/test.css" var="cssTestUrl"/>
-    <link rel="stylesheet" type="text/css" href="${cssTestUrl}" />
+    <c:url value="/styles/test.css" var="myCssTestUrl"/>
+    <link rel="stylesheet" type="text/css" href="${myCssTestUrl}" />
 </head>
 <body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
@@ -19,31 +19,44 @@
 </header>
 
 <main>
-    <h5><b><c:out value="${questions[currQuestion].question}"/></b></h5>
+    <div class="form-inline justify-content-center my-head-question">
+<%--        <h5><b><c:out value="${questions[currQuestion].question}"/></b></h5>--%>
+        <b class="mx-sm-3 mb-3 my-question-text"><c:out value="${questions[currQuestion].question}"/></b>
+    </div>
     <form action="Controller" method="post">
         <input type="hidden" name="command" value="next_question">
-        <c:choose>
-            <c:when test="${questions[currQuestion].rightAnswers == 1}">
-                <c:forEach items="${questions[currQuestion].answers}" var="answer">
-                    <p><input type="radio" name="answer" value="<c:out value="${answer.answerId}"/>"/><c:out value="${answer.answer}"/></p>
-                </c:forEach>
-            </c:when>
+        <div class="my-form-answers">
+            <c:choose>
+                <c:when test="${questions[currQuestion].rightAnswers == 1}">
+                    <c:forEach items="${questions[currQuestion].answers}" var="answer">
+<%--                        <p><input type="radio" name="answer" value="<c:out value="${answer.answerId}"/>"/><c:out value="${answer.answer}"/></p>--%>
+                <div class="form-inline my-form-question mx-sm-3 mb-3">
+                    <input type="radio" name="answer" value="<c:out value="${answer.answerId}"/>"/><c:out value="${answer.answer}"/>
+                </div>
+                    </c:forEach>
+                </c:when>
 
-            <c:otherwise>
-                <c:forEach items="${questions[currQuestion].answers}" var="answer">
-                    <p><input type="checkbox" name="<c:out value="${answer.answerId}"/>" value="true"/><c:out value="${answer.answer}"/></p>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
+                <c:otherwise>
+                    <c:forEach items="${questions[currQuestion].answers}" var="answer">
+                        <div class="form-inline my-form-question mx-sm-3 mb-3">
+    <%--                        <p><input type="checkbox" name="<c:out value="${answer.answerId}"/>" value="true"/><c:out value="${answer.answer}"/></p>--%>
+                            <input type="checkbox" name="<c:out value="${answer.answerId}"/>" value="true"/><c:out value="${answer.answer}"/>
+                        </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+        </div>
         <br/>
 
         <c:choose>
             <c:when test="${currQuestion + 1 == numOfQuestions}">
                 <input type="hidden" name="finishTest" value="true">
-                <input type="submit" value=<fmt:message key="button.finishTest"/> class="btn-success" class="btn" >
+                <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.finishTest"/></button>
+<%--                <input type="submit" value=<fmt:message key="button.finishTest"/> class="btn-success" class="btn" >--%>
             </c:when>
             <c:otherwise>
-                <input type="submit" value=<fmt:message key="button.nextQuesstion"/> >
+                <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.nextQuesstion"/></button>
+<%--                <input type="submit" value=<fmt:message key="button.nextQuesstion"/> >--%>
             </c:otherwise>
         </c:choose>
     </form>

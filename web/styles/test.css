@@ -18,6 +18,25 @@ body {
     background-color: #f5f5f5;
 }
 
-.my-header {
-    padding-top: 40px;
+.my-form-answers{
+    background-color: lavender;
+}
+
+.my-head-question{
+    background-color: gainsboro;
+}
+
+.my-question-text{
+    font-size: larger;
+}
+
+.green_text {
+    color: darkgreen;
+}
+
+.wrapper {text-align: center; /*располагаем содержимое блока по центру*/}
+
+.box {
+    display: inline-block; /*располагаем блоки в ряд по горизонтали*/
+    margin-right: -0.25em; /*убираем правый отступ между блоками*/
 }
