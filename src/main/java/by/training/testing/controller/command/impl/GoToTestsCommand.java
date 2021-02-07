@@ -34,7 +34,7 @@ public class GoToTestsCommand implements Command {
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
     private static final String CURRENT_QUESTION_SESSION_ATTR = "currQuestion";
-    private static final int TEST_AMOUNT_ON_PAGE = 5;
+    private static final int TEST_AMOUNT_ON_PAGE = 6;
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 

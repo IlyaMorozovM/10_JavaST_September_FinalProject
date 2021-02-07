@@ -68,7 +68,7 @@
                 <c:if test="${user.roleName == 'tutor'}">
                     <div class="wrapper">
                     <button onclick="location.href='Controller?command=go_to_edit&entity=answer&' +
-                        'id=<c:out value="${answer.answerId}"/>&text=<c:out value="${answer.answer}"/>&isRight=<c:out value="${answer.right}"/>'" class="btn btn-primary"><fmt:message key="button.edit"/></button>
+                        'id=<c:out value="${answer.answerId}"/>&text=<c:out value="${answer.answer}"/>&isRight=<c:out value="${answer.right}"/>'" class="btn btn-dark"><fmt:message key="button.edit"/></button>
 <%--                    <br/><br/>--%>
                     <c:set var="message"><fmt:message key="notification.delete"/></c:set>
                         <div class="box">

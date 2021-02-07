@@ -16,7 +16,7 @@
 
 
 <div class="container">
-    <div class="pagination p1">
+    <div class="pagination p1 justify-content-center">
         <ul class="pagination">
             <c:if test="${currentPage>1}">
                 <li class="page-item">
