@@ -8,30 +8,38 @@
     <title>Test results</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/testResults.css" var="cssResultsUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssResultsUrl}" />
     <link rel="shortcut icon" href="#">
 </head>
-<body class="p-3 mb-2 bg-info text-white">
+<body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
-    <h2><fmt:message key="label.browsingResults"/><c:out value="${testTitle}"/> </h2>
+    <h2 class="my-header"><fmt:message key="label.browsingResults"/><c:out value="${testTitle}"/> </h2>
 
     <div> <!-- find user form -->
-        <form action="Controller" method="post">
+        <form action="Controller" method="post" class="form-inline justify-content-center ">
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="true">
 
-            <label for="login"><fmt:message key="label.findByLogin"/></label>
-            <input type="text" id="login" name="login"/>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="login"><fmt:message key="label.findByLogin"/></label>
+                <input type="text" class="form-control" placeholder="User login" id="login" name="login"/>
+            </div>
 
-            <input type="submit" value=<fmt:message key="button.find"/> class="btn-success" />
+            <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.find"/></button>
+<%--            <input type="submit" value=<fmt:message key="button.find"/> class="btn-success" />--%>
         </form>
     </div>
 
-    <div> <!-- find user form -->
+    <div> <!-- find all users form -->
         <form action="Controller" method="post">
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="false">
 
-            <input type="submit" value=<fmt:message key="button.showAllResults" /> class="btn-success" />
+            <div class="form-group mx-sm-3 mb-2">
+                <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.showAllResults" /></button>
+            </div>
+<%--            <input type="submit" value=<fmt:message key="button.showAllResults" /> class="btn-success" />--%>
         </form>
     </div>
 
@@ -45,11 +53,11 @@
     </c:choose>
 
     <div>
-        <table class="table table-hover">
+        <table class="table table-bordered">
             <thead>
-            <tr>
-                <th><fmt:message key="table.studentLogin"/></th>
-                <th><fmt:message key="table.pointsOf"/>${numOfQuestions})</th>
+            <tr class="table-dark">
+                <th scope="col"><fmt:message key="table.studentLogin"/></th>
+                <th scope="col"><fmt:message key="table.pointsOf"/>${numOfQuestions})</th>
             </tr>
             </thead>
 
@@ -63,6 +71,7 @@
             </c:forEach>
         </table>
     </div>
+    </br>
 
     <div>
         <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>

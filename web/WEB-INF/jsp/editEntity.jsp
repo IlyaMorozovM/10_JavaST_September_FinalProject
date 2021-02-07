@@ -8,6 +8,8 @@
     <title>Edit <c:out value="${param.entity}"/></title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/styles/editEntity.css" var="cssEditUrl"/>
+    <link rel="stylesheet" type="text/css" href="${cssEditUrl}" />
 </head>
 <body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>
