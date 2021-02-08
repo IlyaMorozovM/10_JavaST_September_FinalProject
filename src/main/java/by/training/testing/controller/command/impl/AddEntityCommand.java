@@ -54,6 +54,8 @@ public class AddEntityCommand implements Command {
         String name = req.getParameter(REQUEST_PARAM_NAME);
         String entity = req.getParameter(REQUEST_PARAM_ENTITY);
 
+        //TODO: пагинацию сделать, так как та которая сейчас е универсальная, а только перенаправляет на страницу с тестами, а надо чтоб на subjects
+
 //        HttpSession session = req.getSession(true);
 //        session.setAttribute(SESSION_ATTR_ENTITY, entity);
 

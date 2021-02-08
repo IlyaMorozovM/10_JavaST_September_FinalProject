@@ -92,6 +92,9 @@
         </div>
     </main>
 
+
+    <jsp:include page="paginationSubjects.jsp"/>
+
     <!-- footer -->
     <footer>
         <jsp:include page="footer.jsp"/>

@@ -43,7 +43,7 @@
 <%--            </c:if>--%>
 <%--            <br/><br/>--%>
 <%--        </c:forEach>--%>
-<%--        <jsp:include page="pagination.jsp"/>--%>
+<%--        <jsp:include page="paginationTests.jsp"/>--%>
 <%--    </div>--%>
 <%--    <c:if test="${user.roleName == 'tutor'}">--%>
 <%--        <div>--%>
@@ -130,7 +130,7 @@
 </main>
 
     <!-- pagination -->
-    <jsp:include page="pagination.jsp"/>
+    <jsp:include page="paginationTests.jsp"/>
 
     </br>
     <div>    <!-- buttons holder -->

@@ -28,7 +28,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public List<Test> getTestsFromTo(int subjectId, int start, int end) throws ServiceException {
+    public List<Test> getTestsFromTo(int subjectId, int limit, int offset) throws ServiceException {
         if(subjectId <= 0)
             return null;
 
@@ -37,7 +37,7 @@ public class TestServiceImpl implements TestService {
         TestDAO testDAO = daoFactory.getTestDao();
 
         try {
-            return testDAO.getTestsFromTo(subjectId, start, end);
+            return testDAO.getTestsFromTo(subjectId, limit, offset);
         }
         catch (DAOException e) {
             throw new ServiceException("Error while getting tests", e);

@@ -1,5 +1,6 @@
 package by.training.testing.dao.impl;
 
+import by.training.testing.bean.Test;
 import by.training.testing.dao.SubjectDAO;
 import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.impl.connection.ConnectionPool;
@@ -24,6 +25,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     private static final String DELETE_SUBJECT_SQL = "DELETE FROM subjects WHERE subjects.id = ?";
     private static final String UPDATE_SUBJECT_SQL = "UPDATE subjects SET subjects.name = ? WHERE subjects.id = ?";
     private static final String SELECT_SUBJECT_SQL = "SELECT * FROM subjects";
+    private static final String FIND_IN_RANGE_SQL = "SELECT * FROM subjects LIMIT ? OFFSET ?";
 
     @Override
     public List<Subject> getSubjects() throws DAOException {
@@ -56,6 +58,35 @@ public class SubjectDAOImpl implements SubjectDAO {
         finally {
             connectionPool.returnConnection(connection);
         }
+    }
+
+    @Override
+    public List<Subject> getSubjectsFromTo(int limit, int offset) throws DAOException {
+        ResultSet resultSet;
+        PreparedStatement ps;
+        Connection connection = null;
+
+        List<Subject> subjects = new ArrayList<>();
+        try {
+            connection = connectionPool.takeConnection();
+            ps = connection.prepareStatement(FIND_IN_RANGE_SQL);
+            ps.setInt(1, limit);
+            ps.setInt(2, offset);
+            resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                subjects.add(new Subject(resultSet.getInt(DB_COLUMN_ID), resultSet.getString(DB_COLUMN_NAME)));
+            }
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("Error in connection pool while getting subjects", e);
+        }
+        catch (SQLException e) {
+            throw new DAOException("Error while getting subjects", e);
+        }
+        finally {
+            connectionPool.returnConnection(connection);
+        }
+
+        return subjects;
     }
 
     @Override

@@ -91,7 +91,11 @@ public class GoToTestsCommand implements Command {
         }
         req.setAttribute(REQUEST_ATTR_TESTS, tests1);
         int countOfTests = tests.size();
-        req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE + 1);
+        if (countOfTests % TEST_AMOUNT_ON_PAGE != 0) {
+            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE + 1);
+        } else {
+            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE);
+        }
         if (req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE) != null) {
             req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
         } else {

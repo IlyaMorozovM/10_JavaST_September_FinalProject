@@ -22,10 +22,10 @@
             <input type="hidden" name="id" value="<c:out value="${param.id}"/>"/>
             <c:choose>
                 <c:when test="${param.entity == 'subject'}">
-                    <input type="text" placeholder=<fmt:message key="placeholer.subjectName"/> name="name"/>
+                    <input type="text" name="name" placeholder=<fmt:message key="placeholer.subjectName"/>/>
                 </c:when>
                 <c:when test="${param.entity == 'test'}">
-                    <input type="text" placeholder=<fmt:message key="placeholer.testName"/> name="name"/>
+                    <input type="text" name="name" placeholder=<fmt:message key="placeholer.testName"/>/>
                 </c:when>
                 <c:when test="${param.entity == 'question'}">
                     <textarea name="name" placeholder=<fmt:message key="placeholer.questionText"/>></textarea>
@@ -42,7 +42,8 @@
                 <input type="checkbox" name="isRight" value="true"/>
             </c:if>
             </br></br>
-            <input type="submit" value=<fmt:message key="button.add"/> class="btn" class="btn-info">
+            <button type="submit" class="btn btn-info"><fmt:message key="button.add"/></button>
+<%--            <input type="submit" value=<fmt:message key="button.add"/> class="btn" class="btn-info">--%>
         </form>
 
         </br></br>

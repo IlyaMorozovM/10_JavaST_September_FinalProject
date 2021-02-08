@@ -26,6 +26,19 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public List<Subject> getSubjectsFromTo(int limit, int offset) throws ServiceException {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        SubjectDAO subjectDAO = daoFactory.getSubjectDao();
+
+        try {
+            return subjectDAO.getSubjectsFromTo(limit, offset);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting subjects", e);
+        }
+    }
+
+    @Override
     public boolean addSubject(String name) throws ServiceException {
 
         if(name.equals(""))

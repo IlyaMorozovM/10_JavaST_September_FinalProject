@@ -62,7 +62,7 @@ public class TestDAOImpl implements TestDAO {
     }
 
     @Override
-    public List<Test> getTestsFromTo(int subjectId, int start, int end) throws DAOException {
+    public List<Test> getTestsFromTo(int subjectId, int limit, int offset) throws DAOException {
         ResultSet resultSet = null;
         PreparedStatement ps = null;
         Connection connection = null;
@@ -72,8 +72,8 @@ public class TestDAOImpl implements TestDAO {
             connection = connectionPool.takeConnection();
             ps = connection.prepareStatement(FIND_IN_RANGE_SQL);
             ps.setInt(1, subjectId);
-            ps.setInt(2, start);
-            ps.setInt(3, end);
+            ps.setInt(2, limit);
+            ps.setInt(3, offset);
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 tests.add(new Test(resultSet.getInt(DB_COLUMN_ID), resultSet.getInt(DB_COLUMN_SUBJECT),
