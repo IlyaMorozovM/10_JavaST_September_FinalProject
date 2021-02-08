@@ -58,14 +58,10 @@ public class ResultServiceImplTest {
 
     @DataProvider(name = "get_results_user_good")
     public Object[][] createPositiveDataGetUser() {
-        List<Result> allResults = new ArrayList<>();
-        allResults.add(new Result(6, "vasya", 2));
-        allResults.add(new Result(6, "Dasha", 2));
-        allResults.add(new Result(6, "vasya", 2));
         List<Result> userResults = new ArrayList<>();
-        userResults.add(new Result(6, "Dasha", 2));
+        userResults.add(new Result(1, "Dasha", 2));
         return new Object[][]{
-                {6, "Dasha", userResults}
+                {1, "Dasha", userResults}
         };
     }
 
@@ -88,7 +84,6 @@ public class ResultServiceImplTest {
     @Test(description = "Positive scenario of getting user results",
             dataProvider = "get_results_user_good")
     public void getUserResultsTest(int testId, String login, List<Question> expected) throws ServiceException {
-        //TODO: проверить тест после фикса
         List<Result> actual = resultService.getUserResults(testId, login);
         Assert.assertEquals(actual, expected);
     }
