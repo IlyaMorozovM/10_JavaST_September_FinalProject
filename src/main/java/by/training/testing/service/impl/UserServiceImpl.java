@@ -1,7 +1,6 @@
 package by.training.testing.service.impl;
 
 import by.training.testing.bean.User;
-import by.training.testing.dao.TestDAO;
 import by.training.testing.dao.UserDAO;
 import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.exception.DAOUserAlreadyExistsException;
@@ -17,6 +16,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+
+    UserDAO userDAO;
+
+    public UserServiceImpl() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        userDAO = daoFactory.getUserDao();
+    }
+
     @Override
     public String getMD5Hash(byte[] password) throws NoSuchAlgorithmException {
         String generatedPassword = null;
@@ -34,9 +41,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers() throws ServiceException {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        UserDAO userDAO = daoFactory.getUserDao();
-
         try {
             return userDAO.getUsers();
         }
@@ -47,9 +51,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsersFromTo(int limit, int offset) throws ServiceException {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        UserDAO userDAO = daoFactory.getUserDao();
-
         try {
             return userDAO.getUsersFromTo(limit, offset);
         }
@@ -75,9 +76,6 @@ public class UserServiceImpl implements UserService {
         if(userId == 0)
             return false;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        UserDAO userDAO = daoFactory.getUserDao();
-
         try {
             userDAO.deleteUser(userId);
         }
@@ -89,12 +87,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signIn(String login, byte[] password) throws ServiceException {
-
         if(login.equals("") || password.equals(""))
             return null;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        UserDAO userDAO = daoFactory.getUserDao();
 
         try {
             return userDAO.signIn(login, password);
@@ -106,12 +100,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean signUp(String login, byte[] password, String name, String lastname, String email, String role) throws ServiceException {
-
         if(login.equals("") || Arrays.toString(password).equals("") || name.equals("") || lastname.equals("") || email.equals("") || role.equals(""))
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        UserDAO userDAO = daoFactory.getUserDao();
 
         try {
             userDAO.signUp(login, password, name, lastname, email, Integer.parseInt(role));

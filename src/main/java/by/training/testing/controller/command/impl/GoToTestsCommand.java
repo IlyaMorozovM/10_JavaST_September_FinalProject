@@ -29,6 +29,7 @@ public class GoToTestsCommand implements Command {
     private static final String REQUEST_ATTR_MAX_PAGE = "maxPage";
     private static final String REQUEST_PARAMETER_SUBJECTID = "subjectId";
     private static final String REQUEST_PARAMETER_CURRENT_PAGE = "currentPage";
+    private static final String TEST_TITLE_SESSION_ATTR = "testTitle";
     private static final String SUBJECTID_SESSION_ATTR = "subjectId";
     private static final String TESTID_SESSION_ATTR = "testId";
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
@@ -53,6 +54,7 @@ public class GoToTestsCommand implements Command {
         session.removeAttribute(NUMBER_OF_QUESTIONS_SESSION_ATTR);
         session.removeAttribute(RIGHT_ANSWERS_SESSION_ATTR);
         session.removeAttribute(CURRENT_QUESTION_SESSION_ATTR);
+        session.removeAttribute(TEST_TITLE_SESSION_ATTR);
 
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();

@@ -11,12 +11,15 @@ import java.util.List;
 
 public class SubjectServiceImpl implements SubjectService {
 
+    SubjectDAO subjectDAO;
+
+    public SubjectServiceImpl() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        subjectDAO = daoFactory.getSubjectDao();
+    }
+
     @Override
     public List<Subject> getSubjects() throws ServiceException {
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        SubjectDAO subjectDAO = daoFactory.getSubjectDao();
-
         try {
             return subjectDAO.getSubjects();
         }
@@ -27,9 +30,6 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getSubjectsFromTo(int limit, int offset) throws ServiceException {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        SubjectDAO subjectDAO = daoFactory.getSubjectDao();
-
         try {
             return subjectDAO.getSubjectsFromTo(limit, offset);
         }
@@ -40,12 +40,8 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public boolean addSubject(String name) throws ServiceException {
-
         if(name.equals(""))
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        SubjectDAO subjectDAO = daoFactory.getSubjectDao();
 
         try {
             subjectDAO.addSubject(name);
@@ -58,12 +54,8 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public boolean editSubject(int id, String name) throws ServiceException {
-
         if(name.equals("") || id == 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        SubjectDAO subjectDAO = daoFactory.getSubjectDao();
 
         try {
             subjectDAO.editSubject(id, name);
@@ -76,12 +68,8 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public boolean deleteSubject(int id) throws ServiceException {
-
         if(id == 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        SubjectDAO subjectDAO = daoFactory.getSubjectDao();
 
         try {
             subjectDAO.deleteSubject(id);

@@ -13,13 +13,19 @@ import by.training.testing.service.factory.ServiceFactory;
 import java.util.List;
 
 public class QuestionServiceImpl implements QuestionService {
+
+    QuestionDAO questionDAO;
+
+    public QuestionServiceImpl() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        questionDAO = daoFactory.getQuestionDao();
+    }
+
     @Override
     public List<Question> getQuestions(int testId) throws ServiceException {
         if(testId <= 0)
             return null;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        QuestionDAO questionDAO = daoFactory.getQuestionDao();
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         AnswerService answerService = serviceFactory.getAnswerService();
 
@@ -42,9 +48,6 @@ public class QuestionServiceImpl implements QuestionService {
         if(question.equals("") || testId <= 0)
             return false;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        QuestionDAO questionDAO = daoFactory.getQuestionDao();
-
         try {
             questionDAO.addQuestion(testId, question);
         }
@@ -59,9 +62,6 @@ public class QuestionServiceImpl implements QuestionService {
         if(question.equals("") || questionId <= 0)
             return false;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        QuestionDAO questionDAO = daoFactory.getQuestionDao();
-
         try {
             questionDAO.editQuestion(questionId, question);
         }
@@ -75,9 +75,6 @@ public class QuestionServiceImpl implements QuestionService {
     public boolean deleteQuestion(int questionId) throws ServiceException {
         if(questionId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        QuestionDAO questionDAO = daoFactory.getQuestionDao();
 
         try {
             questionDAO.deleteQuestion(questionId);

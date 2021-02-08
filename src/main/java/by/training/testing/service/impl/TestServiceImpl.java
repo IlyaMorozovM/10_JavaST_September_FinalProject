@@ -10,14 +10,18 @@ import by.training.testing.service.TestService;
 import java.util.List;
 
 public class TestServiceImpl implements TestService {
+
+    TestDAO testDAO;
+
+    public TestServiceImpl() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        testDAO = daoFactory.getTestDao();
+    }
+
     @Override
     public List<Test> getTests(int subjectId) throws ServiceException {
-
         if(subjectId <= 0)
             return null;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        TestDAO testDAO = daoFactory.getTestDao();
 
         try {
             return testDAO.getTests(subjectId);
@@ -31,10 +35,7 @@ public class TestServiceImpl implements TestService {
     public List<Test> getTestsFromTo(int subjectId, int limit, int offset) throws ServiceException {
         if(subjectId <= 0)
             return null;
-
         //TODO: вынести тут все создания фабрик в поле класса + с коннекшенами попробовать такое в ДАО
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        TestDAO testDAO = daoFactory.getTestDao();
 
         try {
             return testDAO.getTestsFromTo(subjectId, limit, offset);
@@ -46,12 +47,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public boolean addTest(int subjectId, String title) throws ServiceException {
-
         if(title.equals("") || subjectId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        TestDAO testDAO = daoFactory.getTestDao();
 
         try {
             testDAO.addTest(subjectId, title);
@@ -64,12 +61,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public boolean editTest(int testId, String title) throws ServiceException {
-
         if(title.equals("") || testId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        TestDAO testDAO = daoFactory.getTestDao();
 
         try {
             testDAO.editTest(testId, title);
@@ -82,12 +75,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public boolean deleteTest(int testId) throws ServiceException {
-
         if(testId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        TestDAO testDAO = daoFactory.getTestDao();
 
         try {
             testDAO.deleteTest(testId);

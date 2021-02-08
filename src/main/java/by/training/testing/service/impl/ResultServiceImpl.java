@@ -7,17 +7,21 @@ import by.training.testing.dao.factory.DAOFactory;
 import by.training.testing.service.ResultService;
 import by.training.testing.service.exception.ServiceException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultServiceImpl implements ResultService {
+
+    ResultDAO resultDAO;
+
+    public ResultServiceImpl() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        resultDAO = daoFactory.getResultDao();
+    }
+
     @Override
     public List<Result> getResults(int testId) throws ServiceException {
         if(testId <= 0)
             return null;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        ResultDAO resultDAO = daoFactory.getResultDao();
 
         try {
             return resultDAO.getResults(testId);
@@ -32,9 +36,6 @@ public class ResultServiceImpl implements ResultService {
         if(testId <= 0)
             return null;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        ResultDAO resultDAO = daoFactory.getResultDao();
-
         try {
             return resultDAO.getResultsFromTo(testId, limit, offset);
         }
@@ -47,9 +48,6 @@ public class ResultServiceImpl implements ResultService {
     public List<Result> getUserResults(int testId, String login) throws ServiceException {
         if(testId <= 0)
             return null;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        ResultDAO resultDAO = daoFactory.getResultDao();
 
         try {
             return resultDAO.getUserResults(testId, login);
@@ -64,9 +62,6 @@ public class ResultServiceImpl implements ResultService {
         if(testId <= 0)
             return null;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        ResultDAO resultDAO = daoFactory.getResultDao();
-
         try {
             return resultDAO.getUserResultsFromTo(testId, login, limit, offset);
         }
@@ -79,9 +74,6 @@ public class ResultServiceImpl implements ResultService {
     public boolean addResult(int testId, String studentLogin, int points) throws ServiceException {
         if(studentLogin.equals("") || testId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        ResultDAO resultDAO = daoFactory.getResultDao();
 
         try {
             resultDAO.addResult(testId, studentLogin, points);

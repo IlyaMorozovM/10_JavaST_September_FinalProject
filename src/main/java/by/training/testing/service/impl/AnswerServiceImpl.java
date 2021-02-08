@@ -10,14 +10,19 @@ import by.training.testing.dao.AnswerDAO;
 import java.util.List;
 
 public class AnswerServiceImpl implements AnswerService {
+
+    AnswerDAO answerDAO;
+
+    public AnswerServiceImpl() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        answerDAO = daoFactory.getAnswerDao();
+    }
+
     @Override
     public List<Answer> getAnswers(int questionId) throws ServiceException {
 
         if(questionId <= 0)
             return null;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        AnswerDAO answerDAO = daoFactory.getAnswerDao();
 
         try {
             return answerDAO.getAnswers(questionId);
@@ -32,9 +37,6 @@ public class AnswerServiceImpl implements AnswerService {
 
         if(answer.equals("") || questionId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        AnswerDAO answerDAO = daoFactory.getAnswerDao();
 
         try {
             answerDAO.addAnswer(questionId, answer, isRight);
@@ -51,9 +53,6 @@ public class AnswerServiceImpl implements AnswerService {
         if(answer.equals("") || answerId <= 0)
             return false;
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        AnswerDAO answerDAO = daoFactory.getAnswerDao();
-
         try {
             answerDAO.editAnswer(answerId, answer, isRight);
         }
@@ -68,9 +67,6 @@ public class AnswerServiceImpl implements AnswerService {
 
         if(answerId <= 0)
             return false;
-
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        AnswerDAO answerDAO = daoFactory.getAnswerDao();
 
         try {
             answerDAO.deleteAnswer(answerId);
