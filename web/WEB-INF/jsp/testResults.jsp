@@ -21,6 +21,7 @@
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="true">
 
+<%--            <c:set var="isUserResult" scope="session" value="true" />--%>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="login"><fmt:message key="label.findByLogin"/></label>
                 <input type="text" class="form-control" placeholder="User login" id="login" name="login"/>
@@ -35,6 +36,7 @@
         <form action="Controller" method="post">
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="false">
+<%--            <c:set var="isUserResult" scope="session" value="false" />--%>
 
             <div class="form-group mx-sm-3 mb-2">
                 <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.showAllResults" /></button>
@@ -73,9 +75,14 @@
     </div>
     </br>
 
+    <jsp:include page="paginationResults.jsp"/>
+    </br>
+
     <div>
         <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>
     </div>
+
+
 
     <!-- footer -->
     <footer>

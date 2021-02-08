@@ -46,6 +46,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUsersFromTo(int limit, int offset) throws ServiceException {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        UserDAO userDAO = daoFactory.getUserDao();
+
+        try {
+            return userDAO.getUsersFromTo(limit, offset);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting users", e);
+        }
+    }
+
+    @Override
     public List<User> getUser(List<User> users, String login) throws ServiceException {
         List<User> oneUser = new ArrayList<>();
         for (User user: users){

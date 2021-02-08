@@ -65,7 +65,7 @@ public class ResultServiceImplTest {
         List<Result> userResults = new ArrayList<>();
         userResults.add(new Result(6, "Dasha", 2));
         return new Object[][]{
-                {allResults, "Dasha", userResults}
+                {6, "Dasha", userResults}
         };
     }
 
@@ -87,8 +87,9 @@ public class ResultServiceImplTest {
 
     @Test(description = "Positive scenario of getting user results",
             dataProvider = "get_results_user_good")
-    public void getUserResultsTest(List<Result> results, String login, List<Question> expected) throws ServiceException {
-        List<Result> actual = resultService.getUserResults(results, login);
+    public void getUserResultsTest(int testId, String login, List<Question> expected) throws ServiceException {
+        //TODO: проверить тест после фикса
+        List<Result> actual = resultService.getUserResults(testId, login);
         Assert.assertEquals(actual, expected);
     }
 

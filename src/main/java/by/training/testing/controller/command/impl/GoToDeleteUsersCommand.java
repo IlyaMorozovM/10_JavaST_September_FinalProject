@@ -28,7 +28,10 @@ public class GoToDeleteUsersCommand implements Command {
     private static final String ONE_USER_SESSION_ATTR = "oneUser";
     private static final String REQUEST_PARAM_LOGIN = "login";
     private static final String REQUEST_PARAM_ONE_USER = "showOneUser";
+    private static final String REQUEST_PARAM_CURRENT_PAGE = "currentPage";
+    private static final String REQUEST_ATTR_MAX_PAGE = "maxPage";
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
+    private static final int USER_AMOUNT_ON_PAGE = 5;
 
     /**
      * Method, that directs client to the "delete" page.

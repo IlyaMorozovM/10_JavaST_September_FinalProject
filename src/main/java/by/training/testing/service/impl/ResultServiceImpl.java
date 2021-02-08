@@ -28,14 +28,51 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public List<Result> getUserResults(List<Result> results, String login) throws ServiceException {
-        List<Result> userResults = new ArrayList<>();
-        for(Result result: results){
-            if (result.getStudentLogin().equals(login)){
-                userResults.add(result);
-            }
+    public List<Result> getResultsFromTo(int testId, int limit, int offset) throws ServiceException {
+        if(testId <= 0)
+            return null;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        ResultDAO resultDAO = daoFactory.getResultDao();
+
+        try {
+            return resultDAO.getResultsFromTo(testId, limit, offset);
         }
-        return userResults;
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting results", e);
+        }
+    }
+
+    @Override
+    public List<Result> getUserResults(int testId, String login) throws ServiceException {
+        if(testId <= 0)
+            return null;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        ResultDAO resultDAO = daoFactory.getResultDao();
+
+        try {
+            return resultDAO.getUserResults(testId, login);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting user results", e);
+        }
+    }
+
+    @Override
+    public List<Result> getUserResultsFromTo(int testId, String login, int limit, int offset) throws ServiceException {
+        if(testId <= 0)
+            return null;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        ResultDAO resultDAO = daoFactory.getResultDao();
+
+        try {
+            return resultDAO.getUserResultsFromTo(testId, login, limit, offset);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting user results", e);
+        }
     }
 
     @Override
