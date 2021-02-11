@@ -1,6 +1,5 @@
 package by.training.testing.dao.impl;
 
-import by.training.testing.bean.Subject;
 import by.training.testing.bean.User;
 import by.training.testing.dao.UserDAO;
 import by.training.testing.dao.exception.DAOException;
@@ -10,7 +9,6 @@ import by.training.testing.dao.impl.connection.ConnectionPoolException;
 import by.training.testing.service.UserService;
 import by.training.testing.service.factory.ServiceFactory;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;

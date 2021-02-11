@@ -1,11 +1,10 @@
 package by.training.testing.dao.impl;
 
-import by.training.testing.bean.Test;
+import by.training.testing.bean.Subject;
 import by.training.testing.dao.SubjectDAO;
 import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.impl.connection.ConnectionPool;
 import by.training.testing.dao.impl.connection.ConnectionPoolException;
-import by.training.testing.bean.Subject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
