@@ -1,7 +1,6 @@
 package by.training.testing.dao.impl;
 
 import by.training.testing.bean.Result;
-import by.training.testing.bean.Test;
 import by.training.testing.dao.ResultDAO;
 import by.training.testing.dao.exception.DAOException;
 import by.training.testing.dao.impl.connection.ConnectionPool;
@@ -17,16 +16,16 @@ import java.util.List;
 public class ResultDAOImpl implements ResultDAO {
 
     private static final String DB_COLUMN_POINTS = "points";
-    private static final String DB_COLUMN_TEST = "test";
+    private static final String DB_COLUMN_TEST = "test_id";
     private static final String DB_COLUMN_STUDENT_LOGIN = "student_login";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_RESULT_SQL = "INSERT results(`test`, `student_login`, `points`) VALUES (?,?,?)";
-    private static final String SELECT_RESULT_SQL = "SELECT * FROM results WHERE results.test = ?";
-    private static final String FIND_IN_RANGE_SQL = "SELECT * FROM results WHERE results.test = ? LIMIT ? OFFSET ?";
-    private static final String SELECT_USER_RESULT_SQL = "SELECT * FROM results WHERE results.test = ? and results.student_login = ?";
-    private static final String FIND_IN_RANGE_USER_RESULT_SQL = "SELECT * FROM results WHERE results.test = ? and results.student_login = ? LIMIT ? OFFSET ?";
+    private static final String INSERT_RESULT_SQL = "INSERT results(`test_id`, `student_login`, `points`) VALUES (?,?,?)";
+    private static final String SELECT_RESULT_SQL = "SELECT * FROM results WHERE results.test_id = ?";
+    private static final String FIND_IN_RANGE_SQL = "SELECT * FROM results WHERE results.test_id = ? LIMIT ? OFFSET ?";
+    private static final String SELECT_USER_RESULT_SQL = "SELECT * FROM results WHERE results.test_id = ? and results.student_login = ?";
+    private static final String FIND_IN_RANGE_USER_RESULT_SQL = "SELECT * FROM results WHERE results.test_id = ? and results.student_login = ? LIMIT ? OFFSET ?";
 
     @Override
     public List<Result> getResults(int testId) throws DAOException {

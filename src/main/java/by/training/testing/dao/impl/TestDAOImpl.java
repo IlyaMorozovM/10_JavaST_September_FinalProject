@@ -17,15 +17,15 @@ public class TestDAOImpl implements TestDAO {
 
     private static final String DB_COLUMN_TITLE = "title";
     private static final String DB_COLUMN_ID = "id";
-    private static final String DB_COLUMN_SUBJECT = "subject";
+    private static final String DB_COLUMN_SUBJECT = "subject_id";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_TEST_SQL = "INSERT tests(`subject`, `title`) VALUES (?,?)";
+    private static final String INSERT_TEST_SQL = "INSERT tests(`subject_id`, `title`) VALUES (?,?)";
     private static final String DELETE_TEST_SQL = "DELETE FROM tests WHERE tests.id = ?";
     private static final String UPDATE_TEST_SQL = "UPDATE tests SET tests.title = ? WHERE tests.id = ?";
-    private static final String SELECT_TEST_SQL = "SELECT * FROM tests WHERE tests.subject = ?";
-    private static final String FIND_IN_RANGE_SQL = "SELECT * FROM tests WHERE tests.subject = ? LIMIT ? OFFSET ?";
+    private static final String SELECT_TEST_SQL = "SELECT * FROM tests WHERE tests.subject_id = ?";
+    private static final String FIND_IN_RANGE_SQL = "SELECT * FROM tests WHERE tests.subject_id = ? LIMIT ? OFFSET ?";
 
     @Override
     public List<Test> getTests(int subjectId) throws DAOException {

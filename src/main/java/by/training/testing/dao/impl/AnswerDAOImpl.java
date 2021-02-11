@@ -23,16 +23,16 @@ import java.util.List;
 public class AnswerDAOImpl implements AnswerDAO {
 
     private static final String DB_COLUMN_ANSWER = "answer";
-    private static final String DB_COLUMN_QUESTION = "question";
+    private static final String DB_COLUMN_QUESTION = "question_id";
     private static final String DB_COLUMN_ID = "id";
     private static final String DB_COLUMN_ISRIGHT = "is_right";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String INSERT_ANSWER_SQL = "INSERT answers(`question`, `answer`, `is_right`) VALUES (?,?,?)";
+    private static final String INSERT_ANSWER_SQL = "INSERT answers(`question_id`, `answer`, `is_right`) VALUES (?,?,?)";
     private static final String DELETE_ANSWER_SQL = "DELETE FROM answers WHERE answers.id = ?";
     private static final String UPDATE_ANSWER_SQL = "UPDATE answers SET answers.answer = ?, answers.is_right = ? WHERE answers.id = ?";
-    private static final String SELECT_ANSWER_SQL = "SELECT * FROM answers WHERE answers.question = ?";
+    private static final String SELECT_ANSWER_SQL = "SELECT * FROM answers WHERE answers.question_id = ?";
 
     /**
      * Method, that validates params (login, email, name, lastname, password, role),

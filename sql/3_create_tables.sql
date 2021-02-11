@@ -25,18 +25,18 @@ alter table subjects
 
 create table tests
 (
-    id      int auto_increment,
-    subject int         not null,
-    title   varchar(50) not null,
+    id         int auto_increment,
+    subject_id int         not null,
+    title      varchar(50) not null,
     constraint id_UNIQUE
         unique (id),
     constraint subject
-        foreign key (subject) references subjects (id)
+        foreign key (subject_id) references subjects (id)
             on delete cascade
 );
 
 create index subject_idx
-    on tests (subject);
+    on tests (subject_id);
 
 alter table tests
     add primary key (id);
@@ -44,36 +44,36 @@ alter table tests
 create table questions
 (
     id       int auto_increment,
-    test     int          not null,
+    test_id  int          not null,
     question varchar(500) not null,
     constraint id_UNIQUE
         unique (id),
     constraint test
-        foreign key (test) references tests (id)
+        foreign key (test_id) references tests (id)
             on delete cascade
 );
 
 create index test_idx
-    on questions (test);
+    on questions (test_id);
 
 alter table questions
     add primary key (id);
 
 create table answers
 (
-    id       int auto_increment,
-    question int          not null,
-    answer   varchar(255) not null,
-    is_right tinyint      not null,
+    id          int auto_increment,
+    question_id int          not null,
+    answer      varchar(255) not null,
+    is_right    tinyint      not null,
     constraint id_UNIQUE
         unique (id),
     constraint question
-        foreign key (question) references questions (id)
+        foreign key (question_id) references questions (id)
             on delete cascade
 );
 
 create index question_idx
-    on answers (question);
+    on answers (question_id);
 
 alter table answers
     add primary key (id);
@@ -101,11 +101,11 @@ create table results
 (
     id            int auto_increment
         primary key,
-    test          int         not null,
+    test_id       int         not null,
     student_login varchar(50) not null,
     points        int         not null,
     constraint results_tests_id_fk
-        foreign key (test) references tests (id),
+        foreign key (test_id) references tests (id),
     constraint results_users_login_fk
         foreign key (student_login) references users (login)
 );
