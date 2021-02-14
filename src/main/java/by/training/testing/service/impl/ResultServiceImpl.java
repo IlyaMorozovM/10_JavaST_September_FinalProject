@@ -9,6 +9,13 @@ import by.training.testing.service.exception.ServiceException;
 
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with entity "result".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class ResultServiceImpl implements ResultService {
 
     ResultDAO resultDAO;
@@ -18,6 +25,13 @@ public class ResultServiceImpl implements ResultService {
         resultDAO = daoFactory.getResultDao();
     }
 
+    /**
+     * Method that receives all results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @return List of all results.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public List<Result> getResults(int testId) throws ServiceException {
         if(testId <= 0)
@@ -31,6 +45,15 @@ public class ResultServiceImpl implements ResultService {
         }
     }
 
+    /**
+     * Method that receives results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @param limit Number of results returned.
+     * @param offset Offset of records in the database.
+     * @return List of all results with size = limit.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public List<Result> getResultsFromTo(int testId, int limit, int offset) throws ServiceException {
         if(testId <= 0)
@@ -44,6 +67,14 @@ public class ResultServiceImpl implements ResultService {
         }
     }
 
+    /**
+     * Method that receives student results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @param login Student login, to which results relate.
+     * @return List of all student results.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public List<Result> getUserResults(int testId, String login) throws ServiceException {
         if(testId <= 0)
@@ -57,6 +88,16 @@ public class ResultServiceImpl implements ResultService {
         }
     }
 
+    /**
+     * Method that receives student results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @param login Student login, to which results relate.
+     * @param limit Number of results returned.
+     * @param offset Offset of records in the database.
+     * @return List of student results with size = limit.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public List<Result> getUserResultsFromTo(int testId, String login, int limit, int offset) throws ServiceException {
         if(testId <= 0)
@@ -70,6 +111,15 @@ public class ResultServiceImpl implements ResultService {
         }
     }
 
+    /**
+     * Method that inserts result with some values (testId, studentLogin, points) into DB.
+     *
+     * @param testId Test ID, to which result relate.
+     * @param studentLogin Student login, to which result relate.
+     * @param points Points scored by the student for the test.
+     * @return True - if operation was successful, otherwise - false.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public boolean addResult(int testId, String studentLogin, int points) throws ServiceException {
         if(studentLogin.equals("") || testId <= 0)

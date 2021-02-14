@@ -12,6 +12,13 @@ import by.training.testing.service.factory.ServiceFactory;
 
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with entity "question".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class QuestionServiceImpl implements QuestionService {
 
     QuestionDAO questionDAO;
@@ -21,6 +28,13 @@ public class QuestionServiceImpl implements QuestionService {
         questionDAO = daoFactory.getQuestionDao();
     }
 
+    /**
+     * Method that receives questions, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which questions relate.
+     * @return List, that contains all questions, related to a specific test.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public List<Question> getQuestions(int testId) throws ServiceException {
         if(testId <= 0)
@@ -43,6 +57,14 @@ public class QuestionServiceImpl implements QuestionService {
         }
     }
 
+    /**
+     * Method that inserts question with some values (testId, question) into DB.
+     *
+     * @param testId Test ID, to which question relate.
+     * @param question Text of question, that inserting into DB.
+     * @return True - if operation was successful, otherwise - false.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public boolean addQuestion(int testId, String question) throws ServiceException {
         if(question.equals("") || testId <= 0)
@@ -57,6 +79,15 @@ public class QuestionServiceImpl implements QuestionService {
         return true;
     }
 
+    /**
+     * Method that edits question with some new values (questionId, question)
+     * and inserts into DB.
+     *
+     * @param questionId Question ID, to which question relate.
+     * @param question Text of question, that editing.
+     * @return True - if operation was successful, otherwise - false.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public boolean editQuestion(int questionId, String question) throws ServiceException {
         if(question.equals("") || questionId <= 0)
@@ -71,6 +102,13 @@ public class QuestionServiceImpl implements QuestionService {
         return true;
     }
 
+    /**
+     * Method that deletes question by ID.
+     *
+     * @param questionId Question ID, to which question relate.
+     * @return True - if operation was successful, otherwise - false.
+     * @throws ServiceException Thrown when DAO exception is caught.
+     */
     @Override
     public boolean deleteQuestion(int questionId) throws ServiceException {
         if(questionId <= 0)
