@@ -14,6 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with DB relates to entity "question".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class QuestionDAOImpl implements QuestionDAO {
 
     private static final String DB_COLUMN_QUESTION = "question";
@@ -27,12 +34,19 @@ public class QuestionDAOImpl implements QuestionDAO {
     private static final String UPDATE_QUESTION_SQL = "UPDATE questions SET questions.question = ? WHERE questions.id = ?";
     private static final String SELECT_QUESTION_SQL = "SELECT * FROM questions WHERE questions.test_id = ?";
 
+    /**
+     * Method that receives questions, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which questions relate.
+     * @return List, that contains all questions, related to a specific test.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Question> getQuestions(int testId) throws DAOException {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
-        ResultSet rs = null;
+        ResultSet rs;
 
         try {
             connection = connectionPool.takeConnection();
@@ -43,7 +57,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             if(rs == null)
                 return null;
 
-            List<Question> questions = new ArrayList<Question>();
+            List<Question> questions = new ArrayList<>();
             while(rs.next()) {
                 questions.add(new Question(rs.getInt(DB_COLUMN_ID), rs.getInt(DB_COLUMN_TEST), rs.getString(DB_COLUMN_QUESTION), new ArrayList<Answer>()));
             }
@@ -62,9 +76,16 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
     }
 
+    /**
+     * Method that inserts question with some values (testId, question) into DB.
+     *
+     * @param testId Test ID, to which question relate.
+     * @param question Text of question, that inserting into DB.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void addQuestion(int testId, String question) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -87,9 +108,17 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
     }
 
+    /**
+     * Method that edits question with some new values (questionId, question)
+     * and inserts into DB.
+     *
+     * @param questionId Question ID, to which question relate.
+     * @param question Text of question, that editing.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void editQuestion(int questionId, String question) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -112,9 +141,15 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
     }
 
+    /**
+     * Method that deletes question by ID.
+     *
+     * @param questionId Question ID, to which question relate.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void deleteQuestion(int questionId) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {

@@ -35,11 +35,11 @@ public class AnswerDAOImpl implements AnswerDAO {
     private static final String SELECT_ANSWER_SQL = "SELECT * FROM answers WHERE answers.question_id = ?";
 
     /**
-     * Method, that validates params (login, email, name, lastname, password, role),
-     * when admin registers users.
+     * Method that receives answers, related to a specific question, from DB.
      *
      * @param questionId Question ID, to which answers relate.
-     * @return List, that contains all answers.
+     * @return List, that contains all answers, related to a specific question.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
      */
     @Override
     public List<Answer> getAnswers(int questionId) throws DAOException {
@@ -76,6 +76,14 @@ public class AnswerDAOImpl implements AnswerDAO {
         }
     }
 
+    /**
+     * Method that inserts answer with some values (questionId, answer, isRight) into DB.
+     *
+     * @param questionId Question ID, to which answer relate.
+     * @param answer Text of answer, that inserting into DB.
+     * @param isRight Boolean value, that indicates whether the answer is correct.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void addAnswer(int questionId, String answer, boolean isRight) throws DAOException {
         PreparedStatement ps;
@@ -102,6 +110,15 @@ public class AnswerDAOImpl implements AnswerDAO {
         }
     }
 
+    /**
+     * Method that edits answer with some new values (questionId, answer, isRight)
+     * and inserts into DB.
+     *
+     * @param answerId Answer ID, to which answer relate.
+     * @param answer Text of answer, that editing.
+     * @param isRight Boolean value, that indicates whether the answer is correct.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void editAnswer(int answerId, String answer, boolean isRight) throws DAOException {
         PreparedStatement ps;
@@ -128,9 +145,15 @@ public class AnswerDAOImpl implements AnswerDAO {
         }
     }
 
+    /**
+     * Method that deletes answer by ID.
+     *
+     * @param answerId Answer ID, to which answer relate.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void deleteAnswer(int answerId) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {

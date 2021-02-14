@@ -14,6 +14,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with DB relates to entity "user".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class UserDAOImpl implements UserDAO {
 
     private static final String DB_COLUMN_NAME = "name";
@@ -31,8 +38,12 @@ public class UserDAOImpl implements UserDAO {
     private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id";
     private static final String FIND_IN_RANGE_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id LIMIT ? OFFSET ?";
 
-    public UserDAOImpl() {}
-
+    /**
+     * Method that receives all users from DB.
+     *
+     * @return List of all users.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<User> getUsers() throws DAOException {
         PreparedStatement ps;
@@ -66,6 +77,14 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Method that receives users from DB.
+     *
+     * @param limit Number of users returned.
+     * @param offset Offset of records in the database.
+     * @return List of users with size = limit.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<User> getUsersFromTo(int limit, int offset) throws DAOException {
         ResultSet resultSet;
@@ -96,9 +115,15 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    /**
+     * Method that deletes user by ID.
+     *
+     * @param userId User ID, to which user relate.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void deleteUser(int userId) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -120,11 +145,20 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Authorization method, returns the user
+     * with the specified username and password, if such exists.
+     *
+     * @param login User login.
+     * @param password User password.
+     * @return User with specified username and password, if such exists.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public User signIn(String login, byte[] password) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
-        ResultSet rs = null;
+        ResultSet rs;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
@@ -152,7 +186,6 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException("Error in connection pool while authorizing user", e);
         }
         catch (SQLException e) {
-            e.printStackTrace();
             throw new DAOException("Error while authorizing user", e);
         }
         catch (NoSuchAlgorithmException e) {
@@ -164,10 +197,21 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
+    /**
+     * This method registers user with parameters passed to the method.
+     *
+     * @param login User login.
+     * @param password User password.
+     * @param name User name.
+     * @param lastname User lastname.
+     * @param email User email.
+     * @param roleId User role (1 = tutor, 2 = student, 3 = admin).
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void signUp(String login, byte[] password, String name, String lastname, String email, int roleId) throws DAOException {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();

@@ -13,6 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with DB relates to entity "subject".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class SubjectDAOImpl implements SubjectDAO {
 
     private static final String DB_COLUMN_NAME = "name";
@@ -26,11 +33,17 @@ public class SubjectDAOImpl implements SubjectDAO {
     private static final String SELECT_SUBJECT_SQL = "SELECT * FROM subjects";
     private static final String FIND_IN_RANGE_SQL = "SELECT * FROM subjects LIMIT ? OFFSET ?";
 
+    /**
+     * Method that receives all subjects from DB.
+     *
+     * @return List of all subjects.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Subject> getSubjects() throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
-        ResultSet rs = null;
+        ResultSet rs;
 
         try {
             connection = connectionPool.takeConnection();
@@ -59,6 +72,14 @@ public class SubjectDAOImpl implements SubjectDAO {
         }
     }
 
+    /**
+     * Method that receives subjects from DB.
+     *
+     * @param limit Number of subjects returned.
+     * @param offset Offset of records in the database.
+     * @return List of subjects with size = limit.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Subject> getSubjectsFromTo(int limit, int offset) throws DAOException {
         ResultSet resultSet;
@@ -88,9 +109,15 @@ public class SubjectDAOImpl implements SubjectDAO {
         return subjects;
     }
 
+    /**
+     * Method that inserts subject with some value (name) into DB.
+     *
+     * @param name Name of subject, that editing.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void addSubject(String name) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -112,9 +139,17 @@ public class SubjectDAOImpl implements SubjectDAO {
         }
     }
 
+    /**
+     * Method that edits subject with some new values (id, name)
+     * and inserts into DB.
+     *
+     * @param id Subject ID, to which subject relate.
+     * @param name Name of subject, that editing.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void editSubject(int id, String name) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -137,9 +172,15 @@ public class SubjectDAOImpl implements SubjectDAO {
         }
     }
 
+    /**
+     * Method that deletes subject by ID.
+     *
+     * @param id Subject ID, to which subject relate.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void deleteSubject(int id) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {

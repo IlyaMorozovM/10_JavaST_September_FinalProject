@@ -13,6 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with DB relates to entity "test".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class TestDAOImpl implements TestDAO {
 
     private static final String DB_COLUMN_TITLE = "title";
@@ -27,11 +34,18 @@ public class TestDAOImpl implements TestDAO {
     private static final String SELECT_TEST_SQL = "SELECT * FROM tests WHERE tests.subject_id = ?";
     private static final String FIND_IN_RANGE_SQL = "SELECT * FROM tests WHERE tests.subject_id = ? LIMIT ? OFFSET ?";
 
+    /**
+     * Method that receives all tests, related to a specific subject, from DB.
+     *
+     * @param subjectId Subject ID, to which test relate.
+     * @return List, that contains all tests, related to a specific subject.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Test> getTests(int subjectId) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
-        ResultSet rs = null;
+        ResultSet rs;
 
         try {
             connection = connectionPool.takeConnection();
@@ -61,10 +75,19 @@ public class TestDAOImpl implements TestDAO {
         }
     }
 
+    /**
+     * Method that receives tests, related to a specific subject, from DB.
+     *
+     * @param subjectId Subject ID, to which test relate.
+     * @param limit Number of tests returned.
+     * @param offset Offset of records in the database.
+     * @return List, that contains tests, related to a specific subject (size = limit).
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Test> getTestsFromTo(int subjectId, int limit, int offset) throws DAOException {
-        ResultSet resultSet = null;
-        PreparedStatement ps = null;
+        ResultSet resultSet;
+        PreparedStatement ps;
         Connection connection = null;
 
         List<Test> tests = new ArrayList<>();
@@ -92,9 +115,16 @@ public class TestDAOImpl implements TestDAO {
         return tests;
     }
 
+    /**
+     * Method that inserts test with some values (subjectId, title) into DB.
+     *
+     * @param subjectId Subject ID, to which test relate.
+     * @param title Title of test, that inserting into DB.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void addTest(int subjectId, String title) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -117,9 +147,17 @@ public class TestDAOImpl implements TestDAO {
         }
     }
 
+    /**
+     * Method that edits test with some new values (testId, title)
+     * and inserts into DB.
+     *
+     * @param testId Test ID, to which test relate.
+     * @param title Title of test, that editing.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void editTest(int testId, String title) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {
@@ -142,9 +180,15 @@ public class TestDAOImpl implements TestDAO {
         }
     }
 
+    /**
+     * Method that deletes test by ID.
+     *
+     * @param testId Test ID, to which test relate.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void deleteTest(int testId) throws DAOException {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Connection connection = null;
 
         try {

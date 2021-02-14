@@ -13,6 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains methods, that interacts with DB relates to entity "result".
+ *
+ * @author Ilya Morozov
+ * @version	1.0
+ * @since	2020-12-14
+ */
 public class ResultDAOImpl implements ResultDAO {
 
     private static final String DB_COLUMN_POINTS = "points";
@@ -27,6 +34,13 @@ public class ResultDAOImpl implements ResultDAO {
     private static final String SELECT_USER_RESULT_SQL = "SELECT * FROM results WHERE results.test_id = ? and results.student_login = ?";
     private static final String FIND_IN_RANGE_USER_RESULT_SQL = "SELECT * FROM results WHERE results.test_id = ? and results.student_login = ? LIMIT ? OFFSET ?";
 
+    /**
+     * Method that receives all results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @return List of all results.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Result> getResults(int testId) throws DAOException {
         PreparedStatement ps;
@@ -61,6 +75,15 @@ public class ResultDAOImpl implements ResultDAO {
         }
     }
 
+    /**
+     * Method that receives results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @param limit Number of results returned.
+     * @param offset Offset of records in the database.
+     * @return List of all results with size = limit.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Result> getResultsFromTo(int testId, int limit, int offset) throws DAOException {
         ResultSet resultSet;
@@ -91,6 +114,14 @@ public class ResultDAOImpl implements ResultDAO {
         return results;
     }
 
+    /**
+     * Method that receives student results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @param login Student login, to which results relate.
+     * @return List of all student results.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Result> getUserResults(int testId, String login) throws DAOException {
         PreparedStatement ps;
@@ -126,6 +157,16 @@ public class ResultDAOImpl implements ResultDAO {
         }
     }
 
+    /**
+     * Method that receives student results, related to a specific test, from DB.
+     *
+     * @param testId Test ID, to which results relate.
+     * @param login Student login, to which results relate.
+     * @param limit Number of results returned.
+     * @param offset Offset of records in the database.
+     * @return List of student results with size = limit.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public List<Result> getUserResultsFromTo(int testId, String login, int limit, int offset) throws DAOException {
         ResultSet resultSet;
@@ -157,6 +198,14 @@ public class ResultDAOImpl implements ResultDAO {
         return results;
     }
 
+    /**
+     * Method that inserts result with some values (testId, studentLogin, points) into DB.
+     *
+     * @param testId Test ID, to which result relate.
+     * @param studentLogin Student login, to which result relate.
+     * @param points Points scored by the student for the test.
+     * @throws DAOException Thrown when a DB connection exception or DB exception occurs.
+     */
     @Override
     public void addResult(int testId, String studentLogin, int points) throws DAOException {
         PreparedStatement ps;
