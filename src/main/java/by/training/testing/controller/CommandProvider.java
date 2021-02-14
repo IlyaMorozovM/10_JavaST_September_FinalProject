@@ -31,6 +31,7 @@ final class CommandProvider {
         repository.put(CommandName.GO_TO_DELETE_USERS, new GoToDeleteUsersCommand());
         repository.put(CommandName.GO_TO_RESULTS, new GoToResultsCommand());
         repository.put(CommandName.CHANGE_LANGUAGE, new ChangeLanguageCommand());
+        repository.put(CommandName.PAGINATION_REDIRECT, new PaginationRedirectCommand());
     }
 
     Command getCommand(String name) {

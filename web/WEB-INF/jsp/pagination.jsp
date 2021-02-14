@@ -20,7 +20,7 @@
         <ul class="pagination">
             <c:if test="${currentPage>1}">
                 <li class="page-item">
-                    <a href="Controller?command=go_to_results&currentPage=${currentPage-1}" class="page-link">
+                    <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=${currentPage-1}" class="page-link">
                         &#10094
                     </a>
                 </li>
@@ -28,7 +28,7 @@
 
             <c:if test="${currentPage>2}">
                 <li class="page-item">
-                    <a href="Controller?command=go_to_results&currentPage=1" class="page-link">1</a>
+                    <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=1" class="page-link">1</a>
                 </li>
             </c:if>
 
@@ -40,18 +40,18 @@
 
             <c:if test="${currentPage>1}">
                 <li class="page-item">
-                    <a href="Controller?command=go_to_results&currentPage=${currentPage-1}" class="page-link">${currentPage-1}</a>
+                    <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=${currentPage-1}" class="page-link">${currentPage-1}</a>
                 </li>
             </c:if>
 
 
             <li class="page-item active">
-                <a href="Controller?command=go_to_results&currentPage=${currentPage}" class="page-link">${currentPage}</a>
+                <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=${currentPage}" class="page-link">${currentPage}</a>
             </li>
 
             <c:if test="${currentPage < maxPage}">
             <li class="page-item">
-                <a href="Controller?command=go_to_results&currentPage=${currentPage+1}" class="page-link">${currentPage+1}</a>
+                <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=${currentPage+1}" class="page-link">${currentPage+1}</a>
             <li class="page-item">
                 </c:if>
 
@@ -63,13 +63,13 @@
 
             <c:if test="${currentPage<maxPage-1}">
                 <li class="page-item">
-                    <a href="Controller?command=go_to_results&currentPage=${maxPage}" class="page-link">${maxPage}</a>
+                    <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=${maxPage}" class="page-link">${maxPage}</a>
                 </li>
             </c:if>
 
             <c:if test="${currentPage<maxPage}">
                 <li class="page-item">
-                    <a href="Controller?command=go_to_results&currentPage=${currentPage+1}" class="page-link">
+                    <a href="Controller?command=pagination_redirect&requestPage=${pageContext.request.requestURL}&currentPage=${currentPage+1}" class="page-link">
                         &#10095
                     </a>
                 </li>

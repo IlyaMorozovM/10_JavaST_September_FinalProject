@@ -130,7 +130,7 @@
 </main>
 
     <!-- pagination -->
-    <jsp:include page="paginationTests.jsp"/>
+    <jsp:include page="pagination.jsp"/>
 
     </br>
     <div>    <!-- buttons holder -->

@@ -75,7 +75,7 @@
     </div>
     </br>
 
-    <jsp:include page="paginationResults.jsp"/>
+    <jsp:include page="pagination.jsp"/>
     </br>
 
     <div>

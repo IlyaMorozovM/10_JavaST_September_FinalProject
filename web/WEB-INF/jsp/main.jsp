@@ -93,7 +93,7 @@
     </main>
 
 
-    <jsp:include page="paginationSubjects.jsp"/>
+    <jsp:include page="pagination.jsp"/>
 
     <!-- footer -->
     <footer>
