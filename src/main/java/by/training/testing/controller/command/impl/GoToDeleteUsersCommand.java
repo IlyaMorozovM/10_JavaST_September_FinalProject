@@ -51,21 +51,33 @@ public class GoToDeleteUsersCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
 
+        int page = 1;
+        try {
+            if (req.getParameter(REQUEST_PARAM_CURRENT_PAGE) != null) {
+                page = Integer.parseInt(req.getParameter(REQUEST_PARAM_CURRENT_PAGE));
+            }
+        } catch (NumberFormatException ex) {
+            //TODO: log
+        }
+
         List<User> users;
+        List<User> allUsers;
         List<User> oneUser = new ArrayList<>();
+
+        int countOfUsers = 0;
 
         if ( req.getParameter(REQUEST_PARAM_ONE_USER) == null ||
                 req.getParameter(REQUEST_PARAM_ONE_USER).equals("false")) {
             try {
-                users = userService.getUsers();
-                //session.setAttribute(USERS_SESSION_ATTR, users);
+                allUsers = userService.getUsers();
+                countOfUsers = allUsers.size();
+                users = userService.getUsersFromTo(USER_AMOUNT_ON_PAGE, (page - 1) * USER_AMOUNT_ON_PAGE);
                 req.setAttribute(USERS_SESSION_ATTR, users);
                 session.removeAttribute(REQUEST_PARAM_LOGIN);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
         } else {
-//            String login = req.getParameter(REQUEST_PARAM_LOGIN);
             String login;
             if (req.getParameter(REQUEST_PARAM_LOGIN) != null) {
                 login = req.getParameter(REQUEST_PARAM_LOGIN);
@@ -75,15 +87,27 @@ public class GoToDeleteUsersCommand implements Command {
             }
             try {
                 oneUser.add(userService.getOneUser(login));
-                //session.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
                 req.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
+                countOfUsers = 1;
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
         }
-//        session.setAttribute(USERS_SESSION_ATTR, users);
 
-//TODO: пагинация + разобраться с сессией!
+        //----------------------------------------------------------------
+
+        if (countOfUsers % USER_AMOUNT_ON_PAGE != 0) {
+            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE + 1);
+        } else {
+            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE);
+        }
+        if (req.getParameter(REQUEST_PARAM_CURRENT_PAGE) != null) {
+            req.setAttribute(REQUEST_PARAM_CURRENT_PAGE, req.getParameter(REQUEST_PARAM_CURRENT_PAGE));
+        } else {
+            req.setAttribute(REQUEST_PARAM_CURRENT_PAGE, 1);
+        }
+        //-------------------------------------------------------------------
+
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(DELETE_USERS_PAGE_URI);
         requestDispatcher.forward(req, resp);

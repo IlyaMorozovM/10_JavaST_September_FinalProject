@@ -96,6 +96,10 @@
         </table>
     </div>
     <br/>
+
+    <jsp:include page="pagination.jsp"/>
+    </br>
+
     <div>    <!-- buttons holder -->
         <button onclick="location.href='Controller?command=go_to_main'" class="btn btn-dark"><fmt:message key="button.back"/></button>
     </div>
