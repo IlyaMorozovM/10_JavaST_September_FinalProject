@@ -1,5 +1,6 @@
 package by.training.testing.controller.command.impl;
 
+import by.training.testing.bean.Test;
 import by.training.testing.bean.User;
 import by.training.testing.controller.command.Command;
 import by.training.testing.service.UserService;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,28 +51,39 @@ public class GoToDeleteUsersCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
 
-        List<User> users = null;
-        List<User> oneUser = null;
+        List<User> users;
+        List<User> oneUser = new ArrayList<>();
 
         if ( req.getParameter(REQUEST_PARAM_ONE_USER) == null ||
                 req.getParameter(REQUEST_PARAM_ONE_USER).equals("false")) {
             try {
                 users = userService.getUsers();
-                session.setAttribute(USERS_SESSION_ATTR, users);
+                //session.setAttribute(USERS_SESSION_ATTR, users);
+                req.setAttribute(USERS_SESSION_ATTR, users);
+                session.removeAttribute(REQUEST_PARAM_LOGIN);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
         } else {
-            users = (List<User>)session.getAttribute(USERS_SESSION_ATTR);
-            String login = req.getParameter(REQUEST_PARAM_LOGIN);
+//            String login = req.getParameter(REQUEST_PARAM_LOGIN);
+            String login;
+            if (req.getParameter(REQUEST_PARAM_LOGIN) != null) {
+                login = req.getParameter(REQUEST_PARAM_LOGIN);
+                session.setAttribute(REQUEST_PARAM_LOGIN, login);
+            } else {
+                login = (String)session.getAttribute(REQUEST_PARAM_LOGIN);
+            }
             try {
-                oneUser = userService.getUser(users, login);
-                session.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
+                oneUser.add(userService.getOneUser(login));
+                //session.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
+                req.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
         }
 //        session.setAttribute(USERS_SESSION_ATTR, users);
+
+//TODO: пагинация + разобраться с сессией!
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(DELETE_USERS_PAGE_URI);
         requestDispatcher.forward(req, resp);

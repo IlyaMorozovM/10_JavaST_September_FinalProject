@@ -88,6 +88,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User getOneUser(String login) throws ServiceException {
+        try {
+            return userDAO.getOneUser(login);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Error while getting user", e);
+        }
+    }
+
     /**
      * Method that receives user from users list by login.
      *

@@ -51,10 +51,10 @@
 
     <c:choose>
         <c:when test="${oneUser != null}">
-            <c:set var="users" scope="session" value="${oneUser}" />
+            <c:set var="users" scope="request" value="${oneUser}" />
         </c:when>
         <c:otherwise>
-            <c:set var="users" scope="session" value="${allUsers}" />
+            <c:set var="users" scope="request" value="${allUsers}" />
         </c:otherwise>
     </c:choose>
 

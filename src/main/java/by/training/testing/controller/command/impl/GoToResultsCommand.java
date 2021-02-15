@@ -83,14 +83,14 @@ public class GoToResultsCommand implements Command {
             //TODO: log
         }
 
-        List<Result> results = null;
-        List<Result> allResults = null;
-        List<Result> userResults = null;
-        List<Result> allUserResults = null;
+        List<Result> results;
+        List<Result> allResults;
+        List<Result> userResults;
+        List<Result> allUserResults;
         int countOfResults = 0;
 
         if (req.getParameter(REQUEST_PARAM_USER_RESULT) != null) {
-            if(req.getParameter(REQUEST_PARAM_USER_RESULT).equals("true")) {
+            if (req.getParameter(REQUEST_PARAM_USER_RESULT).equals("true")) {
                 session.setAttribute(REQUEST_PARAM_USER_RESULT, "true");
             } else {
                 session.setAttribute(REQUEST_PARAM_USER_RESULT, "false");
@@ -104,17 +104,15 @@ public class GoToResultsCommand implements Command {
                 countOfResults = allResults.size();
                 results = resultService.getResultsFromTo(testId, RESULT_AMOUNT_ON_PAGE, (page - 1) * RESULT_AMOUNT_ON_PAGE);
                 req.setAttribute(REQUEST_ATTR_RESULTS, results);
-                session.removeAttribute(REQUEST_ATTR_USER_RESULTS);
-                session.setAttribute(REQUEST_ATTR_RESULTS, results);
-//                session.setAttribute(RESULTS_SESSION_ATTR, results);
+                session.removeAttribute(REQUEST_PARAM_LOGIN);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
         } else {
-            //results = (List<Result>)session.getAttribute(RESULTS_SESSION_ATTR);
             String login;
             if (req.getParameter(REQUEST_PARAM_LOGIN) != null) {
                 login = req.getParameter(REQUEST_PARAM_LOGIN);
+                session.setAttribute(REQUEST_PARAM_LOGIN, login);
             } else {
                 login = (String)session.getAttribute(REQUEST_PARAM_LOGIN);
             }
@@ -123,10 +121,6 @@ public class GoToResultsCommand implements Command {
                 countOfResults = allUserResults.size();
                 userResults = resultService.getUserResultsFromTo(testId, login, RESULT_AMOUNT_ON_PAGE, (page - 1) * RESULT_AMOUNT_ON_PAGE);
                 req.setAttribute(REQUEST_ATTR_USER_RESULTS, userResults);
-                session.removeAttribute(REQUEST_ATTR_RESULTS);
-                session.setAttribute(REQUEST_ATTR_USER_RESULTS, userResults);
-                session.setAttribute(REQUEST_PARAM_LOGIN, login);
-//                session.setAttribute(USER_RESULTS_SESSION_ATTR, userResults);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }

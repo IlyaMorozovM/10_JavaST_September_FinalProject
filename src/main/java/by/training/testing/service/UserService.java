@@ -10,6 +10,7 @@ public interface UserService {
         String getMD5Hash(byte[] password) throws NoSuchAlgorithmException;
         List<User> getUsers() throws ServiceException;
         List<User> getUsersFromTo(int limit, int offset) throws ServiceException;
+        User getOneUser(String login) throws ServiceException;
         List<User> getUser(List<User> users, String login) throws ServiceException;
         boolean deleteUser(int userId) throws ServiceException;
         User signIn(String login, byte[] password) throws ServiceException;

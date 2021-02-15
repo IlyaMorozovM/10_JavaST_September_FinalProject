@@ -34,9 +34,10 @@ public class UserDAOImpl implements UserDAO {
 
     private static final String DELETE_USER_SQL = "DELETE FROM users WHERE users.id = ?";
     private static final String INSERT_USER_SQL = "INSERT users(login, pass_hash, `name`, lastname, email, `role`) VALUES (?,?,?,?,?,?)";
-    private static final String SIGN_IN_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id where u.login = ? and u.pass_hash = ?";
+    private static final String SIGN_IN_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id WHERE u.login = ? and u.pass_hash = ?";
     private static final String SELECT_USER_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id";
     private static final String FIND_IN_RANGE_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id LIMIT ? OFFSET ?";
+    private static final String FIND_ONE_USER_SQL = "SELECT u.*, r.name as roleName FROM users u INNER JOIN roles r ON u.role = r.id WHERE u.login = ?";
 
     /**
      * Method that receives all users from DB.
@@ -113,6 +114,35 @@ public class UserDAOImpl implements UserDAO {
         }
 
         return users;
+    }
+
+    @Override
+    public User getOneUser(String login) throws DAOException {
+        ResultSet resultSet;
+        PreparedStatement ps;
+        Connection connection = null;
+
+        User oneUser = null;
+        try {
+            connection = connectionPool.takeConnection();
+            ps = connection.prepareStatement(FIND_ONE_USER_SQL);
+            ps.setString(1, login);
+            resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                oneUser = new User(resultSet.getInt(DB_COLUMN_ID), resultSet.getString(DB_COLUMN_LOGIN), resultSet.getString(DB_COLUMN_NAME),
+                        resultSet.getString(DB_COLUMN_LASTNAME), resultSet.getString(DB_COLUMN_EMAIL), resultSet.getString(DB_COLUMN_ROLE));
+            }
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("Error in connection pool while getting users", e);
+        }
+        catch (SQLException e) {
+            throw new DAOException("Error while getting users", e);
+        }
+        finally {
+            connectionPool.returnConnection(connection);
+        }
+
+        return oneUser;
     }
 
     /**
