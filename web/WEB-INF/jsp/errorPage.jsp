@@ -8,6 +8,8 @@
     <title>Oops! Something went wrong :(</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
 </head>
 <body class="badge bg-danger">
 <jsp:include page="navLanguageAndSignOut.jsp"/>

@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <c:url value="/styles/editEntity.css" var="cssEditUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssEditUrl}" />
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
 </head>
 <body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>

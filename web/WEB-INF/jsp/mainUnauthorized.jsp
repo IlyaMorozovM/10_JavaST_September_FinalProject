@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
-    <link rel="shortcut icon" href="#">
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
     <c:url value="/styles/mainUnauthorized.css" var="cssMainU"/>
     <link href="${cssMainU}" rel="stylesheet">
 </head>

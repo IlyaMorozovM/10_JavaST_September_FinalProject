@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <c:url value="/styles/deleteUsers.css" var="cssDeleteUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssDeleteUrl}" />
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
 </head>
 <body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>

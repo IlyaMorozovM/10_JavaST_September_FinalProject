@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <c:url value="/styles/questions.css" var="cssQuestionsUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssQuestionsUrl}" />
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
 </head>
 <body class="text-center">
 <jsp:include page="navLanguageAndSignOut.jsp"/>

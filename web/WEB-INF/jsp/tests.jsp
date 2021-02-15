@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <c:url value="/styles/tests.css" var="cssTestsUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssTestsUrl}" >
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
 </head>
 <body class="text-center">
 
