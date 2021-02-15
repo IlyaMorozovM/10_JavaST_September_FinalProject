@@ -52,10 +52,10 @@
 
         <div>    <!-- buttons holder -->
             <c:choose>
-                <c:when test="${param.entity == 'test'}">
+                <c:when test="${entity == 'test'}">
                     <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>
                 </c:when>
-                <c:when test="${param.entity == 'subject'}">
+                <c:when test="${entity == 'subject'}">
                     <button onclick="location.href='Controller?command=go_to_main'" class="btn btn-dark"><fmt:message key="button.back"/></button>
                 </c:when>
                 <c:otherwise>

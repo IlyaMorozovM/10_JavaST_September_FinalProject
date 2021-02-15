@@ -5,7 +5,7 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Edit <c:out value="${param.entity}"/></title>
+    <title>Edit <c:out value="${entity}"/></title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <c:url value="/styles/editEntity.css" var="cssEditUrl"/>
@@ -20,43 +20,37 @@
 <main>
     <form action="Controller" method="post" class="my-form-edit-entity">
         <input type="hidden" name="command" value="editEntity"/>
-        <input type="hidden" name="entity" value="<c:out value="${param.entity}"/>">
-        <input type="hidden" name="id" value="<c:out value="${param.id}"/>">
+        <input type="hidden" name="entity" value="<c:out value="${entity}"/>">
+        <input type="hidden" name="id" value="<c:out value="${id}"/>">
         <c:choose>
-<%--            <c:when test="${param.entity == 'subject' || param.entity == 'test'}">--%>
-<%--                <input type="text" value="<c:out value="${param.text}"/>" name="text"/>--%>
-<%--            </c:when>--%>
-<%--            <c:otherwise>--%>
-<%--                <textarea name="text"><c:out value="${param.text}"/></textarea>--%>
-<%--            </c:otherwise>--%>
-            <c:when test="${param.entity == 'subject'}">
-                <input type="text" placeholder=<fmt:message key="placeholer.subjectName"/> name="text"/>
+            <c:when test="${entity == 'subject'}">
+                <input type="text" name="text" placeholder=<fmt:message key="placeholer.subjectName"/> />
             </c:when>
-            <c:when test="${param.entity == 'test'}">
-                <input type="text" placeholder=<fmt:message key="placeholer.testName"/> name="text"/>
+            <c:when test="${entity == 'test'}">
+                <input type="text" name="text" placeholder=<fmt:message key="placeholer.testName"/> />
             </c:when>
-            <c:when test="${param.entity == 'question'}">
+            <c:when test="${entity == 'question'}">
                 <textarea name="text" placeholder=<fmt:message key="placeholer.questionText"/>></textarea>
             </c:when>
-            <c:when test="${param.entity == 'answer'}">
+            <c:when test="${entity == 'answer'}">
                 <textarea name="text" placeholder=<fmt:message key="placeholer.answerText"/>></textarea>
             </c:when>
             <c:otherwise>
-                <textarea name="text" placeholder=<fmt:message key="label.edit"/>"<c:out value="${param.entity}"/>"></textarea>
+                <textarea name="text" placeholder=<fmt:message key="label.edit"/>"<c:out value="${entity}"/>"></textarea>
             </c:otherwise>
         </c:choose>
-        <c:if test="${param.entity == 'answer'}">
-            <input type="checkbox" name="isRight" value="true" <c:if test="${param.isRight == 'true'}"><c:out value="checked"/></c:if>/>
+        <c:if test="${entity == 'answer'}">
+            <input type="checkbox" name="isRight" value="true" <c:if test="${isRight == 'true'}"><c:out value="checked"/></c:if>/>
         </c:if>
         <input type="submit" value=<fmt:message key="button.save"/> class="btn" class="btn-success">
     </form>
 
     <div>    <!-- buttons holder -->
         <c:choose>
-            <c:when test="${param.entity == 'test'}">
+            <c:when test="${entity == 'test'}">
                 <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>
             </c:when>
-            <c:when test="${param.entity == 'subject'}">
+            <c:when test="${entity == 'subject'}">
                 <button onclick="location.href='Controller?command=go_to_main'" class="btn btn-dark"><fmt:message key="button.back"/></button>
             </c:when>
             <c:otherwise>

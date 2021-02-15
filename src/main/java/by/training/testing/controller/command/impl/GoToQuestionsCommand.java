@@ -28,6 +28,9 @@ public class GoToQuestionsCommand implements Command {
 
     private static final String QUESTIONS_SESSION_ATTR = "questions";
     private static final String REQUEST_PARAMETER_TESTID = "testId";
+    private static final String REQUEST_PARAM_ENTITY = "entity";
+    private static final String REQUEST_PARAM_ID = "id";
+    private static final String REQUEST_PARAM_ISRIGHT = "isRight";
     private static final String TESTID_SESSION_ATTR = "testId";
     private static final String USER_SESSION_ATTR = "user";
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
@@ -47,6 +50,9 @@ public class GoToQuestionsCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         HttpSession session = req.getSession(true);
+        session.removeAttribute(REQUEST_PARAM_ENTITY);
+        session.removeAttribute(REQUEST_PARAM_ID);
+        session.removeAttribute(REQUEST_PARAM_ISRIGHT);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         QuestionService questionService = serviceFactory.getQuestionService();

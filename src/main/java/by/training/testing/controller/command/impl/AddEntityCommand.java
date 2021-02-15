@@ -50,7 +50,6 @@ public class AddEntityCommand implements Command {
      */
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
         HttpSession session = req.getSession(true);
         session.removeAttribute(REQUEST_PARAM_ENTITY);
         session.removeAttribute(REQUEST_PARAM_ID);

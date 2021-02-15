@@ -32,6 +32,9 @@ public class GoToMainCommand implements Command {
     private static final String REQUEST_PARAMETER_CURRENT_PAGE = "currentPage";
     private static final String REQUEST_ATTR_SUBJECTS = "subjects";
     private static final String REQUEST_ATTR_MAX_PAGE = "maxPage";
+    private static final String REQUEST_PARAM_ENTITY = "entity";
+    private static final String REQUEST_PARAM_ID = "id";
+    private static final String REQUEST_PARAM_ISRIGHT = "isRight";
     private static final int SUBJECT_AMOUNT_ON_PAGE = 6;
 
     /**
@@ -47,6 +50,10 @@ public class GoToMainCommand implements Command {
         HttpSession session = req.getSession(true);
         session.removeAttribute(SUBJECTID_SESSION_ATTR);
         session.removeAttribute(TESTS_SESSION_ATTR);
+        session.removeAttribute(REQUEST_PARAM_ENTITY);
+        session.removeAttribute(REQUEST_PARAM_ID);
+        session.removeAttribute(REQUEST_PARAM_ISRIGHT);
+
         if(session.getAttribute(USER_SESSION_ATTR) != null) {
             ServiceFactory serviceFactory = ServiceFactory.getInstance();
             SubjectService subjectService = serviceFactory.getSubjectService();
