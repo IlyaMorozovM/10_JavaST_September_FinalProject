@@ -51,13 +51,12 @@ public class AddEntityCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        String name = req.getParameter(REQUEST_PARAM_NAME);
+        HttpSession session = req.getSession(true);
+        session.removeAttribute(REQUEST_PARAM_ENTITY);
+        session.removeAttribute(REQUEST_PARAM_ID);
+
         String entity = req.getParameter(REQUEST_PARAM_ENTITY);
-
-        //TODO: пагинацию сделать, так как та которая сейчас е универсальная, а только перенаправляет на страницу с тестами, а надо чтоб на subjects
-
-//        HttpSession session = req.getSession(true);
-//        session.setAttribute(SESSION_ATTR_ENTITY, entity);
+        String name = req.getParameter(REQUEST_PARAM_NAME);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         boolean result;

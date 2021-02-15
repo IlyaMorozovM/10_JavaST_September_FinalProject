@@ -5,7 +5,7 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Add new <c:out value="${param.entity}"/></title>
+    <title>Add new <c:out value="${entity}"/></title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
     <c:url value="/styles/addEntity.css" var="cssAddUrl"/>
@@ -20,27 +20,27 @@
     <main>
         <form action="Controller" method="post" class="my-form-add-entity">
             <input type="hidden" name="command" value="addEntity"/>
-            <input type="hidden" name="entity" value="<c:out value="${param.entity}"/>">
-            <input type="hidden" name="id" value="<c:out value="${param.id}"/>"/>
+            <input type="hidden" name="entity" value="<c:out value="${entity}"/>">
+            <input type="hidden" name="id" value="<c:out value="${id}"/>"/>
             <c:choose>
-                <c:when test="${param.entity == 'subject'}">
+                <c:when test="${entity == 'subject'}">
                     <input type="text" name="name" placeholder=<fmt:message key="placeholer.subjectName"/>/>
                 </c:when>
-                <c:when test="${param.entity == 'test'}">
+                <c:when test="${entity == 'test'}">
                     <input type="text" name="name" placeholder=<fmt:message key="placeholer.testName"/>/>
                 </c:when>
-                <c:when test="${param.entity == 'question'}">
+                <c:when test="${entity == 'question'}">
                     <textarea name="name" placeholder=<fmt:message key="placeholer.questionText"/>></textarea>
                 </c:when>
-                <c:when test="${param.entity == 'answer'}">
+                <c:when test="${entity == 'answer'}">
                     <textarea name="name" placeholder=<fmt:message key="placeholer.answerText"/>></textarea>
                 </c:when>
                 <c:otherwise>
-                    <textarea name="name" placeholder=<fmt:message key="label.addNew"/>"<c:out value="${param.entity}"/>"></textarea>
+                    <textarea name="name" placeholder=<fmt:message key="label.addNew"/>"<c:out value="${entity}"/>"></textarea>
                 </c:otherwise>
 
             </c:choose>
-            <c:if test="${param.entity == 'answer'}">
+            <c:if test="${entity == 'answer'}">
                 <input type="checkbox" name="isRight" value="true"/>
             </c:if>
             </br></br>
