@@ -50,66 +50,31 @@
             <custom:condMsg condition="${param.error == 'role'}" message="${invalidUserRole}"/>
         </div>
 
-
-<%--        <div> <!-- registration container -->--%>
-<%--            <form action="Controller" method="post">--%>
-<%--                <input type="hidden" name="command" value="signup"/>--%>
-
-<%--                <br/>--%>
-<%--                <label for="login"><fmt:message key="label.login"/></label>--%>
-<%--                <input type="text" id="login" name="login"/>--%>
-
-<%--                <br/>--%>
-<%--                <label for="email"><fmt:message key="label.email"/></label>--%>
-<%--                <input type="text" id="email" name="email"/>--%>
-
-<%--                <br/>--%>
-<%--                <label for="name"><fmt:message key="label.name"/></label>--%>
-<%--                <input type="text" id="name" name="name"/>--%>
-
-<%--                <br/>--%>
-<%--                <label for="lastname"><fmt:message key="label.lastname"/></label>--%>
-<%--                <input type="text" id="lastname" name="lastname"/>--%>
-
-<%--                <br/>--%>
-<%--                <label for="password"><fmt:message key="label.password"/></label>--%>
-<%--                <input type="password" id="password" name="password"/>--%>
-
-<%--                <br/>--%>
-<%--                <label for="role"><fmt:message key="label.signupRole"/></label>--%>
-<%--                <input type="number" id="role" name="role"/>--%>
-
-<%--                <br/>--%>
-<%--                <input type="submit" value=<fmt:message key="button.signup"/> class="btn-success" class="btn" />--%>
-<%--            </form>--%>
-<%--        </div>--%>
-
-        <fieldset class="form-group">
-            <legend class="col-form-label col-sm-2 my-label-signUp"><strong><fmt:message key="label.signupRole"/></strong></legend>
-            <div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="2">
-                    <label class="form-check-label" for="gridRadios1">
-                        <fmt:message key="radio.student"/>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" id="gridRadios2" value="1">
-                    <label class="form-check-label" for="gridRadios2">
-                        <fmt:message key="radio.tutor"/>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" id="gridRadios3" value="3">
-                    <label class="form-check-label" for="gridRadios3">
-                        <fmt:message key="radio.admin"/>
-                    </label>
-                </div>
-            </div>
-        </fieldset>
-
         <div> <!-- registration container -->
             <form action="Controller" method="post" class="col-lg-6 offset-lg-3">
+                <fieldset class="form-group">
+                    <legend class="col-form-label col-sm-2 my-label-signUp"><strong><fmt:message key="label.signupRole"/></strong></legend>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="2">
+                            <label class="form-check-label" for="gridRadios1">
+                                <fmt:message key="radio.student"/>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="role" id="gridRadios2" value="1">
+                            <label class="form-check-label" for="gridRadios2">
+                                <fmt:message key="radio.tutor"/>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="role" id="gridRadios3" value="3">
+                            <label class="form-check-label" for="gridRadios3">
+                                <fmt:message key="radio.admin"/>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
                 <input type="hidden" name="command" value="signup"/>
                     <div class="row">
                         <label for="name" class="my-label-signUp"><strong><fmt:message key="label.name"/></strong></label>

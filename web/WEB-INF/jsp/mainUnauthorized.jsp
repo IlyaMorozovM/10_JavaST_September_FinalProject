@@ -16,7 +16,6 @@
     <c:url value="/styles/mainUnauthorized.css" var="cssMainU"/>
     <link href="${cssMainU}" rel="stylesheet">
 </head>
-<%--<body class="p-3 mb-2 bg-info text-white">--%>
 <body class="text-center">
 
     <!-- change language -->
@@ -32,7 +31,7 @@
     <custom:condMsg condition="${param.register == 'success'}" message="${successSignup}"/>
     <custom:condMsg condition="${param.signin == 'error'}" message="${failLogin}"/>
 
-<%--    <div align="center"> <!-- login form -->--%>
+<%--<!-- login form -->--%>
     <figure class="text-center">
         <blockquote class="blockquote">
         <h3 class="h3 mb-3 font-weight-normal my-signin"><fmt:message key="label.signin"/></h3>
