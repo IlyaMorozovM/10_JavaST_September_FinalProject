@@ -21,6 +21,7 @@ public class GoToEditCommand implements Command {
     private static final String REQUEST_PARAM_ENTITY = "entity";
     private static final String REQUEST_PARAM_ID = "id";
     private static final String REQUEST_PARAM_ANSWER = "answer";
+    private static final String REQUEST_PARAM_TEXT = "text";
     private static final String REQUEST_PARAM_IS_RIGHT = "isRight";
     private static final String EDIT_PAGE_URI = "WEB-INF/jsp/editEntity.jsp";
 
@@ -44,6 +45,9 @@ public class GoToEditCommand implements Command {
 
         int id = Integer.parseInt(req.getParameter(REQUEST_PARAM_ID));
         session.setAttribute(REQUEST_PARAM_ID, id);
+
+        String text = req.getParameter(REQUEST_PARAM_TEXT);
+        session.setAttribute(REQUEST_PARAM_TEXT, text);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(EDIT_PAGE_URI);
         dispatcher.forward(req, resp);

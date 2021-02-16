@@ -52,7 +52,7 @@ public class EditEntityCommand implements Command {
         session.removeAttribute(REQUEST_PARAM_ENTITY);
         session.removeAttribute(REQUEST_PARAM_ID);
         session.removeAttribute(REQUEST_PARAM_ISRIGHT);
-
+        session.removeAttribute(REQUEST_PARAM_TEXT);
 
         String entity = req.getParameter(REQUEST_PARAM_ENTITY);
         int id = Integer.parseInt(req.getParameter(REQUEST_PARAM_ID));

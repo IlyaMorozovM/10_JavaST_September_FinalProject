@@ -24,19 +24,19 @@
         <input type="hidden" name="id" value="<c:out value="${id}"/>">
         <c:choose>
             <c:when test="${entity == 'subject'}">
-                <input type="text" name="text" placeholder=<fmt:message key="placeholer.subjectName"/> />
+                <input type="text" name="text" value="${text}" placeholder=<fmt:message key="placeholer.subjectName"/> />
             </c:when>
             <c:when test="${entity == 'test'}">
-                <input type="text" name="text" placeholder=<fmt:message key="placeholer.testName"/> />
+                <input type="text" name="text" value="${text}" placeholder=<fmt:message key="placeholer.testName"/> />
             </c:when>
             <c:when test="${entity == 'question'}">
-                <textarea name="text" placeholder=<fmt:message key="placeholer.questionText"/>></textarea>
+                <textarea name="text" placeholder=<fmt:message key="placeholer.questionText"/>><c:out value="${text}"/></textarea>
             </c:when>
             <c:when test="${entity == 'answer'}">
-                <textarea name="text" placeholder=<fmt:message key="placeholer.answerText"/>></textarea>
+                <textarea name="text" placeholder=<fmt:message key="placeholer.answerText"/>><c:out value="${text}"/></textarea>
             </c:when>
             <c:otherwise>
-                <textarea name="text" placeholder=<fmt:message key="label.edit"/>"<c:out value="${entity}"/>"></textarea>
+                <textarea name="text" placeholder=<fmt:message key="label.edit"/>"<c:out value="${entity}"/>"><c:out value="${text}"/></textarea>
             </c:otherwise>
         </c:choose>
         <c:if test="${entity == 'answer'}">
