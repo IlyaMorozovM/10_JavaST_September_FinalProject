@@ -56,8 +56,8 @@
                 <c:forEach items="${subjects}" var="subject">
                                 <div class="col-md-4">
                                     <div class="card mb-4 box-shadow">
-                                        <c:url value="/img/testPng1.jpeg" var="testImg"/>
-                                        <img class="card-img-top" src="${testImg}" alt="subject image">
+                                        <c:url value="/img/subject.png" var="subjectImg"/>
+                                        <img class="card-img-top" src="${subjectImg}" alt="subject image">
                                         <div class="card-body">
                                             <p class="card-text"><mark><strong><c:out value="${subject.name.toUpperCase()}"/></strong></mark></p>
                                             <div class="d-flex justify-content-between align-items-center">

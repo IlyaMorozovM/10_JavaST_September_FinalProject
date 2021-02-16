@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="${cssUrl}" /></head>
 <body>
 
+    <c:if test="${currentPage == null}">
+        <c:set var="currentPage" scope="request" value="1" />
+    </c:if>
 
 <div class="container">
     <div class="pagination p1 justify-content-center">

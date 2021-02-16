@@ -57,13 +57,12 @@ public class GoToMainCommand implements Command {
         if(session.getAttribute(USER_SESSION_ATTR) != null) {
             ServiceFactory serviceFactory = ServiceFactory.getInstance();
             SubjectService subjectService = serviceFactory.getSubjectService();
-            List<Subject> subjects = null;
+            List<Subject> allSubjects = null;
             try {
-                subjects = subjectService.getSubjects();
+                allSubjects = subjectService.getSubjects();
             } catch (ServiceException e) {
                 requestDispatcherIndex.forward(req, resp);
             }
-            //session.setAttribute(SUBJECTS_SESSION_ATTR, subjects);
 
             //----------------------------------------------------------------
             int page = 1;
@@ -74,14 +73,14 @@ public class GoToMainCommand implements Command {
             } catch (NumberFormatException ex) {
                 //TODO: log
             }
-            List<Subject> subjects1 = null;
+            List<Subject> subjects = null;
             try {
-                subjects1 = subjectService.getSubjectsFromTo(SUBJECT_AMOUNT_ON_PAGE, (page - 1) * SUBJECT_AMOUNT_ON_PAGE);
+                subjects = subjectService.getSubjectsFromTo(SUBJECT_AMOUNT_ON_PAGE, (page - 1) * SUBJECT_AMOUNT_ON_PAGE);
             } catch (ServiceException e) {
                 //TODO : perform
             }
-            req.setAttribute(REQUEST_ATTR_SUBJECTS, subjects1);
-            int countOfSubjects = subjects.size();
+            req.setAttribute(REQUEST_ATTR_SUBJECTS, subjects);
+            int countOfSubjects = allSubjects.size();
             if (countOfSubjects % SUBJECT_AMOUNT_ON_PAGE != 0) {
                 req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfSubjects / SUBJECT_AMOUNT_ON_PAGE + 1);
             } else {
@@ -93,6 +92,7 @@ public class GoToMainCommand implements Command {
                 req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, 1);
             }
             //-------------------------------------------------------------------
+            session.setAttribute(SUBJECTS_SESSION_ATTR, subjects);
             RequestDispatcher requestDispatcherMain = req.getRequestDispatcher(MAIN_PAGE_URI);
             requestDispatcherMain.forward(req, resp);
         } else {

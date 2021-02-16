@@ -8,7 +8,8 @@
     <title>Testing System</title>
     <c:url value="/styles/bootstrap.min.css" var="cssUrl"/>
     <link rel="stylesheet" type="text/css" href="${cssUrl}" />
-    <link rel="shortcut icon" href="#">
+    <c:url value="/img/icon.png" var="iconUrl"/>
+    <link rel="shortcut icon" href="${iconUrl}" type="image/png">
   </head>
   <body>
 

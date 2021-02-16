@@ -73,7 +73,9 @@ public class GoToDeleteUsersCommand implements Command {
                 countOfUsers = allUsers.size();
                 users = userService.getUsersFromTo(USER_AMOUNT_ON_PAGE, (page - 1) * USER_AMOUNT_ON_PAGE);
                 req.setAttribute(USERS_SESSION_ATTR, users);
+                session.setAttribute(USERS_SESSION_ATTR, users);
                 session.removeAttribute(REQUEST_PARAM_LOGIN);
+                session.removeAttribute(ONE_USER_SESSION_ATTR);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
@@ -88,6 +90,8 @@ public class GoToDeleteUsersCommand implements Command {
             try {
                 oneUser.add(userService.getOneUser(login));
                 req.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
+                session.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
+                session.removeAttribute(USERS_SESSION_ATTR);
                 countOfUsers = 1;
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
@@ -98,8 +102,10 @@ public class GoToDeleteUsersCommand implements Command {
 
         if (countOfUsers % USER_AMOUNT_ON_PAGE != 0) {
             req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE + 1);
+            session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE + 1);
         } else {
             req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE);
+            session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE);
         }
         if (req.getParameter(REQUEST_PARAM_CURRENT_PAGE) != null) {
             req.setAttribute(REQUEST_PARAM_CURRENT_PAGE, req.getParameter(REQUEST_PARAM_CURRENT_PAGE));

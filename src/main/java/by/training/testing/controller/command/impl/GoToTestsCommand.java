@@ -34,6 +34,8 @@ public class GoToTestsCommand implements Command {
     private static final String REQUEST_PARAM_ISRIGHT = "isRight";
     private static final String TEST_TITLE_SESSION_ATTR = "testTitle";
     private static final String SUBJECTID_SESSION_ATTR = "subjectId";
+    private static final String SUBJECTS_SESSION_ATTR = "subjects";
+    private static final String TESTS_SESSION_ATTR = "tests";
     private static final String TESTID_SESSION_ATTR = "testId";
     private static final String NUMBER_OF_QUESTIONS_SESSION_ATTR = "numOfQuestions";
     private static final String RIGHT_ANSWERS_SESSION_ATTR = "rightAnswers";
@@ -61,6 +63,7 @@ public class GoToTestsCommand implements Command {
         session.removeAttribute(REQUEST_PARAM_ENTITY);
         session.removeAttribute(REQUEST_PARAM_ID);
         session.removeAttribute(REQUEST_PARAM_ISRIGHT);
+        session.removeAttribute(SUBJECTS_SESSION_ATTR);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         TestService testService = serviceFactory.getTestService();
@@ -73,13 +76,12 @@ public class GoToTestsCommand implements Command {
         else
             subjectId = (int)session.getAttribute(SUBJECTID_SESSION_ATTR);
 
-        List<Test> tests = null;
+        List<Test> allTests = null;
         try {
-            tests = testService.getTests(subjectId);
+            allTests = testService.getTests(subjectId);
         } catch (ServiceException e) {
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
-        //session.setAttribute(TESTS_SESSION_ATTR, tests);
 
         //----------------------------------------------------------------
         int page = 1;
@@ -90,14 +92,14 @@ public class GoToTestsCommand implements Command {
         } catch (NumberFormatException ex) {
             //TODO: log
         }
-        List<Test> tests1 = null;
+        List<Test> tests = null;
         try {
-            tests1 = testService.getTestsFromTo(subjectId, TEST_AMOUNT_ON_PAGE, (page - 1) * TEST_AMOUNT_ON_PAGE);
+            tests = testService.getTestsFromTo(subjectId, TEST_AMOUNT_ON_PAGE, (page - 1) * TEST_AMOUNT_ON_PAGE);
         } catch (ServiceException e) {
             //TODO : perform
         }
-        req.setAttribute(REQUEST_ATTR_TESTS, tests1);
-        int countOfTests = tests.size();
+        req.setAttribute(REQUEST_ATTR_TESTS, tests);
+        int countOfTests = allTests.size();
         if (countOfTests % TEST_AMOUNT_ON_PAGE != 0) {
             req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE + 1);
         } else {
@@ -109,6 +111,7 @@ public class GoToTestsCommand implements Command {
             req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, 1);
         }
         //-------------------------------------------------------------------
+        session.setAttribute(TESTS_SESSION_ATTR, tests);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(TESTS_PAGE_URI);
         requestDispatcher.forward(req, resp);

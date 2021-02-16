@@ -27,6 +27,7 @@ public class GoToQuestionsCommand implements Command {
     private static final String START_TEST_PAGE_URI = "WEB-INF/jsp/test.jsp";
 
     private static final String QUESTIONS_SESSION_ATTR = "questions";
+    private static final String TESTS_SESSION_ATTR = "tests";
     private static final String REQUEST_PARAMETER_TESTID = "testId";
     private static final String REQUEST_PARAM_ENTITY = "entity";
     private static final String REQUEST_PARAM_ID = "id";
@@ -53,6 +54,7 @@ public class GoToQuestionsCommand implements Command {
         session.removeAttribute(REQUEST_PARAM_ENTITY);
         session.removeAttribute(REQUEST_PARAM_ID);
         session.removeAttribute(REQUEST_PARAM_ISRIGHT);
+        session.removeAttribute(TESTS_SESSION_ATTR);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         QuestionService questionService = serviceFactory.getQuestionService();

@@ -104,7 +104,9 @@ public class GoToResultsCommand implements Command {
                 countOfResults = allResults.size();
                 results = resultService.getResultsFromTo(testId, RESULT_AMOUNT_ON_PAGE, (page - 1) * RESULT_AMOUNT_ON_PAGE);
                 req.setAttribute(REQUEST_ATTR_RESULTS, results);
+                session.setAttribute(RESULTS_SESSION_ATTR, results);
                 session.removeAttribute(REQUEST_PARAM_LOGIN);
+                session.removeAttribute(USER_RESULTS_SESSION_ATTR);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
@@ -121,6 +123,8 @@ public class GoToResultsCommand implements Command {
                 countOfResults = allUserResults.size();
                 userResults = resultService.getUserResultsFromTo(testId, login, RESULT_AMOUNT_ON_PAGE, (page - 1) * RESULT_AMOUNT_ON_PAGE);
                 req.setAttribute(REQUEST_ATTR_USER_RESULTS, userResults);
+                session.setAttribute(USER_RESULTS_SESSION_ATTR, userResults);
+                session.removeAttribute(RESULTS_SESSION_ATTR);
             } catch (ServiceException e) {
                 resp.sendRedirect(REDIRECT_COMMAND_ERROR);
             }
@@ -133,14 +137,17 @@ public class GoToResultsCommand implements Command {
         } catch (ServiceException e) {
             resp.sendRedirect(REDIRECT_COMMAND_ERROR);
         }
-        //TODO: why only Controller в адресной строке, когда find
+
         session.setAttribute(NUMBER_OF_QUESTIONS_SESSION_ATTR, questions.size());
         //----------------------------------------------------------------
 
         if (countOfResults % RESULT_AMOUNT_ON_PAGE != 0) {
             req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE + 1);
+            session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE + 1);
         } else {
             req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE);
+            session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE);
+//TODO: подумать, много сессии параметров, надо чистить или переделывать как-то
         }
         if (req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE) != null) {
             req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
@@ -148,8 +155,6 @@ public class GoToResultsCommand implements Command {
             req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, 1);
         }
         //-------------------------------------------------------------------
-//        session.setAttribute(RESULTS_SESSION_ATTR, results);
-//        session.setAttribute(USER_RESULTS_SESSION_ATTR, userResults);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(RESULTS_PAGE_URI);
         requestDispatcher.forward(req, resp);
