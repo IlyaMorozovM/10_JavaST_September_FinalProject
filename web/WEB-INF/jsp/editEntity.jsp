@@ -57,7 +57,6 @@
                 <button onclick="location.href='Controller?command=go_to_questions'" class="btn btn-dark"><fmt:message key="button.back"/></button>
             </c:otherwise>
         </c:choose>
-        <%--            <button onclick="location.href='Controller?command=go_to_tests'">Back</button>--%>
     </div>
 
 </main>

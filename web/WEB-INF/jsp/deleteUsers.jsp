@@ -34,7 +34,6 @@
                 <label for="login"><fmt:message key="label.findByLogin"/></label>
                 <input type="text" class="form-control" placeholder="User login" id="login" name="login"/>
             </div>
-<%--            <input type="submit" value=<fmt:message key="button.find"/> class="btn-dark" />--%>
             <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.find"/></button>
         </form>
     </div>
@@ -44,7 +43,6 @@
             <input type="hidden" name="command" value="go_to_delete_users"/>
             <input type="hidden" name="showOneUser" value="false">
 
-<%--            <input type="submit" value=<fmt:message key="button.showAllUsers" /> class="btn-dark" />--%>
             <div class="form-group mx-sm-3 mb-2">
             <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.showAllUsers" /></button>
             </div>
@@ -79,7 +77,6 @@
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.lastname}"/></td>
                 <td><c:out value="${user.roleName}"/></td>
-<%--                <td><button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button></td>--%>
                 <td>
                     <c:set var="message"><fmt:message key="notification.deleteUser"/></c:set>
                     <form onSubmit='return confirm("${message}");' action="Controller" method="post">
@@ -92,8 +89,6 @@
                 </td>
             </tr>
             </tbody>
-<%--                <button onclick="location.href='Controller?command=delete&entity=user&id=<c:out value="${user.userId}"/>'">Delete</button>--%>
-<%--            <br/><br/>--%>
         </c:forEach>
         </table>
     </div>

@@ -79,15 +79,12 @@
 
                                                         <button type="submit" class="btn-danger"><fmt:message key="button.delete"/></button>
 
-                                                            <%--                                                    <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">--%>
                                                     </form>
-                                                    <%--                <button onclick="location.href='Controller?command=delete&entity=subject&id=<c:out value="${subject.subjectId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
                                                 </c:if>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                 </c:forEach>
                 </div>
             </div>

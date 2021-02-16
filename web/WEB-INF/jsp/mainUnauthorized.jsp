@@ -45,12 +45,10 @@
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
 
             <br/>
-<%--            <input type="submit" value=<fmt:message key="button.signin"/> class="btn-dark" class="btn" />--%>
             <button  type="submit"  class="btn btn-lg btn-primary btn-block"><fmt:message key="button.signin"/></button>
         </form>
         </blockquote>
     </figure>
-<%--    </div>--%>
 
     <!-- footer -->
     <footer>

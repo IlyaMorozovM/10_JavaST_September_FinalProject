@@ -22,14 +22,12 @@
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="true">
 
-<%--            <c:set var="isUserResult" scope="session" value="true" />--%>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="login"><fmt:message key="label.findByLogin"/></label>
                 <input type="text" class="form-control" placeholder="User login" id="login" name="login"/>
             </div>
 
             <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.find"/></button>
-<%--            <input type="submit" value=<fmt:message key="button.find"/> class="btn-success" />--%>
         </form>
     </div>
 
@@ -37,12 +35,10 @@
         <form action="Controller" method="post">
             <input type="hidden" name="command" value="go_to_results"/>
             <input type="hidden" name="isUserResult" value="false">
-<%--            <c:set var="isUserResult" scope="session" value="false" />--%>
 
             <div class="form-group mx-sm-3 mb-2">
                 <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.showAllResults" /></button>
             </div>
-<%--            <input type="submit" value=<fmt:message key="button.showAllResults" /> class="btn-success" />--%>
         </form>
     </div>
 
@@ -83,11 +79,10 @@
         <button onclick="location.href='Controller?command=go_to_tests'" class="btn btn-dark"><fmt:message key="button.back"/></button>
     </div>
 
-
-
     <!-- footer -->
     <footer>
         <jsp:include page="footer.jsp"/>
     </footer>
+
 </body>
 </html>

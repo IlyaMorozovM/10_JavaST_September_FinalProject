@@ -59,8 +59,6 @@
                                                         class="btn btn-sm btn-outline-secondary"><fmt:message key="button.view"/></button>
                                             </c:otherwise>
                                         </c:choose>
-<%--                                        <button type="button" onclick="location.href='Controller?command=go_to_questions&testId=<c:out value="${test.testId}"/>'"--%>
-<%--                                                class="btn btn-sm btn-outline-secondary"><fmt:message key="button.view"/></button>--%>
                                         <c:if test="${user.roleName == 'tutor'}">
                                             <button onclick="location.href='Controller?command=go_to_edit&entity=test&' +
                                                     'id=<c:out value="${test.testId}"/>&text=<c:out value="${test.title}"/>'"  class="btn btn-sm btn-outline-secondary"><fmt:message key="button.edit"/></button>
@@ -78,10 +76,7 @@
                                             <input type="hidden" name="id" value=<c:out value="${test.testId}"/> />
 
                                             <button type="submit" name="delete" class="btn-danger"><fmt:message key="button.delete"/></button>
-
-                                                <%--                                                    <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">--%>
                                         </form>
-                                        <%--                <button onclick="location.href='Controller?command=delete&entity=subject&id=<c:out value="${subject.subjectId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
                                     </c:if>
                                 </div>
                             </div>

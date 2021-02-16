@@ -34,7 +34,6 @@
         <tr>
             <th scope="row"><fmt:message key="table.done"/></th>
             <td><c:out value="${rightAnswers}"/></td>
-<%--            <td><c:out value="${Double.parseDouble(String.valueOf(rightAnswers)) / Double.parseDouble(String.valueOf(numOfQuestions)) * 100}"/>%</td>--%>
             <td><c:out value="${rightAnswers / numOfQuestions * 100}"/>%</td>
         </tr>
         </tbody>

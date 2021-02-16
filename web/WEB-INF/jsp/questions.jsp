@@ -32,7 +32,6 @@
                 <div class="wrapper">
                     <button onclick="location.href='Controller?command=go_to_edit&entity=question&' +
                         'id=<c:out value="${question.questionId}"/>&text=<c:out value="${question.question}"/>'" class="btn btn-dark"><fmt:message key="button.edit"/></button>
-    <%--                <br/><br/>--%>
                     <c:set var="message"><fmt:message key="notification.delete"/></c:set>
                         <div class="box">
                             <form onSubmit='return confirm("${message}");' action="Controller" method="post">
@@ -41,18 +40,14 @@
                                 <input type="hidden" name="id" value=<c:out value="${question.questionId}"/> />
 
                                 <button name=delete type="submit"  class="btn btn-danger"><fmt:message key="button.delete"/></button>
-            <%--                    <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">--%>
                             </form>
                         </div>
                 </div>
-<%--                <button onclick="location.href='Controller?command=delete&entity=question&id=<c:out value="${question.questionId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
             </c:if>
-<%--            <br/>--%>
             </div>
 
 
             <!-- Answers -->
-
             <c:forEach items="${question.answers}" var="answer">
                 <div class="form-inline my-form-question">
                 <c:choose>
@@ -71,7 +66,6 @@
                     <div class="wrapper">
                     <button onclick="location.href='Controller?command=go_to_edit&entity=answer&' +
                         'id=<c:out value="${answer.answerId}"/>&text=<c:out value="${answer.answer}"/>&isRight=<c:out value="${answer.right}"/>'" class="btn btn-dark"><fmt:message key="button.edit"/></button>
-<%--                    <br/><br/>--%>
                     <c:set var="message"><fmt:message key="notification.delete"/></c:set>
                         <div class="box">
                             <form onSubmit='return confirm("${message}");' action="Controller" method="post">
@@ -80,13 +74,10 @@
                                 <input type="hidden" name="id" value=<c:out value="${answer.answerId}"/> />
 
                                 <button name=delete type="submit"  class="btn btn-danger"><fmt:message key="button.delete"/></button>
-        <%--                        <input name=delete type=submit value=<fmt:message key="button.delete"/> class="btn-danger">--%>
                             </form>
                         </div>
                     </div>
-<%--                    <button onclick="location.href='Controller?command=delete&entity=answer&id=<c:out value="${answer.answerId}"/>'" class="btn btn-danger"><fmt:message key="button.delete"/></button>--%>
                 </c:if>
-<%--                <br/>--%>
                 </div>
             </c:forEach>
 

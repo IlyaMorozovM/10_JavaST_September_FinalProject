@@ -45,7 +45,6 @@
             </c:if>
             </br></br>
             <button type="submit" class="btn btn-info"><fmt:message key="button.add"/></button>
-<%--            <input type="submit" value=<fmt:message key="button.add"/> class="btn" class="btn-info">--%>
         </form>
 
         </br></br>
@@ -62,7 +61,6 @@
                     <button onclick="location.href='Controller?command=go_to_questions'" class="btn btn-dark"><fmt:message key="button.back"/></button>
                 </c:otherwise>
             </c:choose>
-<%--            <button onclick="location.href='Controller?command=go_to_tests'">Back</button>--%>
         </div>
 
     </main>

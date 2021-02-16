@@ -118,11 +118,7 @@
                         </small>
                     </div>
 
-<%--                <label for="role"><fmt:message key="label.signupRole"/></label>--%>
-<%--                <input type="number" id="role" name="role"/>--%>
-
                 <button type="submit" class="btn btn-dark mb-2"><fmt:message key="button.signup"/></button>
-<%--                <input type="submit" value=<fmt:message key="button.signup"/> class="btn-success" class="btn" />--%>
             </form>
         </div>
 
