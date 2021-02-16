@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(int userId) throws ServiceException {
         if(userId == 0)
             return false;
-///TODO: убрать эти false и поменять возвр значения на void, так как уже есть проверка
+
         try {
             userDAO.deleteUser(userId);
         }

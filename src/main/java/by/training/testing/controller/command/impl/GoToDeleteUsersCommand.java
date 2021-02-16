@@ -6,6 +6,8 @@ import by.training.testing.controller.command.Command;
 import by.training.testing.service.UserService;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.service.factory.ServiceFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,6 +37,8 @@ public class GoToDeleteUsersCommand implements Command {
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
     private static final int USER_AMOUNT_ON_PAGE = 5;
 
+    private static final Logger LOGGER = LogManager.getLogger(GoToDeleteUsersCommand.class);
+
     /**
      * Method, that directs client to the "delete" page.
      *
@@ -57,7 +61,7 @@ public class GoToDeleteUsersCommand implements Command {
                 page = Integer.parseInt(req.getParameter(REQUEST_PARAM_CURRENT_PAGE));
             }
         } catch (NumberFormatException ex) {
-            //TODO: log
+            LOGGER.warn(ex);
         }
 
         List<User> users;
@@ -66,13 +70,12 @@ public class GoToDeleteUsersCommand implements Command {
 
         int countOfUsers = 0;
 
-        if ( req.getParameter(REQUEST_PARAM_ONE_USER) == null ||
+        if (req.getParameter(REQUEST_PARAM_ONE_USER) == null ||
                 req.getParameter(REQUEST_PARAM_ONE_USER).equals("false")) {
             try {
                 allUsers = userService.getUsers();
                 countOfUsers = allUsers.size();
                 users = userService.getUsersFromTo(USER_AMOUNT_ON_PAGE, (page - 1) * USER_AMOUNT_ON_PAGE);
-                req.setAttribute(USERS_SESSION_ATTR, users);
                 session.setAttribute(USERS_SESSION_ATTR, users);
                 session.removeAttribute(REQUEST_PARAM_LOGIN);
                 session.removeAttribute(ONE_USER_SESSION_ATTR);
@@ -89,7 +92,6 @@ public class GoToDeleteUsersCommand implements Command {
             }
             try {
                 oneUser.add(userService.getOneUser(login));
-                req.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
                 session.setAttribute(ONE_USER_SESSION_ATTR, oneUser);
                 session.removeAttribute(USERS_SESSION_ATTR);
                 countOfUsers = 1;
@@ -101,10 +103,8 @@ public class GoToDeleteUsersCommand implements Command {
         //----------------------------------------------------------------
 
         if (countOfUsers % USER_AMOUNT_ON_PAGE != 0) {
-            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE + 1);
             session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE + 1);
         } else {
-            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE);
             session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfUsers / USER_AMOUNT_ON_PAGE);
         }
         if (req.getParameter(REQUEST_PARAM_CURRENT_PAGE) != null) {

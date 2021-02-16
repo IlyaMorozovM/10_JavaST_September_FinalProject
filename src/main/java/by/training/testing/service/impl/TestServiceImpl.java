@@ -58,7 +58,6 @@ public class TestServiceImpl implements TestService {
     public List<Test> getTestsFromTo(int subjectId, int limit, int offset) throws ServiceException {
         if(subjectId <= 0)
             return null;
-        //TODO: вынести тут все создания фабрик в поле класса + с коннекшенами попробовать такое в ДАО
 
         try {
             return testDAO.getTestsFromTo(subjectId, limit, offset);

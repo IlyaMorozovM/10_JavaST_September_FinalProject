@@ -1,10 +1,13 @@
 package by.training.testing.controller.command.impl;
 
+import by.training.testing.controller.Controller;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.bean.Test;
 import by.training.testing.controller.command.Command;
 import by.training.testing.service.TestService;
 import by.training.testing.service.factory.ServiceFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,6 +46,8 @@ public class GoToTestsCommand implements Command {
     private static final int TEST_AMOUNT_ON_PAGE = 6;
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
+
+    private static final Logger LOGGER = LogManager.getLogger(GoToTestsCommand.class);
 
     /**
      * Method, that directs client to the "tests" page.
@@ -90,20 +95,19 @@ public class GoToTestsCommand implements Command {
                 page = Integer.parseInt(req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
             }
         } catch (NumberFormatException ex) {
-            //TODO: log
+            LOGGER.warn(ex);
         }
         List<Test> tests = null;
         try {
             tests = testService.getTestsFromTo(subjectId, TEST_AMOUNT_ON_PAGE, (page - 1) * TEST_AMOUNT_ON_PAGE);
         } catch (ServiceException e) {
-            //TODO : perform
+            LOGGER.debug(e);
         }
-        req.setAttribute(REQUEST_ATTR_TESTS, tests);
         int countOfTests = allTests.size();
         if (countOfTests % TEST_AMOUNT_ON_PAGE != 0) {
-            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE + 1);
+            session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE + 1);
         } else {
-            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE);
+            session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfTests / TEST_AMOUNT_ON_PAGE);
         }
         if (req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE) != null) {
             req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));

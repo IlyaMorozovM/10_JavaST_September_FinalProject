@@ -8,6 +8,8 @@ import by.training.testing.service.QuestionService;
 import by.training.testing.service.ResultService;
 import by.training.testing.service.exception.ServiceException;
 import by.training.testing.service.factory.ServiceFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,6 +47,8 @@ public class GoToResultsCommand implements Command {
 
     private static final String REDIRECT_COMMAND_ERROR = "Controller?command=go_to_main&error=error";
 
+    private static final Logger LOGGER = LogManager.getLogger(GoToResultsCommand.class);
+
     /**
      * Method, that directs tutor to the "results" page.
      * "Results" page contains results, that refer to a specific test.
@@ -80,7 +84,7 @@ public class GoToResultsCommand implements Command {
                 page = Integer.parseInt(req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
             }
         } catch (NumberFormatException ex) {
-            //TODO: log
+            LOGGER.warn(ex);
         }
 
         List<Result> results;
@@ -103,7 +107,6 @@ public class GoToResultsCommand implements Command {
                 allResults = resultService.getResults(testId);
                 countOfResults = allResults.size();
                 results = resultService.getResultsFromTo(testId, RESULT_AMOUNT_ON_PAGE, (page - 1) * RESULT_AMOUNT_ON_PAGE);
-                req.setAttribute(REQUEST_ATTR_RESULTS, results);
                 session.setAttribute(RESULTS_SESSION_ATTR, results);
                 session.removeAttribute(REQUEST_PARAM_LOGIN);
                 session.removeAttribute(USER_RESULTS_SESSION_ATTR);
@@ -122,7 +125,6 @@ public class GoToResultsCommand implements Command {
                 allUserResults = resultService.getUserResults(testId, login);
                 countOfResults = allUserResults.size();
                 userResults = resultService.getUserResultsFromTo(testId, login, RESULT_AMOUNT_ON_PAGE, (page - 1) * RESULT_AMOUNT_ON_PAGE);
-                req.setAttribute(REQUEST_ATTR_USER_RESULTS, userResults);
                 session.setAttribute(USER_RESULTS_SESSION_ATTR, userResults);
                 session.removeAttribute(RESULTS_SESSION_ATTR);
             } catch (ServiceException e) {
@@ -142,12 +144,9 @@ public class GoToResultsCommand implements Command {
         //----------------------------------------------------------------
 
         if (countOfResults % RESULT_AMOUNT_ON_PAGE != 0) {
-            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE + 1);
             session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE + 1);
         } else {
-            req.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE);
             session.setAttribute(REQUEST_ATTR_MAX_PAGE, countOfResults / RESULT_AMOUNT_ON_PAGE);
-//TODO: подумать, много сессии параметров, надо чистить или переделывать как-то
         }
         if (req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE) != null) {
             req.setAttribute(REQUEST_PARAMETER_CURRENT_PAGE, req.getParameter(REQUEST_PARAMETER_CURRENT_PAGE));
